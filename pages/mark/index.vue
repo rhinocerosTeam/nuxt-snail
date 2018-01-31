@@ -1,17 +1,22 @@
 <template>
     <div>
-
+        <
     </div>
 </template>
 <script>
-    import Mint from 'mint-ui';
+    import {Toast } from 'mint-ui';
+
     export default {
         data() {
             return {
 
             }
         },
-        methods: {},
+        methods: {
+            handleClose(){
+
+            }
+        },
         head() {
             return {
                 title: '标签列表'
@@ -21,7 +26,7 @@
 
         },
         mounted(){
-            Mint.Toast('你好nuihaonihaohsdjfisdfj')
+           Toast('你好nuihaonihaohsdjfisdfj')
         }
     }
 </script>
