@@ -1,0 +1,12 @@
+.git/
+.DS_Store
+dist/
+build/
+logs/
+release/
+/vscode/
+tmp/
+.idea/**
+.vscode/
+npm-debug.log
+yarn-error.log
