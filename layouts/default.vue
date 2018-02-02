@@ -1,10 +1,18 @@
 <template>
     <div>
-        <nuxt/>
+        <nuxt />
+        <mt-popup
+                v-model="popupVisible"
+                position="right">
+                <marks></marks>
+        </mt-popup>
     </div>
 </template>
 <script>
 
+
+
+ import marks from "~/components/marks"
 
 export default {
     head: {
@@ -13,7 +21,18 @@ export default {
             { name: 'viewport', content: 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' }
         ]
     },
+    components:{
+        marks
+    },
+    data(){
+        return {
+            popupVisible:true
+        }
+    },
     mounted(){
+        setTimeout(()=>{
+            this.popupVisible = true
+         },2000)
         document.documentElement.style.fontSize = document.documentElement.clientWidth / (7.5) + "px";
     }
 }
