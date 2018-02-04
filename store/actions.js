@@ -63,4 +63,39 @@ export default {
     setBookDetil:(context, data = {}) => {
         context.commit('SET_BOOKDETIL', data);
     },
+    updateMarkMenu({commit, state},data={}){
+        console.log('data',data)
+
+        let markmenu = null
+        if(data._id){
+            let {_id,name,index} = data
+            markmenu = [{_id,name,index}]
+        }else{
+            let {name,index} = data
+            let nd = Object.assign({},state.marksMenu)
+            nd.push({name,index})
+            markmenu = nd
+        }
+        commit('UPDATE_MARKMENU', markmenu);
+
+        // 设置当前的标签
+        let currentMark = state.marksList
+        console.log('currentMark',state,currentMark)
+        for(let obj of markmenu){
+            currentMark = currentMark[obj.index].child
+        }
+
+        commit('UPDATE_CURRENTMENU', currentMark);
+
+    },
+
+    addMark(){
+
+    },
+    updateMark(){
+
+    },
+    deleteMark(){
+
+    }
 }

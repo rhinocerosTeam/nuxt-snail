@@ -36,4 +36,13 @@ export default {
     SET_BOOKDETIL(state, data) {
         state.bookDetail = Object.assign({}, data);
     },
+    ADD_MARK(state,data){
+        state.marksList = data
+    },
+    UPDATE_MARKMENU(state,data){
+        state.marksMenu = Object.assign({},data)
+    },
+    UPDATE_CURRENTMENU(state,data){
+        state.currentMenu = data
+    }
 }

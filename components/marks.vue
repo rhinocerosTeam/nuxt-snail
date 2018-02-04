@@ -1,24 +1,61 @@
 <template>
     <div class="marksContainer">
-        <div>Marks 编辑</div>
+        <div class="header">MARKS
+        <span class="update" v-if="!isEdit" @click="update()"></span>
+        <span class="save" v-if="isEdit"></span>
+        </div>
         <div class="box">
-            <div>
-                > node > 娱乐 > 健身
+            <div class="menu">
+                <span v-for="m,index in markMenu"> {{ m.name}} {{ index==markMenu.length-1?'':'>' }} </span>
             </div>
             <ul>
-                <li>node</li>
-                <li>java</li>
-                <li>数据库</li>
-                <li>运动</li>
-                <li>健身</li>
-                <li>娱乐</li>
+                <li v-for="obj,pindex in pageMarks" @click.stop="goDetail(obj,pindex)" :key="pindex">
+                    <div v-if="isEdit">
+                        <mt-field  placeholder="请输入标签" v-model="obj.name"></mt-field>
+                    </div>
+                    <div v-else>
+                        {{obj.name}}
+                    </div>
+                </li>
             </ul>
+            <div>增加</div>
         </div>
     </div>
 </template>
 <script>
     import "~/assets/css/mark/mark.scss"
+    import { mapGetters, mapActions } from 'vuex'
     export default {
+        data(){
+            return {
+                isEdit:false
+            }
+        },
+        computed: {
+            ...mapGetters({
+                markMenu: 'getMarkMenu',
+                marks: 'getMarks',
+                pageMarks:'getCurrentMark'
+            })
+        },
+        methods:{
+            ...mapActions({
+                updateMarkMenu:'updateMarkMenu',
+            }),
+            update(){
+                this.isEdit = true
+            },
+            goDetail(obj,index){
+                if(obj.child){
+                    this.updateMarkMenu({...obj,index})
+                }
+            }
+        },
+        created(){
+
+        },
+        mounted(){
+        },
 
     }
 </script>

@@ -14,4 +14,13 @@ export default {
     getBookDetail: state => {
         return state.bookDetail
     },
+    getMarks:state => {
+        return state.marksList
+    },
+    getMarkMenu:state => {
+        return state.marksMenu
+    },
+    getCurrentMark:state => {
+        return state.currentMenu
+    }
 }
