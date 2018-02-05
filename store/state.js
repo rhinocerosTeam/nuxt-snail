@@ -26,40 +26,8 @@ export default {
     router: {
         path: ''
     },
-    marksList: [
-        {
-            _id:"2312312fgg33333",
-            key:123,
-            name:"前段",
-            child:[
-                {
-                    key:1,
-                    name:"node",
-                },
-                {
-                    key:2,
-                    name:"H5",
-                }
-            ]
-
-        },
-        {
-            _id:"2312312fgg33333",
-            key:123,
-            name:"java",
-            child:[
-                {
-                    key:1,
-                    name:"node",
-                },
-                {
-                    key:2,
-                    name:"H5",
-                }
-            ]
-
-        }
-    ],
+    markIsUpdate:false,
+    marksList: [],
     marksMenu:[
         // {
         //     key:123,
@@ -67,36 +35,5 @@ export default {
         //     index:0
         // }
     ],
-    currentMenu:[{
-        _id:"2312312fgg33333",
-        key:123,
-        name:"前段",
-        child:[
-            {
-                key:1,
-                name:"node",
-            },
-            {
-                key:2,
-                name:"H5",
-            }
-        ]
-
-    },
-        {
-            _id:"2312312fgg33333",
-            key:123,
-            name:"java",
-            child:[
-                {
-                    key:1,
-                    name:"node",
-                },
-                {
-                    key:2,
-                    name:"H5",
-                }
-            ]
-
-        }]
+    currentMenu:[]
 }

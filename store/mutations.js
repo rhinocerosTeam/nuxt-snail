@@ -36,13 +36,33 @@ export default {
     SET_BOOKDETIL(state, data) {
         state.bookDetail = Object.assign({}, data);
     },
-    ADD_MARK(state,data){
+
+
+    /**
+     * 更新mark是否更新的状态
+     * **/
+    UPDATE_MARKSTATUS(state,data){
+        state.markIsUpdate = data
+    },
+    /**
+     * 更新标签
+     * **/
+    UPDATE_MARK(state,data){
+        state.markIsUpdate = true
         state.marksList = data
     },
+    /**
+     * 更新当前的mark数据
+     * **/
+    UPDATE_CURRENTMENU(state,data){
+        state.currentMenu = data
+    },
+    /**
+     * 更新mark目录
+     * **/
     UPDATE_MARKMENU(state,data){
         state.marksMenu = Object.assign({},data)
     },
-    UPDATE_CURRENTMENU(state,data){
-        state.currentMenu = data
-    }
+
+
 }

@@ -66,6 +66,14 @@ export default {
         }
 
         return body
+    },
+
+    isObjectId(value){
+        let data = String(value)
+        if(data.length == 24){
+            return true
+        }
+        return false
     }
 
 

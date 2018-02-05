@@ -9,7 +9,7 @@ import draft from './draft'
 import post from './post'
 import user from './user'
 import comment from './comment'
-
+import mark from './marks'
 const router = new Router({prefix: '/v1'})
 
 /**
@@ -23,6 +23,7 @@ router.use(draft.routes(), draft.allowedMethods())
 router.use(post.routes(), post.allowedMethods())
 router.use(user.routes(), user.allowedMethods())
 router.use(comment.routes(), comment.allowedMethods())
+router.use(mark.routes(), mark.allowedMethods())
 
 function authorize (ctx, next) {
   // console.log( ctx )

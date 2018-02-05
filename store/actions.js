@@ -88,7 +88,6 @@ export default {
         commit('UPDATE_CURRENTMENU', currentMark);
 
     },
-
     addMark(){
 
     },
@@ -97,5 +96,15 @@ export default {
     },
     deleteMark(){
 
+    },
+    initMark({commit, state},data={}){
+        if(!state.markIsUpdate){
+            api.getMarkList(123456).then((res)=>{
+                let  data = api.parse(res)||{};
+                commit('UPDATE_MARK', data);
+                commit('UPDATE_MARKMENU', data);
+                commit('UPDATE_MARKSTATUS', true);
+            })
+        }
     }
 }
