@@ -6,16 +6,18 @@
         </div>
         <div class="box">
             <div class="menu">
-                <span v-for="m,index in markMenu" @click="changeMenu(index)"> {{ m.name}} {{ index==markMenu.length-1?'':'>' }} </span>
+                <span @click="changeMenu(-1)">全部</span>
+                <span v-for="m,index in markMenu" @click="changeMenu(index)"> > {{ m.name}}  </span>
             </div>
             <ul>
-                <li v-for="obj,pindex in currentMark" @click.stop="goDetail(obj,pindex)" :key="pindex">
+                <li v-for="obj,pindex in currentMark" :key="pindex" @click="choose(obj,pindex)">
                     <div v-if="isEdit">
                         <mt-field  placeholder="请输入标签" v-model="obj.name"></mt-field>
                     </div>
                     <div v-else>
                         {{obj.name}}
                     </div>
+                    <span class="more" v-if="obj.child&&obj.child.length>0" @click.stop="gotoDetail(obj,pindex)" ></span>
                 </li>
             </ul>
             <div>增加</div>
@@ -46,15 +48,16 @@
             update(){
                 this.isEdit = true
             },
-            goDetail(obj,index){
+            gotoDetail(obj,index){
                 if(obj.child){
                     this.updateMarkMenu({...obj,index})
                 }
             },
             changeMenu(mindex){
-                if(mindex >=0 ){
-                    this.updateMarkMenu({mindex})
-                }
+                this.updateMarkMenu({mindex})
+            },
+            choose(obj,index){
+
             }
         },
         created(){

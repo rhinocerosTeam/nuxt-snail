@@ -46,6 +46,17 @@
         height:5vh;
         line-height: 5vh;
         color: #646464;
+        position: relative;
+        .more{
+          position: absolute;
+          top:0;
+          height:100%;
+          width:1rem;
+          background: url("../../img/icon/more.png") no-repeat ;
+          background-size: 0.3rem 0.4rem;
+          background-position: center center ;
+          right:0;
+        }
       }
     }
   }

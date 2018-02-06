@@ -61,7 +61,9 @@ export default {
      * 更新mark目录
      * **/
     UPDATE_MARKMENU(state,data){
-        state.marksMenu = Object.assign({},data)
+
+        console.log('marksMenu------>', data)
+        state.marksMenu = data
     },
 
 

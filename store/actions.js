@@ -73,9 +73,8 @@ export default {
      * **/
     updateMarkMenu({commit, state},data={}){
         let markmenu = null
-        if(data.mindex >= 0){ // 切换菜单
-            console.log('--->',state.marksMenu)
-            markmenu = state.marksMenu.slice(0,data.mindex)
+        if(data.mindex >= -1){ // 切换菜单
+            markmenu = state.marksMenu.slice(0,data.mindex+1)
 
         }else if(data._id){ // 表示第一层
             let {_id,name,index} = data
@@ -83,16 +82,11 @@ export default {
 
         }else{
             let {name,index} = data
-
-            let nd = [...state.marksMenu]
-            console.log('nd--->',nd)
-
+            let nd = state.marksMenu
             nd.push({name,index})
             markmenu = nd
-
-            console.log('markmenu--->',markmenu)
-
         }
+
         commit('UPDATE_MARKMENU', markmenu);
 
         // 设置当前的标签
@@ -101,6 +95,7 @@ export default {
             currentMark = currentMark[obj.index].child
         }
         commit('UPDATE_CURRENTMENU', currentMark);
+        console.log({data,currentMark,markmenu})
     },
 
     addMark(){
