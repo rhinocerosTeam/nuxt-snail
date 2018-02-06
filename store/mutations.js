@@ -55,7 +55,7 @@ export default {
      * 更新当前的mark数据
      * **/
     UPDATE_CURRENTMENU(state,data){
-        state.currentMenu = data
+        state.currentMark = data
     },
     /**
      * 更新mark目录

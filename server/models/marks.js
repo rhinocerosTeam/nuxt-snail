@@ -9,7 +9,7 @@ const Schema = mongoose.Schema
 const markSchema = new Schema({
     key: String, // key
     name: String, // 标签名称
-    userid: Schema.Types.ObjectId, // userid
+    userid: String, // userid
     child:[] // 子标签
 }, { versionKey: false });
 

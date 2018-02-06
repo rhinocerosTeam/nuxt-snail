@@ -17,12 +17,13 @@ export default class MarksControl {
      * @param  {String} userId  用户id
      * @return Promise
      * **/
-    async markList(userId){
+    async markList(userid){
         let res=null,
             doc=null;
-        doc = await Entity.find(Model.mark,{userId:userId}).catch(e => {
+        doc = await Entity.find(Model.mark,{userid:userid}).catch(e => {
             res = Serrors.findError('标签mark查询失败')
         })
+        console.log('doc',doc)
         if(!res){
             res = {
                 code:200,

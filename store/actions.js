@@ -63,31 +63,46 @@ export default {
     setBookDetil:(context, data = {}) => {
         context.commit('SET_BOOKDETIL', data);
     },
+    /**
+     * 点击标签更新菜单目录 {}
+     * 点击菜单目录更新
+     * @param {String} _id 标签的主键
+     * @param {String} name 标签的名称
+     * @param {String} index 此标签在上一级标签中的索引
+     * @param {String} mindex 点击菜单目录更新 (mindex)
+     * **/
     updateMarkMenu({commit, state},data={}){
-        console.log('data',data)
-
         let markmenu = null
-        if(data._id){
+        if(data.mindex >= 0){ // 切换菜单
+            console.log('--->',state.marksMenu)
+            markmenu = state.marksMenu.slice(0,data.mindex)
+
+        }else if(data._id){ // 表示第一层
             let {_id,name,index} = data
             markmenu = [{_id,name,index}]
+
         }else{
             let {name,index} = data
-            let nd = Object.assign({},state.marksMenu)
+
+            let nd = [...state.marksMenu]
+            console.log('nd--->',nd)
+
             nd.push({name,index})
             markmenu = nd
+
+            console.log('markmenu--->',markmenu)
+
         }
         commit('UPDATE_MARKMENU', markmenu);
 
         // 设置当前的标签
         let currentMark = state.marksList
-        console.log('currentMark',state,currentMark)
         for(let obj of markmenu){
             currentMark = currentMark[obj.index].child
         }
-
         commit('UPDATE_CURRENTMENU', currentMark);
-
     },
+
     addMark(){
 
     },
@@ -99,10 +114,10 @@ export default {
     },
     initMark({commit, state},data={}){
         if(!state.markIsUpdate){
-            api.getMarkList(123456).then((res)=>{
+            api.getMarkList('5a78d90312741b08df2b932b').then((res)=>{
                 let  data = api.parse(res)||{};
                 commit('UPDATE_MARK', data);
-                commit('UPDATE_MARKMENU', data);
+                commit('UPDATE_CURRENTMENU', data);
                 commit('UPDATE_MARKSTATUS', true);
             })
         }

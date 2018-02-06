@@ -9,6 +9,7 @@ import bookApi from './book/index';
 import userApi from './user/index';
 import wirteApi from './wirte/index';
 import commentApi from './comments/index';
+import markApi from './mark/index';
 import qs from 'qs';
 
 export default Object.assign({
@@ -33,14 +34,8 @@ export default Object.assign({
 
                 if (result && result["code"] === 200) {
                     return result['data']
-                }else if(result && result["code"] === 403){ // 没权限
-                    alert('您没有权限');
-                    return null
-                }else if(result && result["code"] === 401){ // 未登录
-                    alert('请登录后在操作');
-                    return null
                 }else {
-                    console.error("请求异常：",result['data'])
+                    console.error("请求异常：",result['msg'])
                     return null
                 }
             }
@@ -64,5 +59,6 @@ export default Object.assign({
     bookApi,
     userApi,
     wirteApi,
-    commentApi
+    commentApi,
+    markApi
 )

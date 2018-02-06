@@ -1,7 +1,7 @@
 import Router from  "koa-router"
 import ParamsUtils from '../../utils/params'
 import {marksCtrl} from '../../controls/marks'
-import Serrors from '../utils/serrors'
+import Serrors from '../../utils/serrors'
 const router = new Router()
 
 /**

@@ -11,7 +11,7 @@ export default {
      * @param
      */
     getMarkList(data) {
-        return axios.get('/v1/login', this.GetParamFormat({userId:data}))
+        return axios.get('/v1/markList', this.GetParamFormat({userid:data}))
     },
 
 

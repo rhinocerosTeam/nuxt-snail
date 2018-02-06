@@ -6,10 +6,10 @@
         </div>
         <div class="box">
             <div class="menu">
-                <span v-for="m,index in markMenu"> {{ m.name}} {{ index==markMenu.length-1?'':'>' }} </span>
+                <span v-for="m,index in markMenu" @click="changeMenu(index)"> {{ m.name}} {{ index==markMenu.length-1?'':'>' }} </span>
             </div>
             <ul>
-                <li v-for="obj,pindex in pageMarks" @click.stop="goDetail(obj,pindex)" :key="pindex">
+                <li v-for="obj,pindex in currentMark" @click.stop="goDetail(obj,pindex)" :key="pindex">
                     <div v-if="isEdit">
                         <mt-field  placeholder="请输入标签" v-model="obj.name"></mt-field>
                     </div>
@@ -35,12 +35,13 @@
             ...mapGetters({
                 markMenu: 'getMarkMenu',
                 marks: 'getMarks',
-                pageMarks:'getCurrentMark'
+                currentMark:'getCurrentMark'
             })
         },
         methods:{
             ...mapActions({
                 updateMarkMenu:'updateMarkMenu',
+                initMark:'initMark'
             }),
             update(){
                 this.isEdit = true
@@ -49,9 +50,15 @@
                 if(obj.child){
                     this.updateMarkMenu({...obj,index})
                 }
+            },
+            changeMenu(mindex){
+                if(mindex >=0 ){
+                    this.updateMarkMenu({mindex})
+                }
             }
         },
         created(){
+            this.initMark()
 
         },
         mounted(){

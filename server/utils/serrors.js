@@ -1,4 +1,3 @@
-import Log from 'hefan-debug-log-s'
 
 const CODE = {
     PARAMS_NULL: 400,   //参数为空

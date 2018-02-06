@@ -21,6 +21,6 @@ export default {
         return state.marksMenu
     },
     getCurrentMark:state => {
-        return state.currentMenu
+        return state.currentMark
     }
 }
