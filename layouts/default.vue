@@ -3,7 +3,28 @@
         <mt-header fixed :title="globalMark.name">
             <mt-button  slot="right" @click="popupVisibleFN(true)">标签</mt-button>
         </mt-header>
+
+
         <nuxt />
+
+
+        <mt-tabbar v-model="selected">
+            <mt-tab-item id="tab1">
+                <img slot="icon" src="../assets/img/icon/bar_plan_active.png" v-if="selected == 'tab1'">
+                <img slot="icon" src="../assets/img/icon/bar_plan.png" v-else>
+                待办事项
+            </mt-tab-item>
+            <mt-tab-item id="tab2">
+                <img slot="icon" src="../assets/img/icon/bar_record_active.png" v-if="selected == 'tab2'">
+                <img slot="icon" src="../assets/img/icon/bar_record.png" v-else>
+                记录
+            </mt-tab-item>
+            <mt-tab-item id="tab3">
+                <img slot="icon" src="../assets/img/icon/bar_wo_active.png" v-if="selected == 'tab3'">
+                <img slot="icon" src="../assets/img/icon/bar_wo.png" v-else>
+                我的
+            </mt-tab-item>
+        </mt-tabbar>
         <mt-popup
                 v-model="popupVisible"
                 position="right">
@@ -11,9 +32,9 @@
         </mt-popup>
     </div>
 </template>
+
+
 <script>
-
-
 
  import marks from "~/components/marks"
  import { mapGetters, mapActions } from 'vuex'
@@ -38,6 +59,7 @@ export default {
     },
     data(){
         return {
+            selected:'tab1',
             popupVisible:false
         }
     },
