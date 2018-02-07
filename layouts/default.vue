@@ -1,13 +1,13 @@
 <template>
     <div>
         <mt-header fixed :title="globalMark.name">
-            <mt-button  slot="right" @click="popupVisibleFN">标签</mt-button>
+            <mt-button  slot="right" @click="popupVisibleFN(true)">标签</mt-button>
         </mt-header>
         <nuxt />
         <mt-popup
                 v-model="popupVisible"
                 position="right">
-                <marks></marks>
+                <marks :popupVisibleFN = 'popupVisibleFN'></marks>
         </mt-popup>
     </div>
 </template>
@@ -42,8 +42,8 @@ export default {
         }
     },
     methods:{
-        popupVisibleFN(){
-            this.popupVisible = true
+        popupVisibleFN(flag){
+            this.popupVisible = flag
         },
     },
 

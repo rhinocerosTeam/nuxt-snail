@@ -28,6 +28,7 @@
     import "~/assets/css/mark/mark.scss"
     import { mapGetters, mapActions } from 'vuex'
     export default {
+        props:['popupVisibleFN'],
         data(){
             return {
                 isEdit:false
@@ -60,6 +61,7 @@
             },
             choose(obj,index){
                 this.updateGlobalMark(obj)
+                this.$emit('popupVisibleFN',false)
             }
         },
         created(){
