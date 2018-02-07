@@ -17,10 +17,10 @@
                     <div v-else>
                         {{obj.name}}
                     </div>
-                    <span class="more" v-if="obj.child&&obj.child.length>0" @click.stop="gotoDetail(obj,pindex)" ></span>
+                    <span class="more" v-if="obj.child&&obj.child.length>0&&!isEdit" @click.stop="gotoDetail(obj,pindex)" ></span>
                 </li>
             </ul>
-            <div>增加</div>
+            <!--<div>增加</div>-->
         </div>
     </div>
 </template>
@@ -37,16 +37,18 @@
             ...mapGetters({
                 markMenu: 'getMarkMenu',
                 marks: 'getMarks',
-                currentMark:'getCurrentMark'
+                currentMark:'getCurrentMark',
+                getGlobalMark:'getGlobalMark'
             })
         },
         methods:{
             ...mapActions({
                 updateMarkMenu:'updateMarkMenu',
+                updateGlobalMark:'updateGlobalMark',
                 initMark:'initMark'
             }),
             update(){
-                this.isEdit = true
+                //this.isEdit = true
             },
             gotoDetail(obj,index){
                 if(obj.child){
@@ -57,7 +59,7 @@
                 this.updateMarkMenu({mindex})
             },
             choose(obj,index){
-
+                this.updateGlobalMark(obj)
             }
         },
         created(){

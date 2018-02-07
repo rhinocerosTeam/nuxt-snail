@@ -1,5 +1,8 @@
 <template>
     <div>
+        <mt-header fixed :title="globalMark.name">
+            <mt-button  slot="right" @click="popupVisibleFN">标签</mt-button>
+        </mt-header>
         <nuxt />
         <mt-popup
                 v-model="popupVisible"
@@ -13,6 +16,7 @@
 
 
  import marks from "~/components/marks"
+ import { mapGetters, mapActions } from 'vuex'
 
 export default {
     head: {
@@ -21,18 +25,32 @@ export default {
             { name: 'viewport', content: 'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' }
         ]
     },
+    computed: {
+        ...mapGetters({
+            markMenu: 'getMarkMenu',
+            marks: 'getMarks',
+            currentMark:'getCurrentMark',
+            globalMark:'getGlobalMark'
+        })
+    },
     components:{
         marks
     },
     data(){
         return {
-            popupVisible:true
+            popupVisible:false
         }
     },
-    mounted(){
-        setTimeout(()=>{
+    methods:{
+        popupVisibleFN(){
             this.popupVisible = true
-         },2000)
+        },
+    },
+
+    mounted(){
+//        setTimeout(()=>{
+//            this.popupVisible = true
+//         },2000)
         document.documentElement.style.fontSize = document.documentElement.clientWidth / (7.5) + "px";
     }
 }

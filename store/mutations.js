@@ -61,9 +61,13 @@ export default {
      * 更新mark目录
      * **/
     UPDATE_MARKMENU(state,data){
-
-        console.log('marksMenu------>', data)
         state.marksMenu = data
+    },
+    /**
+     * 更新mark目录
+     * **/
+    UPDATE_GLOBALMARK(state,data){
+        state.globalMark = data
     },
 
 

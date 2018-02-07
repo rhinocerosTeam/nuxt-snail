@@ -98,6 +98,12 @@ export default {
         console.log({data,currentMark,markmenu})
     },
 
+    updateGlobalMark({commit, state},data={}){
+
+        commit('UPDATE_GLOBALMARK', data);
+
+    },
+
     addMark(){
 
     },

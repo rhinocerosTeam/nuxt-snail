@@ -22,5 +22,8 @@ export default {
     },
     getCurrentMark:state => {
         return state.currentMark
+    },
+    getGlobalMark:state => {
+        return state.globalMark
     }
 }
