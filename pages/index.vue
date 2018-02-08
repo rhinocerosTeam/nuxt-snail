@@ -1,19 +1,10 @@
 <template>
-    <section class="container">
-        <div class="content">
-            <div class="bookBox">
-                <BookList></BookList>
-            </div>
-            <div class="categorybox">
-                <category></category>
-            </div>
-        </div>
-        <BackTop :bottom="105" :right="30">
-            <div class='goTop'>
-                <Icon type="jet"></Icon>
-            </div>
-        </BackTop>
-    </section>
+    <div >
+        index<br/>index<br/>index<br/>index<br/>
+        index<br/>index<br/>index<br/>index<br/>
+        index<br/>index<br/>index<br/>index<br/>
+        index<br/>index<br/>index<br/>index<br/>
+    </div>
 </template>
 <script>
 import BookList from '~/components/books/BookList.vue';
@@ -25,16 +16,7 @@ export default {
 
         }
     },
-    methods: {},
-    head() {
-        return {
-            title: 'FreshBook'
-        }
-    },
-    components: {
-        BookList,
-        category
-    },
+
 }
 </script>
 <style scoped>
