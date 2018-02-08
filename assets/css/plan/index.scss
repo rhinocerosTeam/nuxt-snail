@@ -1,0 +1,21 @@
+.plan-container{
+
+  background-color: #fff;
+  ul{
+    padding:0.2rem;
+    li{
+      border-bottom: 1px solid #e8e8e8;
+      min-height: 0.9rem;
+      .date{
+        margin-top: 0.3rem;
+        color: #868383;
+        span{
+          float: right;
+        }
+      }
+
+    }
+  }
+
+
+}

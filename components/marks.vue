@@ -25,7 +25,6 @@
     </div>
 </template>
 <script>
-    import "~/assets/css/mark/mark.scss"
     import { mapGetters, mapActions } from 'vuex'
     export default {
         props:['popupVisibleFN'],
@@ -65,6 +64,7 @@
             }
         },
         created(){
+            console.log(2)
             this.initMark()
 
         },

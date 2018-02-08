@@ -10,6 +10,7 @@ import post from './post'
 import user from './user'
 import comment from './comment'
 import mark from './marks'
+import plan from './plan'
 const router = new Router({prefix: '/v1'})
 
 /**
@@ -24,6 +25,7 @@ router.use(post.routes(), post.allowedMethods())
 router.use(user.routes(), user.allowedMethods())
 router.use(comment.routes(), comment.allowedMethods())
 router.use(mark.routes(), mark.allowedMethods())
+router.use(plan.routes(), plan.allowedMethods())
 
 function authorize (ctx, next) {
   // console.log( ctx )

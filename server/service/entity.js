@@ -203,6 +203,37 @@ export default {
                 }
             })
         })
+    },
+    /**
+     * 删除by id
+     * @param {*} model
+     * @param {*} id
+     */
+    remove(model, id) {
+        return new Promise((resolve, reject) => {
+            model.removeInfo(id, (err, doc) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(doc)
+                }
+            })
+        })
+    },
+
+    aggregate(model, sort){
+        return new Promise((resolve, reject) => {
+            model.aggregate(sort, (err, doc) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(doc)
+                }
+            })
+        })
     }
+
+
+
 
 }

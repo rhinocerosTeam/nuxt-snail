@@ -4,8 +4,10 @@
             <mt-button slot="right" @click="popupVisibleFN(true)">标签</mt-button>
         </mt-header>
 
+        <div class="container">
+            <nuxt/>
+        </div>
 
-        <nuxt/>
 
         <div @click="changeTab">
             <mt-tabbar v-model="selected">
@@ -71,7 +73,6 @@
                 },
                 selected: '',
                 popupVisible: false,
-
             }
         },
         methods: {
@@ -93,6 +94,7 @@
         mounted(){
             document.documentElement.style.fontSize = document.documentElement.clientWidth / (7.5) + "px";
             this.initTab()
+
         },
         created(){
 
@@ -103,6 +105,10 @@
     html,
     body {
         background-color: #eee !important;
+    }
+    .container{
+        margin-top: 40px;
+        padding-bottom:55px ;
     }
 
 </style>

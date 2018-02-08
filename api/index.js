@@ -10,6 +10,7 @@ import userApi from './user/index';
 import wirteApi from './wirte/index';
 import commentApi from './comments/index';
 import markApi from './mark/index';
+import planApi from './plan/index';
 import qs from 'qs';
 
 export default Object.assign({
@@ -60,5 +61,6 @@ export default Object.assign({
     userApi,
     wirteApi,
     commentApi,
-    markApi
+    markApi,
+    planApi
 )

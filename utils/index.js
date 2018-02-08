@@ -1,3 +1,6 @@
+import _ from 'lodash'
+
+
 /**
  * Created by VULCAN on 2017/12/11.
  */
@@ -85,6 +88,12 @@ export default class Utils {
 
         return powers;
     }
+
+
+    static formateMarkName(marks,markId,markKey){
+        return "假名字"
+    }
+
 
 
 }
