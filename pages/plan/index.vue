@@ -1,28 +1,38 @@
 <template>
     <section class="plan-container">
+        <mt-navbar v-model="selected">
+            <mt-tab-item id="1">全部</mt-tab-item>
+            <mt-tab-item id="2">进行中</mt-tab-item>
+            <mt-tab-item id="">增加</mt-tab-item>
+            <mt-tab-item id="3">未开始</mt-tab-item>
+            <mt-tab-item id="4">已完成</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected">
+            <mt-tab-container-item id="1">
+                <plan :type="all"></plan>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="2">
+                <plan :type="0"></plan>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="3">
+                <plan :type="1"></plan>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="4">
+                <plan :type="-1"></plan>
+            </mt-tab-container-item>
+        </mt-tab-container>
 
-        <ul>
-            <li v-for="plan in planList">
-                {{ plan.planName }}
-                <div class="date">
-                    {{ plan.startDatetime }} ~ {{ plan.endDatetime }}
-                    <span>
-                        {{ getMarkName(plan.markId,plan.markKey) }}
-                    </span>
-                </div>
-
-            </li>
-        </ul>
 
     </section>
 </template>
 <script>
     import api from '~/api'
     import Utils from '~/utils/index'
+    import {planStatus} from '~/constant/params'
     import BookList from '~/components/books/BookList.vue';
     import category from '~/components/common/Category'
     import {mapGetters, mapActions} from 'vuex'
-
+    import plan from '~/components/common/planList'
 
     export default {
         async asyncData({isServer,store}){
@@ -36,6 +46,9 @@
                 }
             }
         },
+        components:{
+            plan
+        },
         computed: {
             ...mapGetters({
                 markMenu: 'getMarkMenu',
@@ -46,13 +59,18 @@
         },
         data() {
             return {
-                planList:[]
+                selected:1,
+                planList:[],
+                planStatus:planStatus
 
             }
         },
         methods:{
             getMarkName(id,key){
                 return Utils.formateMarkName(this.marks,id,key)
+            },
+            formateDate(date){
+                return Utils.format(date, "yyyy-MM-dd")
             }
         }
 
