@@ -15,9 +15,7 @@ router.get('/recordList', async (ctx, next) => {
         data = null;
 
     if(ParamsUtils.isObjectId(planId)){
-        data = await recordCtrl.planList({
-            planId
-        },type)
+        data = await recordCtrl.recordList({planId})
     }else{
         data = Serrors.paramsError(`传参错误 planId:${ParamsUtils.isObjectId(planId)}`)
     }

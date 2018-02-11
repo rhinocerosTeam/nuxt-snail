@@ -4,6 +4,7 @@ import books from './books';
 import user from './user';
 import mark from './marks';
 import plan from './plan';
+import record from './record';
 
 export default {
     category,
@@ -11,5 +12,6 @@ export default {
     user,
     comment,
     mark,
-    plan
+    plan,
+    record
 }

@@ -14,7 +14,7 @@
         </mt-cell>-->
 
         <mt-button type="primary" class="save" @click="save">保存</mt-button>
-        <mt-button type="primary" class="save" @click="returnList">返回</mt-button>
+        <mt-button type="primary"  v-if="goList" @click="returnList">返回</mt-button>
     </div>
 </template>
 <script>

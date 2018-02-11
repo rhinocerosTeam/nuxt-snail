@@ -24,26 +24,13 @@ export default class RecordControl {
      * @param  {String} userId  用户id
      * @return Promise
      * **/
-    async recordList(condition, type) {
+    async recordList(condition) {
         let res = null,
             doc = null;
 
-        // doc = await Entity.aggregate(Model.plan,[
-        //     {
-        //        $lookup:
-        //        {
-        //            from: "marks",
-        //            localField: "markId",
-        //            foreignField: "_id",
-        //            as: "marks"
-        //         }
-        //     }
-        // ])
-
-
 
         doc = await Entity.find(Model.record, condition).catch(e => {
-            res = Serrors.findError('计划查询失败')
+            res = Serrors.findError('查询失败')
         })
         if (!res) {
             res = {

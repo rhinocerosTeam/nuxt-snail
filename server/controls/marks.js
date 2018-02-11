@@ -23,7 +23,6 @@ export default class MarksControl {
         doc = await Entity.find(Model.mark,{userid:userid}).catch(e => {
             res = Serrors.findError('标签mark查询失败')
         })
-        console.log('doc',doc)
         if(!res){
             res = {
                 code:200,

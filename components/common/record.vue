@@ -12,8 +12,20 @@
             </li>
         </ul>
 
-        <mt-button type="primary" class="save">保存</mt-button>
-        <mt-button type="primary" class="save" @click="returnList">返回</mt-button>
+        <mt-button type="primary" class="save">新增</mt-button>
+        <mt-button  class="save" @click="returnList">返回</mt-button>
+
+
+        <div class="addRecordBox">
+            <div >
+                <mt-cell title="计划">
+                    <textarea name="" v-model="plan.planName" id="" cols="30" rows="4" ></textarea>
+                </mt-cell>
+                <div class="start">开始</div>
+            </div>
+
+
+        </div>
 
 
     </div>

@@ -34,6 +34,8 @@
                 position="right">
             <marks @popupVisibleFN='popupVisibleFN'></marks>
         </mt-popup>
+
+
     </div>
 </template>
 
@@ -73,6 +75,7 @@
                 },
                 selected: '',
                 popupVisible: false,
+                recordVisible:true
             }
         },
         methods: {
