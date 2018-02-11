@@ -5,6 +5,25 @@ import _ from 'lodash'
 import Model from '../models';
 
 export const wraper = (model, params) => {
+
+    if(model === Model.plan){
+        params = _.pick(params, ['planName', 'startDatetime', 'endDatetime', 'manHour', 'markId', 'markKey', 'result'
+            , 'percent']);
+        return Object.assign({}, {
+            planName: "",
+            startDatetime: "",
+            endDatetime: "",
+            manHour: "",
+            markId: "",
+            markKey: "",
+            result: "",
+            percent: "0",
+            create_time: Date.now()
+        }, params)
+    }
+
+
+
     if (model === Model.books) {
         params = _.pick(params, ['title', 'cover', 'html', 'userid', 'markdown', 'categoryid', 'commentid'
         , 'post', 'update_time', 'post_time', 'star']);

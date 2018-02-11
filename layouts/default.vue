@@ -9,8 +9,8 @@
         </div>
 
 
-        <div @click="changeTab">
-            <mt-tabbar v-model="selected">
+        <div @click="changeTab" >
+            <mt-tabbar fixed v-model="selected">
                 <mt-tab-item id="plan">
                     <img slot="icon" src="../assets/img/icon/bar_plan_active.png" v-if="selected == routerObj.plan">
                     <img slot="icon" src="../assets/img/icon/bar_plan.png" v-else>
@@ -32,7 +32,7 @@
         <mt-popup
                 v-model="popupVisible"
                 position="right">
-            <marks :popupVisibleFN='popupVisibleFN'></marks>
+            <marks @popupVisibleFN='popupVisibleFN'></marks>
         </mt-popup>
     </div>
 </template>
@@ -77,6 +77,7 @@
         },
         methods: {
             popupVisibleFN(flag){
+                console.log('--------->',flag)
                 this.popupVisible = flag
             },
             changeTab(){

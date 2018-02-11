@@ -20,7 +20,7 @@ export default class PlanControl {
      * @param  {String} userId  用户id
      * @return Promise
      * **/
-    async planList(condition){
+    async planList(condition, type){
         let res=null,
             doc=null;
 
@@ -35,6 +35,18 @@ export default class PlanControl {
         //         }
         //     }
         // ])
+
+        if(type == 2){ // 正在进行
+
+            condition.startDatetime={$gte:Date.now()}
+            condition.result=1
+        }else if(type == 3){ //没开始
+            condition.startDatetime={$lt:Date.now()}
+        }else if(type == 4){ //完成
+
+        }else{
+
+        }
 
         doc = await Entity.find(Model.plan,condition).catch(e => {
             res = Serrors.findError('计划查询失败')

@@ -13,5 +13,9 @@ export default {
         return axios.get('/v1/planList', this.GetParamFormat(data))
     },
 
+    addPlan(data){
+        return axios.post('/v1/addPlan', this.PostParamFormat(data))
+    }
+
 
 }

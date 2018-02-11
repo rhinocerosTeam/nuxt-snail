@@ -11,14 +11,14 @@ const router = new Router()
  * 得到标签列表
  */
 router.get('/planList', async (ctx, next) => {
-    let {markId,markKey} = ParamsUtils.queryValidate(ctx) || {},
+    let {markId, markKey, type} = ParamsUtils.queryValidate(ctx) || {},
         data = null;
 
-    if(ParamsUtils.isObjectId(markId) && markKey){
+    if(ParamsUtils.isObjectId(markId) && markKey && type){
         data = await planCtrl.planList({
             markId,
             markKey
-        })
+        },type)
     }else{
         data = Serrors.paramsError(`传参错误 markId:${ParamsUtils.isObjectId(markId)} markKey:${markKey}`)
     }

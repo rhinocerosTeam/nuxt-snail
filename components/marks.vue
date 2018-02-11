@@ -10,7 +10,7 @@
                 <span v-for="m,index in markMenu" @click="changeMenu(index)"> > {{ m.name}}  </span>
             </div>
             <ul>
-                <li v-for="obj,pindex in currentMark" :key="pindex" @click="choose(obj,pindex)">
+                <li v-for="obj,pindex in currentMark||[]" :key="pindex" @click="choose(obj,pindex)">
                     <div v-if="isEdit">
                         <mt-field  placeholder="请输入标签" v-model="obj.name"></mt-field>
                     </div>
@@ -60,6 +60,7 @@
             },
             choose(obj,index){
                 this.updateGlobalMark(obj)
+                console.log('----------->')
                 this.$emit('popupVisibleFN',false)
             }
         },

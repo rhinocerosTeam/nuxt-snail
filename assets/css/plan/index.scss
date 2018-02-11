@@ -1,5 +1,8 @@
 .plan-container{
-
+  .planBox{
+    height:calc(100vh - 130px);
+    overflow-y: scroll;
+  }
   background-color: #fff;
   ul{
     padding:0.2rem;
@@ -18,6 +21,32 @@
 
     }
   }
+  .addPlan{
+    width:0.5rem;
+    height:0.5rem;
+  }
+  .mint-navbar {
+    height:50px;
+    .mint-tab-item{
+      padding: 9px 0!important;
+      .mint-tab-item-label{
+        line-height: 0.5rem;
+        &:nth-of-type(3){
+          line-height: 0;
+        }
+      }
+    }
+  }
 
+  .addPlanContainer{
+    input,textarea{
+      border:1px solid #dadada;
+    }
+    .save{
+      width:6rem;
+      margin-top: 0.5rem;
+      margin-left: 0.75rem;
+    }
+  }
 
 }
