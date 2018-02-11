@@ -52,7 +52,7 @@
         methods: {
             async getRecordList(planId){
 
-                let res = await api.getRecordList(planId).catch(e => {
+                let res = await api.getRecordList({planId}).catch(e => {
                     console.log(e)
                 })
                 let data = api.parse(res)
@@ -88,7 +88,7 @@
 
         },
         mounted(){
-            this.getRecordList(this.planId)
+            this.getRecordList(this.plan._id)
         }
 
     }
