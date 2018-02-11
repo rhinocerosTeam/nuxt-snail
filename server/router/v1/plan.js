@@ -20,7 +20,7 @@ router.get('/planList', async (ctx, next) => {
             markKey
         },type)
     }else{
-        data = Serrors.paramsError(`传参错误 markId:${ParamsUtils.isObjectId(markId)} markKey:${markKey}`)
+        data = Serrors.paramsError(`传参错误 markId:${ParamsUtils.isObjectId(markId)} markKey:${markKey} type ${type}`)
     }
     ctx.body = data
 })
@@ -51,7 +51,7 @@ router.post('/updatePlan', async (ctx, next) =>{
     }
 
     if(!res){
-        res = await planCtrl.addUpdatePlan({_id,name,key,child})
+        res = await planCtrl.addUpdatePlan(params)
     }
 
     ctx.body = res

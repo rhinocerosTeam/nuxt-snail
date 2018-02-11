@@ -16,9 +16,21 @@ export const wraper = (model, params) => {
             manHour: "",
             markId: "",
             markKey: "",
-            result: "",
+            result: "0",
             percent: "0",
-            create_time: Date.now()
+            create_time: Date.now(),
+            update_time:Date.now()
+        }, params)
+    }
+    if(model === Model.record){
+        params = _.pick(params, ['planId', 'content', 'start_time', 'end_time',  'persent']);
+        return Object.assign({}, {
+            planId: "",
+            content: "",
+            start_time: "",
+            end_time: "",
+            percent: "0",
+            create_time: Date.now(),
         }, params)
     }
 

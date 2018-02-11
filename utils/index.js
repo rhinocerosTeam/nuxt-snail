@@ -7,7 +7,7 @@ import _ from 'lodash'
 export default class Utils {
 
 
-    static format(dateStr,fmt){
+    static format(dateStr, fmt) {
 
         var d = new Date(parseInt(dateStr));
 
@@ -110,10 +110,31 @@ export default class Utils {
     }
 
 
-    static formateMarkName(marks,markId,markKey){
-        return "假名字"
+    static formateMarkName(marks = [], markId, markKey) {
+
+        let mark = marks.find((obj) => {
+            return obj._id == markId
+        })
+
+        if (mark.key == markKey) {
+            return mark.name
+        } else {
+            return this.findMarkKey(mark.child, markKey)
+        }
+
+
     }
 
+    static findMarkKey(marks, mkey) {
+        for(let obj of marks){
+            if(obj.key == mkey){
+                return obj.name
+            }
+            if(obj.child&&obj.child>0){
+                return this.findMarkKey(obj.child,mkey)
+            }
+        }
+    }
 
 
 }

@@ -77,7 +77,6 @@
         },
         methods: {
             popupVisibleFN(flag){
-                console.log('--------->',flag)
                 this.popupVisible = flag
             },
             changeTab(){

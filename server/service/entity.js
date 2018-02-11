@@ -159,6 +159,7 @@ export default {
      * @param {*} params
      */
     update(model, id, params) {
+        params = wraper(model, params)
         return new Promise((resolve, reject) => {
             model.updateInfo(id, params, (err, doc) => {
                 if (err) {

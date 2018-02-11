@@ -18,6 +18,20 @@
           float: right;
         }
       }
+      .eidtBox{
+        padding:0.2rem 0;
+        .update{
+          width:0.4rem;
+          height:0.4rem;
+          display: inline-block;
+        }
+        .delete{
+          width:0.4rem;
+          height:0.4rem;
+          display: inline-block;
+          margin-left: 0.5rem;
+        }
+      }
 
     }
   }
