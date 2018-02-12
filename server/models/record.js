@@ -12,7 +12,7 @@ const recordSchema = new Schema({
     start_time:String,
     end_time:String,
     create_time:String,
-    persent:String
+    persent:Number
 }, { versionKey: false });
 
 

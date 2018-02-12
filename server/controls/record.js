@@ -59,7 +59,12 @@ export default class RecordControl {
             doc = await Entity.create(Model.record, data).catch(e => {
                 res = Serrors.findError('record增加失败')
             })
+            await Entity.updateBase(Model.plan, {'_id':data.planId},{$inc:{persent:data.persent}}).catch(e => {
+                res = Serrors.findError('plan修改失败')
+            })
         }
+
+
 
 
         if (!res) {

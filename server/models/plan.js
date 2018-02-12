@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema
 
 const planSchema = new Schema({
+    //_id:{type:Schema.Types.ObjectId},
     planName: String,
     startDatetime : String,
     endDatetime : String,

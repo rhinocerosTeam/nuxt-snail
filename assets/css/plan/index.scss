@@ -76,7 +76,7 @@
     z-index: 100;
     >div{
       width:7rem;
-      height:10rem;
+      height:13rem;
       margin:0.2rem 0.2rem;
       background-color: #fff;
       .start{
@@ -90,6 +90,18 @@
       }
     }
 
+    .time{
+      font-size: 0.9rem;
+      text-align: center;
+      margin:20px 0;
+      color: red;
+    }
+    .mint-cell-value{
+      width:5rem;
+      textarea,input{
+        width:100%;
+      }
+    }
   }
 
 

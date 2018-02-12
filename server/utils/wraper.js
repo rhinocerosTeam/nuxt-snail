@@ -17,7 +17,7 @@ export const wraper = (model, params) => {
             markId: "",
             markKey: "",
             result: "0",
-            percent: "0",
+            percent:0,
             create_time: Date.now(),
             update_time:Date.now()
         }, params)
@@ -29,7 +29,7 @@ export const wraper = (model, params) => {
             content: "",
             start_time: "",
             end_time: "",
-            percent: "0",
+            percent: 0,
             create_time: Date.now(),
         }, params)
     }
