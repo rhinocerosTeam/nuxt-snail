@@ -177,7 +177,6 @@ export default {
      * @param {*} params
      */
     updateBase(model, conditions = {}, update = {}, options = {}) {
-        console.log('conditions-->',conditions,'update-->',update)
         return new Promise((resolve, reject) => {
             model.update(conditions, update, options, (err, doc) => {
                 if (err) {

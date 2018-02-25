@@ -42,8 +42,6 @@
     import api from '~/api'
     import Utils from '~/utils/index'
     import {planStatus, planType} from '~/constant/params'
-    import BookList from '~/components/books/BookList.vue';
-    import category from '~/components/common/Category'
     import {mapGetters, mapActions} from 'vuex'
     import plan from '~/components/common/planList'
     import addPlan from '~/components/common/addPlan'
@@ -63,7 +61,7 @@
         },
         data() {
             return {
-                selected:1,
+                selected:'1',
                 planList:[],
                 planStatus:planStatus,
                 planType:planType

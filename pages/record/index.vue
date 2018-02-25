@@ -1,17 +1,18 @@
 <template>
     <section class="container">
-        record
+        <record ></record>
     </section>
 </template>
 <script>
-    import BookList from '~/components/books/BookList.vue';
-    import category from '~/components/common/Category'
-
+    import record from '~/components/common/record'
     export default {
         data() {
             return {
 
             }
+        },
+        components: {
+            record
         },
 
     }

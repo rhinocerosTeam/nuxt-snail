@@ -14,13 +14,17 @@ router.get('/planList', async (ctx, next) => {
     let {markId, markKey, type} = ParamsUtils.queryValidate(ctx) || {},
         data = null;
 
-    if(ParamsUtils.isObjectId(markId) && markKey && type){
-        data = await planCtrl.planList({
-            markId,
-            markKey
-        },type)
-    }else{
+    if((markId && (!ParamsUtils.isObjectId(markId) || !markKey) )|| !type){
         data = Serrors.paramsError(`传参错误 markId:${ParamsUtils.isObjectId(markId)} markKey:${markKey} type ${type}`)
+    }else{
+        let condition = {}
+        if(markId){
+            condition={
+                markId,
+                markKey
+            }
+        }
+        data = await planCtrl.planList(condition,type)
     }
     ctx.body = data
 })

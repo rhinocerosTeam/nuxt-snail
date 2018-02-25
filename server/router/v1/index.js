@@ -3,12 +3,6 @@ import jwt from 'jsonwebtoken';
 import Params from '../../utils/params'
 
 import Router from 'koa-router'
-import book from './books'
-import category from './category'
-import draft from './draft'
-import post from './post'
-import user from './user'
-import comment from './comment'
 import mark from './marks'
 import plan from './plan'
 import record from './record'
@@ -19,12 +13,7 @@ const router = new Router({prefix: '/v1'})
  */
 // router.use(authorize)
 
-router.use(book.routes(), book.allowedMethods())
-router.use(category.routes(), category.allowedMethods())
-router.use(draft.routes(), draft.allowedMethods())
-router.use(post.routes(), post.allowedMethods())
-router.use(user.routes(), user.allowedMethods())
-router.use(comment.routes(), comment.allowedMethods())
+
 router.use(mark.routes(), mark.allowedMethods())
 router.use(plan.routes(), plan.allowedMethods())
 router.use(record.routes(), record.allowedMethods())

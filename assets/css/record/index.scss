@@ -1,0 +1,72 @@
+.recordContainer{
+  background-color: #fff;
+  .recordList{
+      padding:0.2rem;
+      li{
+        padding-top:0.2rem;
+        border-bottom: 1px solid #e8e8e8;
+        min-height: 0.9rem;
+        font-size: 0.3rem;
+        .eidtBox{
+          margin-top: 0.3rem;
+          .delete{
+            width: 0.4rem;
+            height: 0.4rem;
+            display: inline-block;
+          }
+        }
+        .date{
+          margin-top: 0.3rem;
+          color: #868383;
+          font-size: 0.2rem;
+        }
+        .planInfo{
+          color: darkgrey;
+          padding-bottom:0.2rem;
+          font-weight: bold;
+        }
+      }
+  }
+  .addRecordBox{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    >div{
+      width:7rem;
+      height:13rem;
+      margin:0.2rem 0.2rem;
+      background-color: #fff;
+      .start{
+        width: 20vw;
+        height: 20vw;
+        background-color: #00a0e9;
+        border-radius: 20vw;
+        color: #fff;
+        line-height: 20vw;
+        text-align: center;
+      }
+    }
+
+    .time{
+      font-size: 0.9rem;
+      text-align: center;
+      margin:20px 0;
+      color: red;
+    }
+    .mint-cell-value{
+      width:5rem;
+      textarea,input{
+        width:100%;
+      }
+    }
+  }
+  button{
+    width: 6rem;
+    margin-top: 0.5rem;
+    margin-left: 0.75rem;
+  }
+}

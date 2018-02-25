@@ -66,43 +66,7 @@
   }
 
 
-  .addRecordBox{
-    position: fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 100;
-    >div{
-      width:7rem;
-      height:13rem;
-      margin:0.2rem 0.2rem;
-      background-color: #fff;
-      .start{
-        width: 20vw;
-        height: 20vw;
-        background-color: #00a0e9;
-        border-radius: 20vw;
-        color: #fff;
-        line-height: 20vw;
-        text-align: center;
-      }
-    }
 
-    .time{
-      font-size: 0.9rem;
-      text-align: center;
-      margin:20px 0;
-      color: red;
-    }
-    .mint-cell-value{
-      width:5rem;
-      textarea,input{
-        width:100%;
-      }
-    }
-  }
 
 
 }

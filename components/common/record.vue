@@ -1,8 +1,11 @@
 <template>
-    <div>
+    <div class="recordContainer">
 
-        <ul>
+        <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
+                <div class="planInfo" v-if="record.planId.planName">
+                    {{ record.planId.planName }}
+                </div>
                 {{record.content}}
                 <div class="date">
                     {{ formateDatetime(record.start_time) }} ~ {{ formateDatetime(record.end_time) }} 完成：{{record.persent}}%
@@ -13,24 +16,30 @@
             </li>
         </ul>
 
-        <mt-button type="primary" class="save" @click="addRecord()">新增</mt-button>
-        <mt-button class="save" @click="returnList">返回</mt-button>
+        <div v-if="plan" >
+            <mt-button type="primary" class="save" @click="addRecord()">新增</mt-button>
+            <mt-button class="save" @click="returnList">返回</mt-button>
+        </div>
 
 
-        <div class="addRecordBox" v-show="showRecord">
+
+        <div class="addRecordBox" v-show="showRecord" >
             <div>
-                <mt-cell title="计划">
-                    {{ plan.planName }}
-                </mt-cell>
-                <mt-cell title="计划时间">
-                    {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }}
-                </mt-cell>
-                <mt-cell title="工时">
-                    {{ plan.manHour }}
-                </mt-cell>
-                <mt-cell title="完成情况">
-                    {{ plan.persent }}
-                </mt-cell>
+                <div v-if="plan">
+                    <mt-cell title="计划">
+                        {{ plan.planName }}
+                    </mt-cell>
+                    <mt-cell title="计划时间">
+                        {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }}
+                    </mt-cell>
+                    <mt-cell title="工时">
+                        {{ plan.manHour }}
+                    </mt-cell>
+                    <mt-cell title="完成情况">
+                        {{ plan.persent }}
+                    </mt-cell>
+                </div>
+
                 <mt-cell title="完成事项">
                     <textarea name="" v-model="record.content" id="" cols="30" rows="4"></textarea>
                 </mt-cell>
@@ -95,9 +104,14 @@
             addRecord(){
                 this.showRecord = true
             },
-            async getRecordList(planId){
+            async getRecordList(){
 
-                let res = await api.getRecordList({planId}).catch(e => {
+                let cond = {}
+                if(this.plan && this.plan._id){
+                    cond = {planId:this.plan._id}
+                }
+
+                let res = await api.getRecordList(cond).catch(e => {
                     console.log(e)
                 })
                 let data = api.parse(res)
@@ -181,7 +195,8 @@
 
         },
         mounted(){
-            this.getRecordList(this.plan._id)
+
+            this.getRecordList()
         }
 
     }

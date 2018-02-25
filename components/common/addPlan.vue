@@ -9,9 +9,13 @@
         <mt-cell title="结束时间">
             <input type="date" v-model="plan.endDatetime">
         </mt-cell>
-       <!-- <mt-cell title="标签">
-            {{ globalMark.name}}
-        </mt-cell>-->
+       <mt-cell title="标签">
+
+            {{ globalMark.name }} 重新选择>
+        </mt-cell>
+
+
+
 
         <mt-button type="primary" class="save" @click="save">保存</mt-button>
         <mt-button type="primary"  v-if="goList" @click="returnList">返回</mt-button>
@@ -42,6 +46,7 @@
         methods:{
             async save(){
                 let data = {...this.plan};
+                console.log('---->',this.markMenu);
 
                 if(this.markMenu.length >0 ){
                     data.markId = this.markMenu[0]._id

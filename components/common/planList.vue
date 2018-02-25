@@ -64,8 +64,8 @@
         methods: {
             async getProblemList(){
                 let params = {
-                    markId: '',
-                    markKey: '',
+//                    markId: '',
+//                    markKey: '',
                     type: this.type
                 }
                 if (this.markMenu.length > 0) {

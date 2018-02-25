@@ -4,10 +4,6 @@
 /**
  * Created by songpeilan on 2018/2/8.
  */
-/**
- * Created by user on 2018/2/5.
- */
-
 import Model from '../models/index'
 import Entity from '../service/entity'
 import {exec} from 'child_process'
@@ -29,7 +25,7 @@ export default class RecordControl {
             doc = null;
 
 
-        doc = await Entity.find(Model.record, condition).catch(e => {
+        doc = await Entity.fetch(Model.record, 'create_time',condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -44,6 +40,28 @@ export default class RecordControl {
             resolve(res)
         })
 
+    }
+
+
+    async refrecordList(condition){
+        let res = null,
+            doc = null;
+
+
+        doc = await Entity.refFetchPage(Model.record, 0, 20,'create_time',condition).catch(e => {
+            res = Serrors.findError('查询失败')
+        })
+        if (!res) {
+            res = {
+                code: 200,
+                data: doc,
+                msg: ''
+            }
+        }
+
+        return new Promise((resolve) => {
+            resolve(res)
+        })
     }
 
 

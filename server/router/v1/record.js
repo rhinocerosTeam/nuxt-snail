@@ -14,10 +14,17 @@ router.get('/recordList', async (ctx, next) => {
     let {planId} = ParamsUtils.queryValidate(ctx) || {},
         data = null;
 
-    if(ParamsUtils.isObjectId(planId)){
-        data = await recordCtrl.recordList({planId})
-    }else{
+    if(planId && !ParamsUtils.isObjectId(planId)){
         data = Serrors.paramsError(`传参错误 planId:${ParamsUtils.isObjectId(planId)}`)
+    }else{
+        let cont = null
+        if(planId){
+            cont = {planId}
+            data = await recordCtrl.recordList(cont)
+        }else{
+            data = await recordCtrl.refrecordList(cont)
+        }
+
     }
     ctx.body = data
 })
