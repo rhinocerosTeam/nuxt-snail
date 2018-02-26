@@ -2,7 +2,7 @@
   "name": "nuxt-snail",
   "version": "1.0.0",
   "description": "nuxt-snail project",
-  "author": "宋佩兰 ",
+  "author": "宋佩兰",
   "private": true,
   "scripts": {
     "server": "backpack start",

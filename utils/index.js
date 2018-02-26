@@ -112,6 +112,8 @@ export default class Utils {
 
     static formateMarkName(marks = [], markId, markKey) {
 
+        console.log(marks,markId,markKey)
+
         let mark = marks.find((obj) => {
             return obj._id == markId
         })

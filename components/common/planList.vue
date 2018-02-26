@@ -86,7 +86,8 @@
             goRecord(index){
                 this.recordPlan=this.planList[index]
             },
-            getMarkName(id, key){
+            getMarkName(id='', key=''){
+                console.log('getMarkName-->',id, key)
                 return Utils.formateMarkName(this.marks, id, key)
             },
             formateDate(date){

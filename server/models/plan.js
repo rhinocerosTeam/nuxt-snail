@@ -12,20 +12,16 @@ const Schema = mongoose.Schema
 const planSchema = new Schema({
     //_id:{type:Schema.Types.ObjectId},
     planName: String,
-    startDatetime : String,
-    endDatetime : String,
-    manHour : String,
-    markId : {type:Schema.Types.ObjectId},
-    markKey : String,
-    result : String,
-    percent : String
-}, { versionKey: false });
+    startDatetime: String,
+    endDatetime: String,
+    manHour: String,
+    markId: {type: Schema.Types.ObjectId},
+    markKey: String,
+    result: String,
+    percent: String
+}, {versionKey: false});
 
 
-planSchema.statics = _.merge(baseModel, {
-
-
-
-});
+planSchema.statics = _.merge(baseModel, {});
 
 export default mongoose.model('plan', planSchema, 'plans');
