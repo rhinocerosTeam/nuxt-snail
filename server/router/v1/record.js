@@ -38,10 +38,10 @@ router.post('/addRecord', async (ctx, next) =>{
 
     if( !params.planId || !params.content ){
         res = Serrors.paramsError('传参错误')
-    }
-    if(!res){
+    }else{
         res = await recordCtrl.addUpdateRecord(params)
     }
+
 
     ctx.body = res
 })

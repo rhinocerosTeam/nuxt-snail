@@ -3,7 +3,7 @@
 
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
-                <div class="planInfo" v-if="record.planId.planName">
+                <div class="planInfo" v-if="record.planId&&record.planId.planName">
                     {{ record.planId.planName }}
                 </div>
                 {{record.content}}
@@ -11,6 +11,7 @@
                     {{ formateDatetime(record.start_time) }} ~ {{ formateDatetime(record.end_time) }} 完成：{{record.persent}}%
                 </div>
                 <div class="eidtBox">
+                    <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
                     <img src="../../assets/img/icon/delete.png" class="delete" @click="deletePlan(index,plan._id)">
                 </div>
             </li>
@@ -101,6 +102,9 @@
             }
         },
         methods: {
+            updatePlan(index){
+
+            },
             addRecord(){
                 this.showRecord = true
             },

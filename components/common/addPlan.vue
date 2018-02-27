@@ -10,12 +10,14 @@
             <input type="date" v-model="plan.endDatetime">
         </mt-cell>
        <mt-cell title="标签">
+           <template v-if="isAdd">
+               {{ globalMark.name }} 重新选择>
+           </template>
+           <template v-if="!isAdd">
+               {{ getMarkName(plan.markId,plan.markKey) }} 重新选择>
+           </template>
 
-            {{ globalMark.name }} 重新选择>
         </mt-cell>
-
-
-
 
         <mt-button type="primary" class="save" @click="save">保存</mt-button>
         <mt-button type="primary"  v-if="goList" @click="returnList">返回</mt-button>
@@ -27,33 +29,37 @@
     import {mapActions,mapGetters} from 'vuex';
     import Utils from '~/utils/index'
     export default {
-        props:['planData','goList'],
+        // editType: add update
+        props:['planData','goList','editType'],
         data(){
             return {
+                isAdd:this.editType == 'add',
                 plan:{
                     planName:'',
                     startDatetime:'',
                     endDatetime:'',
+                    markId:'',
+                    markKey:''
                 }
             }
         },
         computed: {
             ...mapGetters({
+                marks: 'getMarks',
                 markMenu:'getMarkMenu',
                 globalMark:'getGlobalMark'
             })
         },
         methods:{
+            getMarkName(id = '', key = ''){
+                if (!this.marks) {
+                    return ''
+                }
+                return Utils.formateMarkName(this.marks, id, key)
+            },
             async save(){
                 let data = {...this.plan};
-                console.log('---->',this.markMenu);
 
-                if(this.markMenu.length >0 ){
-                    data.markId = this.markMenu[0]._id
-                }
-                if(this.globalMark){
-                    data.markKey = this.globalMark.key
-                }
 
                 data.startDatetime = new Date(data.startDatetime).getTime()
                 data.endDatetime = new Date(data.endDatetime).getTime()
@@ -62,12 +68,27 @@
                     let res = await api.updatePlan(data).catch(e => {
                         console.log(e)
                     })
-                    Toast('修改成功')
+                    if(res.code != 200){
+                        Toast(res.msg)
+                    }else{
+                        Toast('修改成功')
+                    }
                 }else{
+                    if(this.markMenu.length >0 ){
+                        data.markId = this.markMenu[0]._id
+                    }
+                    if(this.globalMark){
+                        data.markKey = this.globalMark.key
+                    }
                     let res = await api.addPlan(data).catch(e => {
                         console.log(e)
                     })
-                    Toast('增加成功')
+                    if(res.code != 200){
+                        Toast(res.msg)
+                    }else{
+                        Toast('增加成功')
+                    }
+
                 }
 
                 this.returnList()
@@ -84,6 +105,7 @@
                 plan.startDatetime = Utils.format(plan.startDatetime,"yyyy-MM-dd")
                 plan.endDatetime = Utils.format(plan.endDatetime,"yyyy-MM-dd")
                 this.plan = plan
+                console.log({planData:this.planData,plan:this.plan})
             }
         }
     }

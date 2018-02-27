@@ -22,7 +22,7 @@
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
                 <div class="planBox">
-                    <add-plan type="1"></add-plan>
+                    <add-plan type="1" editType="add"></add-plan>
                 </div>
             </mt-tab-container-item>
             <mt-tab-container-item id="4">

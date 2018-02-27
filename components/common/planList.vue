@@ -7,21 +7,21 @@
                 {{ plan.planName }}
                 <div class="date">
                     {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }} 工时：{{plan.manHour}}
-                    <span>
+                    <span v-if="plan">
                         {{ getMarkName(plan.markId,plan.markKey) }}
                     </span>
                 </div>
                 <div class="eidtBox">
-                    <img src="../../assets/img/icon/update.png" class="update" @click="updatePlan(index)" >
-                    <img src="../../assets/img/icon/delete.png" class="delete" @click="deletePlan(index,plan._id)">
+                    <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
+                    <img src="../../assets/img/icon/delete.png" class="delete" @click.stop="deletePlan(index,plan._id)">
                 </div>
             </li>
         </ul>
         <div class="update" v-if="editPlan._id">
-            <addPlan :planData="editPlan" @goList="goList"></addPlan>
+            <addPlan :planData="editPlan" @goList="goList" editType="update"></addPlan>
         </div>
-        <div v-if='recordPlan._id' >
-            <record :plan="recordPlan"  @goList="goList"></record>
+        <div v-if='recordPlan._id'>
+            <record :plan="recordPlan" @goList="goList"></record>
         </div>
     </div>
 </template>
@@ -57,8 +57,8 @@
             return {
                 planList: [],
                 planStatus: planStatus,
-                editPlan:{},
-                recordPlan:{}
+                editPlan: {},
+                recordPlan: {}
             }
         },
         methods: {
@@ -84,24 +84,26 @@
                 }
             },
             goRecord(index){
-                this.recordPlan=this.planList[index]
+                this.recordPlan = this.planList[index]
             },
-            getMarkName(id='', key=''){
-                console.log('getMarkName-->',id, key)
+            getMarkName(id = '', key = ''){
+                if (!this.marks) {
+                    return ''
+                }
                 return Utils.formateMarkName(this.marks, id, key)
             },
             formateDate(date){
                 return Utils.format(date, "yyyy-MM-dd")
             },
             updatePlan(index){
-                this.editPlan=this.planList[index]
+                this.editPlan = this.planList[index]
             },
             async deletePlan(index, id){
                 let a = await api.deletePlan(id).catch(e => {
                     console.log(e)
                 })
 
-                this.planList.splice(index,1)
+                this.planList.splice(index, 1)
                 Toast('删除成功')
 
             },
