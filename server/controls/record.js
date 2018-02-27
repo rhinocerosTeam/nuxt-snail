@@ -10,6 +10,7 @@ import {exec} from 'child_process'
 import mongoose from 'mongoose';
 import Serrors from '../utils/serrors'
 import _ from 'lodash'
+import PlanCtrl from './plan'
 
 export default class RecordControl {
     constructor() {
@@ -23,7 +24,6 @@ export default class RecordControl {
     async recordList(condition) {
         let res = null,
             doc = null;
-
 
         doc = await Entity.fetch(Model.record, 'create_time',condition).catch(e => {
             res = Serrors.findError('查询失败')
@@ -77,12 +77,12 @@ export default class RecordControl {
             doc = await Entity.create(Model.record, data).catch(e => {
                 res = Serrors.findError('record增加失败')
             })
+            // 增加工时和完成程度
+            await PlanCtrl.EditPlanByRecord()
             await Entity.updateBase(Model.plan, {'_id':data.planId},{$inc:{persent:data.persent}}).catch(e => {
                 res = Serrors.findError('plan修改失败')
             })
         }
-
-
 
 
         if (!res) {
@@ -131,6 +131,7 @@ export default class RecordControl {
             resolve(res);
         })
     }
+
 
 
 }

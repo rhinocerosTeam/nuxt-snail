@@ -18,8 +18,8 @@
         </ul>
 
         <div v-if="plan" >
-            <mt-button type="primary" class="save" @click="addRecord()">新增</mt-button>
-            <mt-button class="save" @click="returnList">返回</mt-button>
+            <mt-button type="primary" class="save" @click="addRecord()">新增进度</mt-button>
+            <mt-button class="save" @click="returnList">返回计划列表</mt-button>
         </div>
 
 
@@ -59,7 +59,7 @@
                     <mt-button type="primary" class="save" @click="end()">结束计时</mt-button>
                 </div>
                 <mt-button type="primary" class="save" @click="save()" v-if="record.end_time">保存</mt-button>
-                <mt-button type="primary" class="save" @click="closeRecord()">关闭</mt-button>
+                <mt-button class="save" @click="closeRecord()">关闭</mt-button>
             </div>
         </div>
     </div>

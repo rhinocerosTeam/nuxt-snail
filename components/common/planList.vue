@@ -3,7 +3,7 @@
         <ul v-show="!editPlan._id && !recordPlan._id">
             <li v-for="plan,index in planList" :key="index" @click="goRecord(index)">
                 <span v-if="plan.result == 1">[{{ planStatus[plan.result]}}]</span>
-                [{{ plan.percent}}]
+                [{{ plan.percent}} %]
                 {{ plan.planName }}
                 <div class="date">
                     {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }} 工时：{{plan.manHour}}

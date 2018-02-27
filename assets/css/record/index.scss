@@ -9,10 +9,13 @@
         font-size: 0.3rem;
         .eidtBox{
           margin-top: 0.3rem;
-          .delete{
+          .delete,.update{
             width: 0.4rem;
             height: 0.4rem;
             display: inline-block;
+          }
+          .update{
+            margin-right: 0.3rem;
           }
         }
         .date{

@@ -71,7 +71,7 @@ export default class PlanControl {
             doc = null;
 
         if (data._id) {
-            doc = await Entity.update(Model.plan,  data._id ,data).catch((e) => {
+            doc = await Entity.update(Model.plan, data._id, data).catch((e) => {
                 res = Serrors.update('plan更新失败')
             })
         } else {
@@ -105,7 +105,6 @@ export default class PlanControl {
         let res = null,
             doc = null;
 
-
         doc = await Entity.remove(Model.plan, id).catch(e => {
             res = {
                 code: 500,
@@ -113,7 +112,6 @@ export default class PlanControl {
                 msg: 'delete error'
             }
         })
-
 
         if (!res) {
             res = {
@@ -126,6 +124,14 @@ export default class PlanControl {
         return new Promise((resolve) => {
             resolve(res);
         })
+    }
+
+    /* 根据工时和完成百分比修改计划 */
+    async EditPlanByRecord(planId, menHour, persent) {
+
+        Entity.updateBase()
+
+
     }
 
 

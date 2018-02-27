@@ -20,7 +20,7 @@
         </mt-cell>
 
         <mt-button type="primary" class="save" @click="save">保存</mt-button>
-        <mt-button type="primary"  v-if="goList" @click="returnList">返回</mt-button>
+        <mt-button  class="save"  v-if="!isAdd" @click="returnList">返回</mt-button>
     </div>
 </template>
 <script>
@@ -30,7 +30,7 @@
     import Utils from '~/utils/index'
     export default {
         // editType: add update
-        props:['planData','goList','editType'],
+        props:['planData','editType'],
         data(){
             return {
                 isAdd:this.editType == 'add',
@@ -99,7 +99,6 @@
             }
         },
         mounted(){
-            console.log('this.planData',this.planData)
             if(this.planData){
                 let plan = this.planData
                 plan.startDatetime = Utils.format(plan.startDatetime,"yyyy-MM-dd")
