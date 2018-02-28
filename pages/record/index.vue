@@ -1,6 +1,6 @@
 <template>
     <section class="container">
-        <record ></record>
+        <record from='record'></record>
     </section>
 </template>
 <script>

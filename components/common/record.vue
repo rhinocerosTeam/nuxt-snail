@@ -12,17 +12,15 @@
                 </div>
                 <div class="eidtBox">
                     <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
-                    <img src="../../assets/img/icon/delete.png" class="delete" @click="deletePlan(index,plan._id)">
+                    <img src="../../assets/img/icon/delete.png" class="delete" @click="deleteRecord(index,record._id)">
                 </div>
             </li>
         </ul>
 
-        <div v-if="plan" >
+        <div v-if="!isFromRecord" >
             <mt-button type="primary" class="save" @click="addRecord()">新增进度</mt-button>
             <mt-button class="save" @click="returnList">返回计划列表</mt-button>
         </div>
-
-
 
         <div class="addRecordBox" v-show="showRecord" >
             <div>
@@ -73,7 +71,7 @@
 
 
     export default {
-        props: ['plan', 'goList'],
+        props: ['plan', 'from'],
         async asyncData({isServer, store}){
 
         },
@@ -88,6 +86,7 @@
         },
         data() {
             return {
+                isFromRecord:this.from == 'record',
                 recordList: [],
                 record: {
                     planId: '',

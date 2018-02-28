@@ -127,11 +127,12 @@ export default class PlanControl {
     }
 
     /* 根据工时和完成百分比修改计划 */
-    async EditPlanByRecord(planId, menHour, persent) {
-
-        Entity.updateBase()
-
-
+    async EditPlanByRecord(params) {
+        let {planId, manHour, percent} = params
+        await Entity.updateBase(Model.plan,{_id:planId},{$inc:{manHour:manHour,percent:percent}},{multi: true}).catch(e=>{
+           return false
+        })
+        return true
     }
 
 

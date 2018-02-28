@@ -53,8 +53,10 @@ router.post('/deleteRecord', async (ctx, next) =>{
     let {id} = ParamsUtils.bodyValidate(ctx),
         data = null;
 
+
+
     if(ParamsUtils.isObjectId(id)){
-        data = recordCtrl.deletePlan(id)
+        data = recordCtrl.deleteRecord(id)
     }else{
         data = Serrors.paramsError('id传参错误')
     }

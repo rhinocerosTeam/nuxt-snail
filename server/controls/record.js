@@ -10,7 +10,7 @@ import {exec} from 'child_process'
 import mongoose from 'mongoose';
 import Serrors from '../utils/serrors'
 import _ from 'lodash'
-import PlanCtrl from './plan'
+import {planCtrl}  from './plan'
 
 export default class RecordControl {
     constructor() {
@@ -25,7 +25,7 @@ export default class RecordControl {
         let res = null,
             doc = null;
 
-        doc = await Entity.fetch(Model.record, 'create_time',condition).catch(e => {
+        doc = await Entity.fetch(Model.record, 'create_time', condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -43,12 +43,12 @@ export default class RecordControl {
     }
 
 
-    async refrecordList(condition){
+    async refrecordList(condition) {
         let res = null,
             doc = null;
 
 
-        doc = await Entity.refFetchPage(Model.record, 0, 20,'create_time',condition).catch(e => {
+        doc = await Entity.refFetchPage(Model.record, 0, 20, 'create_time', condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -67,23 +67,32 @@ export default class RecordControl {
 
     async addUpdateRecord(data) {
         let res = null,
-            doc = null;
-
+            doc = null,
+            _persent = 0,
+            _manHour = 0
         if (data._id) {
-            doc = await Entity.update(Model.record,  data._id ,data).catch((e) => {
-                res = Serrors.update('record更新失败')
+            let record = Entity.findById(Model.record, data._id).catch((e) => {
+                res = Serrors.findError('record查询失败')
             })
+            doc = await Entity.update(Model.record, data._id, data).catch((e) => {
+                res = Serrors.updateError('record更新失败')
+            })
+            _manHour = (data.end_time - data.start_time) - (record.end_time - record.start_time )
+            _persent = data.persent - record.persent
+
         } else {
             doc = await Entity.create(Model.record, data).catch(e => {
-                res = Serrors.findError('record增加失败')
+                res = Serrors.createError('record增加失败')
             })
-            // 增加工时和完成程度
-            await PlanCtrl.EditPlanByRecord()
-            await Entity.updateBase(Model.plan, {'_id':data.planId},{$inc:{persent:data.persent}}).catch(e => {
-                res = Serrors.findError('plan修改失败')
-            })
+            _persent = data.persent
+            _manHour = data.end_time - data.start_time
         }
 
+
+        // 增加工时和完成程度
+        await planCtrl.EditPlanByRecord({planId: data.planId, percent: _persent, manHour: _manHour}).catch(e => {
+            res = Serrors.findError('plan修改失败')
+        })
 
         if (!res) {
             res = {
@@ -107,8 +116,16 @@ export default class RecordControl {
     async deleteRecord(id) {
 
         let res = null,
-            doc = null;
+            doc = null,
+            _persent = 0,
+            _manHour = 0;
 
+        let record = Entity.findById(Model.record, id).catch((e) => {
+            res = Serrors.findError('record查询失败')
+        })
+
+        _persent = -record.persent
+        _manHour = -(record.end_time - record.start_time )
 
         doc = await Entity.remove(Model.record, id).catch(e => {
             res = {
@@ -116,6 +133,13 @@ export default class RecordControl {
                 data: null,
                 msg: 'delete error'
             }
+        })
+
+        console.log({id,record,planId: record.planId, percent: _persent, manHour: _manHour})
+
+        // 删除工时和完成程度
+        await planCtrl.EditPlanByRecord({planId: record.planId, percent: _persent, manHour: _manHour}).catch(e => {
+            res = Serrors.findError('plan修改失败')
         })
 
 
@@ -131,7 +155,6 @@ export default class RecordControl {
             resolve(res);
         })
     }
-
 
 
 }

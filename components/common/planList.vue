@@ -21,7 +21,7 @@
             <addPlan :planData="editPlan" @goList="goList" editType="update"></addPlan>
         </div>
         <div v-if='recordPlan._id'>
-            <record :plan="recordPlan" @goList="goList"></record>
+            <record :plan="recordPlan" @goList="goList" from='plan'></record>
         </div>
     </div>
 </template>

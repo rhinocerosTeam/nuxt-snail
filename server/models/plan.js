@@ -14,11 +14,11 @@ const planSchema = new Schema({
     planName: String,
     startDatetime: String,
     endDatetime: String,
-    manHour: String,
+    manHour: Number,
     markId: {type: Schema.Types.ObjectId},
     markKey: String,
     result: String,
-    percent: String
+    percent: Number
 }, {versionKey: false});
 
 
