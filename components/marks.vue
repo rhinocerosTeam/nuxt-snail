@@ -62,6 +62,7 @@
                 this.updateMarkMenu({mindex})
             },
             choose(obj,index){
+
                 this.updateGlobalMark(obj)
                 this.$emit('popupVisibleFN',false)
             },

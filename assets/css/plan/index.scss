@@ -7,6 +7,7 @@
   ul{
     padding:0.2rem;
     li{
+      padding-top:0.2rem;
       border-bottom: 1px solid #e8e8e8;
       min-height: 0.9rem;
       font-size:0.3rem;
@@ -24,12 +25,13 @@
           width:0.4rem;
           height:0.4rem;
           display: inline-block;
+          margin-right: 0.5rem;
         }
         .delete{
           width:0.4rem;
           height:0.4rem;
           display: inline-block;
-          margin-left: 0.5rem;
+          margin-right: 0.5rem;
         }
       }
 

@@ -2,18 +2,19 @@
     <div>
         <ul v-show="!editPlan._id && !recordPlan._id">
             <li v-for="plan,index in planList" :key="index" @click="goRecord(index)">
-                <span v-if="plan.result == 1">[{{ planStatus[plan.result]}}]</span>
                 [{{ plan.percent}} %]
                 {{ plan.planName }}
                 <div class="date">
-                    {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }} 工时：{{plan.manHour}}
+                    {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }} 工时：{{plan.manHour/1000/60}}分钟
                     <span v-if="plan">
                         {{ getMarkName(plan.markId,plan.markKey) }}
                     </span>
                 </div>
                 <div class="eidtBox">
-                    <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
-                    <img src="../../assets/img/icon/delete.png" class="delete" @click.stop="deletePlan(index,plan._id)">
+                    <img src="../../assets/img/icon/update.png" class="update" v-if="plan.result == 0" @click.stop="updatePlan(index)">
+                    <img src="../../assets/img/icon/delete.png" class="delete" v-if="plan.result == 0" @click.stop="deletePlan(index,plan._id)">
+                    <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0" @click.stop="changeResult(index,1)">
+                    <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1" @click.stop="changeResult(index,0)">
                 </div>
             </li>
         </ul>
@@ -82,6 +83,13 @@
                 if (data) {
                     this.planList = data
                 }
+            },
+            async changeResult(index,result){
+                this.planList[index].result = result
+
+                await api.updatePlan(this.planList[index]).catch(e => {
+                    console.log(e)
+                })
             },
             goRecord(index){
                 this.recordPlan = this.planList[index]

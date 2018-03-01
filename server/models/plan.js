@@ -17,7 +17,7 @@ const planSchema = new Schema({
     manHour: Number,
     markId: {type: Schema.Types.ObjectId},
     markKey: String,
-    result: String,
+    result: Number,
     percent: Number
 }, {versionKey: false});
 

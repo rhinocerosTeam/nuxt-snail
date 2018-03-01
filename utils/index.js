@@ -139,7 +139,6 @@ export default class Utils {
         for (let obj of marks) {
             if (obj.key == mkey) {
                 keyName = obj.name
-                console.log('标签名称：', obj.name, keyName)
                 return keyName
             } else {
                 if (obj.child && obj.child.length > 0) {

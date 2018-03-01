@@ -8,7 +8,6 @@
             <nuxt/>
         </div>
 
-
         <div @click="changeTab" >
             <mt-tabbar fixed v-model="selected">
                 <mt-tab-item id="plan">
