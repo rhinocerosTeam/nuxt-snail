@@ -1,6 +1,5 @@
 import _ from 'lodash'
 
-
 /**
  * Created by VULCAN on 2017/12/11.
  */
@@ -115,27 +114,36 @@ export default class Utils {
         if (marks.length == 0) {
             return ''
         }
+        var keyName = null
         let mark = marks.find((obj) => {
             return obj._id == markId
         })
 
         if (mark) {
             if (mark.key == markKey) {
-                return mark.name
+                keyName = mark.name
+                return keyName
             } else {
-                return this.findMarkKey(mark.child, markKey)
+                keyName = this.findMarkKey(mark.child, markKey, keyName)
+                return keyName
             }
+
         }
 
     }
 
-    static findMarkKey(marks = [], mkey) {
+    static findMarkKey(marks = [], mkey, keyName) {
+        if (keyName) {
+            return keyName
+        }
         for (let obj of marks) {
             if (obj.key == mkey) {
-                return obj.name
+                keyName = obj.name
+                console.log('标签名称：', obj.name, keyName)
+                return keyName
             } else {
                 if (obj.child && obj.child.length > 0) {
-                    return this.findMarkKey(obj.child, mkey)
+                    this.findMarkKey(obj.child, mkey, keyName)
                 }
             }
         }

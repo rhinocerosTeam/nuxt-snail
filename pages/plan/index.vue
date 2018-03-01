@@ -17,7 +17,7 @@
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
                 <div class="planBox">
-                    <plan :type="planType.doing"></plan>
+                    <!--<plan :type="planType.doing"></plan>-->
                 </div>
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
@@ -27,12 +27,12 @@
             </mt-tab-container-item>
             <mt-tab-container-item id="4">
                 <div class="planBox">
-                    <plan :type="planType.notStart"></plan>
+                    <!--<plan :type="planType.notStart"></plan>-->
                 </div>
             </mt-tab-container-item>
             <mt-tab-container-item id="5">
                 <div class="planBox">
-                    <plan :type="planType.finish"></plan>
+                    <!--<plan :type="planType.finish"></plan>-->
                 </div>
             </mt-tab-container-item>
         </mt-tab-container>

@@ -32,7 +32,6 @@ export default Object.assign({
                 if (data["status"] !== 200) {
                     return result
                 }
-
                 if (result && result["code"] === 200) {
                     return result['data']
                 }else {

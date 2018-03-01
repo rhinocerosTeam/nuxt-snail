@@ -8,7 +8,8 @@
                 </div>
                 {{record.content}}
                 <div class="date">
-                    {{ formateDatetime(record.start_time) }} ~ {{ formateDatetime(record.end_time) }} 完成：{{record.persent}}%
+                    {{ formateDatetime(record.start_time) }} ~ {{ formateDatetime(record.end_time) }}
+                    完成：{{record.persent}}%
                 </div>
                 <div class="eidtBox">
                     <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
@@ -17,12 +18,12 @@
             </li>
         </ul>
 
-        <div v-if="!isFromRecord" >
+        <div v-if="!isFromRecord">
             <mt-button type="primary" class="save" @click="addRecord()">新增进度</mt-button>
             <mt-button class="save" @click="returnList">返回计划列表</mt-button>
         </div>
 
-        <div class="addRecordBox" v-show="showRecord" >
+        <div class="addRecordBox" v-show="showRecord">
             <div>
                 <div v-if="plan">
                     <mt-cell title="计划">
@@ -46,10 +47,23 @@
                     <input type="text" v-model="record.persent">
                 </mt-cell>
                 <mt-cell title="开始时间">
-                    {{ formateDatetime(record.start_time) }}
+                    <mt-datetime-picker
+                            ref="picker_start"
+                            type="datetime"
+                            v-model="startTime"
+                            @confirm="startPickerConfirm"
+                    >
+                    </mt-datetime-picker>
+                    {{ formateDatetime(record.start_time)}} <span class="selectTime" @click='chooseTime(0)'> 选择时间 </span>
                 </mt-cell>
                 <mt-cell title="结束时间">
-                    {{ formateDatetime(record.end_time) }}
+                    <mt-datetime-picker
+                            ref="picker_end"
+                            type="datetime"
+                            @confirm="endPickerConfirm"
+                            v-model="endTime">
+                    </mt-datetime-picker>
+                    {{ formateDatetime(record.end_time) }} <span class="selectTime" @click='chooseTime(1)'> 选择时间 </span>
                 </mt-cell>
                 <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time">开始计时</mt-button>
                 <div v-if="record.start_time && !record.end_time">
@@ -58,6 +72,9 @@
                 </div>
                 <mt-button type="primary" class="save" @click="save()" v-if="record.end_time">保存</mt-button>
                 <mt-button class="save" @click="closeRecord()">关闭</mt-button>
+            </div>
+            <div>
+
             </div>
         </div>
     </div>
@@ -86,7 +103,7 @@
         },
         data() {
             return {
-                isFromRecord:this.from == 'record',
+                isFromRecord: this.from == 'record',
                 recordList: [],
                 record: {
                     planId: '',
@@ -97,12 +114,34 @@
                 },
                 recordTime: 0,
                 timeout: '',
-                showRecord: false
+                showRecord: false,
+                startTime: '',
+                endTime: ''
             }
         },
         methods: {
             updatePlan(index){
 
+            },
+            startPickerConfirm(value){
+                console.log(value)
+                this.record.start_time = new Date(value).getTime()
+            },
+            endPickerConfirm(value){
+                this.record.end_time = new Date(value).getTime()
+            },
+            chooseTime(type){
+                if (type == 0) {
+                    if(!this.startTime){
+                        this.startTime = new Date()
+                    }
+                    this.$refs.picker_start.open();
+                } else {
+                    if(!this.endTime){
+                        this.endTime = new Date()
+                    }
+                    this.$refs.picker_end.open();
+                }
             },
             addRecord(){
                 this.showRecord = true
@@ -110,8 +149,8 @@
             async getRecordList(){
 
                 let cond = {}
-                if(this.plan && this.plan._id){
-                    cond = {planId:this.plan._id}
+                if (this.plan && this.plan._id) {
+                    cond = {planId: this.plan._id}
                 }
 
                 let res = await api.getRecordList(cond).catch(e => {
@@ -206,3 +245,6 @@
 
 
 </script>
+<style >
+
+</style>

@@ -120,7 +120,7 @@ export default class RecordControl {
             _persent = 0,
             _manHour = 0;
 
-        let record = Entity.findById(Model.record, id).catch((e) => {
+        let record = await Entity.findById(Model.record, id).catch((e) => {
             res = Serrors.findError('record查询失败')
         })
 
@@ -139,7 +139,7 @@ export default class RecordControl {
 
         // 删除工时和完成程度
         await planCtrl.EditPlanByRecord({planId: record.planId, percent: _persent, manHour: _manHour}).catch(e => {
-            res = Serrors.findError('plan修改失败')
+            res = Serrors.updateError('plan修改失败')
         })
 
 

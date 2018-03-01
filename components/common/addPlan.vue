@@ -60,7 +60,6 @@
             async save(){
                 let data = {...this.plan};
 
-
                 data.startDatetime = new Date(data.startDatetime).getTime()
                 data.endDatetime = new Date(data.endDatetime).getTime()
 
@@ -68,11 +67,15 @@
                     let res = await api.updatePlan(data).catch(e => {
                         console.log(e)
                     })
-                    if(res.code != 200){
-                        Toast(res.msg)
-                    }else{
+
+                    let result = api.parse(res)
+
+                    if(Number(res.data.code) == 200){
                         Toast('修改成功')
+                    }else{
+                        Toast('error'+res.msg)
                     }
+
                 }else{
                     if(this.markMenu.length >0 ){
                         data.markId = this.markMenu[0]._id
@@ -83,11 +86,13 @@
                     let res = await api.addPlan(data).catch(e => {
                         console.log(e)
                     })
-                    if(res.code != 200){
-                        Toast(res.msg)
-                    }else{
+
+                    if(Number(res.data.code) == 200){
                         Toast('增加成功')
+                    }else{
+                        Toast('error'+res.msg)
                     }
+
 
                 }
 
