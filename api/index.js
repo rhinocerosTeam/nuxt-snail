@@ -4,11 +4,6 @@
 
 import _ from 'lodash';
 import axios from '~/plugins/axios';
-import iview from '~/plugins/iview';
-import bookApi from './book/index';
-import userApi from './user/index';
-import wirteApi from './wirte/index';
-import commentApi from './comments/index';
 import markApi from './mark/index';
 import planApi from './plan/index';
 import qs from 'qs';
@@ -56,10 +51,6 @@ export default Object.assign({
         },
 
     },
-    bookApi,
-    userApi,
-    wirteApi,
-    commentApi,
     markApi,
     planApi
 )
