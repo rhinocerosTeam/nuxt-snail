@@ -1,11 +1,70 @@
 import _ from 'lodash'
 import Model from '../models'
 import Entity from '../service/entity'
-import axios from 'axios';
-import jwt from "jsonwebtoken";
-import adminType from "../conf/adminType";
+import axios from 'axios'
+import jwt from "jsonwebtoken"
+import adminType from "../conf/adminType"
+import Serrors from '../utils/serrors'
 export default class UserControl {
-    constructor() {}
+    constructor() {
+    }
+
+
+    async login(user, ctx) {
+        let res = null
+
+        let userDoc = await Entity.find(Model.user, user).catch(e=> {
+            res = Serrors.find('user 查询失败')
+        })
+
+        if (userDoc && userDoc.length > 0) {
+            let user = userDoc[0]
+            ctx.session.user = user
+            user.id = user._id
+            res = {
+                data: {id: user._id, username: user.username},
+                code: 200,
+                msg: ''
+            }
+        }
+        //返回数据
+        return new Promise((resolve) => {
+            resolve(res)
+        })
+    }
+
+
+    async register(user, ctx) {
+        let {username, password} = user,
+            res = null,
+            data = null;
+        let userDoc = await Entity.find(Model.user, {username}).catch(e=> {
+            res = Serrors.findError('user 查询失败')
+        })
+        if (userDoc && userDoc.length > 0) {
+            res = Serrors.findError(`username为${username} 已存在`)
+        } else {
+
+            data = await Entity.create(Model.user, {username, password}).catch(e => {
+                res = Serrors.createError('user 查询失败')
+            })
+
+            res = {
+                data: {username, id: data._id},
+                code: 200,
+                msg: ''
+            }
+            user.id = data._id
+            ctx.session.user = user
+        }
+
+        //返回数据
+        return new Promise((resolve) => {
+            resolve(res)
+        })
+
+    }
+
 
     /**
      * 获得用户
@@ -32,6 +91,10 @@ export default class UserControl {
         return new Promise((resolve) => {
             resolve(res)
         })
+    }
+
+    async addAndUpdateUser() {
+
     }
 
     /**
@@ -65,7 +128,7 @@ export default class UserControl {
     /**
      * 登录
      */
-    async login(code, appid, secret) {
+    async loginWX(code, appid, secret) {
         let res = null;
 
         let requstValue = await axios.get('https://api.weixin.qq.com/sns/oauth2/access_token', {
@@ -88,7 +151,7 @@ export default class UserControl {
             userInfo = _.assign({}, userInfoData.data);
             userInfo.username = userInfo.openid;
             userInfo.weixin = userInfoData.data
-            let getUserData = await Entity.find(Model.user, { username: userInfo.username }).catch((err) => {
+            let getUserData = await Entity.find(Model.user, {username: userInfo.username}).catch((err) => {
                 res = {
                     code: 500,
                     data: null,
@@ -137,7 +200,7 @@ export default class UserControl {
             let token = jwt.sign({
                 // exp: Math.floor(Date.now() / 1000) + (5*60*60),
                 data: jwtData
-            }, 'hefan', { expiresIn: '720h' }); //, {expiresIn: '5h'}
+            }, 'hefan', {expiresIn: '720h'}); //, {expiresIn: '5h'}
 
             userInfo.token = token;
 
@@ -165,17 +228,18 @@ export default class UserControl {
             })
 
             res = res || {
-                code: 200,
-                data: doc,
-                msg: '更新成功'
-            }
+                    code: 200,
+                    data: doc,
+                    msg: '更新成功'
+                }
         }
 
         return new Promise((resolve) => {
             resolve(res)
         })
     }
- /**
+
+    /**
      * 分页获取全部用户
      * */
     async getAllUser(limit, skip) {
@@ -196,7 +260,7 @@ export default class UserControl {
         })
 
         let data = {
-            tableList:doc,
+            tableList: doc,
             count
         }
         // 解析数据

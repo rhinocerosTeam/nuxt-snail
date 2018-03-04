@@ -18,6 +18,7 @@ const planSchema = new Schema({
     markId: {type: Schema.Types.ObjectId},
     markKey: String,
     result: Number,
+    userid: String, // userid
     percent: Number
 }, {versionKey: false});
 

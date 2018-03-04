@@ -1,6 +1,7 @@
 <template>
     <div>
         <mt-header fixed :title="globalMark.name">
+            <mt-button slot="left" @click="goAddPlan()">增加计划</mt-button>
             <mt-button slot="right" @click="popupVisibleFN(true)">标签</mt-button>
         </mt-header>
 
@@ -80,6 +81,10 @@
         methods: {
             popupVisibleFN(flag){
                 this.popupVisible = flag
+            },
+            goAddPlan(){
+                this.selected = ''
+                this.$router.push({path:'plan/addPlan'})
             },
             changeTab(){
                 this.$router.push({ path: '/'+this.selected })

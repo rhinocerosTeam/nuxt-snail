@@ -12,6 +12,7 @@ const recordSchema = new Schema({
     start_time: String,
     end_time: String,
     create_time: String,
+    userid: String, // userid
     persent: Number
 }, {versionKey: false});
 

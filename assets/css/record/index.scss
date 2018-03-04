@@ -1,14 +1,17 @@
 .recordContainer{
-  background-color: #fff;
+  background-color: #eee;
+  min-height: 79vh;
   .recordList{
-      padding:0.2rem;
+      padding:0.1rem 0;
+
       li{
-        padding-top:0.2rem;
-        border-bottom: 1px solid #e8e8e8;
+        padding:0.2rem;
+        margin-bottom: 0.2rem;
         min-height: 0.9rem;
         font-size: 0.3rem;
+        background-color: #fff;
         .eidtBox{
-          margin-top: 0.3rem;
+          float: right;
           .delete,.update{
             width: 0.4rem;
             height: 0.4rem;
@@ -19,14 +22,24 @@
           }
         }
         .date{
-          margin-top: 0.3rem;
+          margin-top: 0.15rem;
+          margin-bottom: 0.15rem;
           color: #868383;
           font-size: 0.2rem;
+          span{
+            padding:2px;
+            color: #024886;
+          }
         }
         .planInfo{
           color: darkgrey;
-          padding-bottom:0.2rem;
-          font-weight: bold;
+          font-size: 0.2rem;
+          span{
+            padding:2px;
+            background: #19be6b;
+            color: #fff;
+            border-radius: 2px;
+          }
         }
       }
   }

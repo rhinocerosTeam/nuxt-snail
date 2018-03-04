@@ -4,7 +4,7 @@
     overflow-y: scroll;
   }
   background-color: #fff;
-  ul{
+  .planList{
     padding:0.2rem;
     li{
       padding-top:0.2rem;
@@ -16,11 +16,15 @@
         color: #868383;
         font-size:0.2rem;
         span{
+          padding:2px;
+          background: #19be6b;
+          color: #fff;
+          border-radius: 2px;
           float: right;
         }
       }
       .eidtBox{
-        padding:0.2rem 0;
+        padding-top:0.2rem;
         .update{
           width:0.4rem;
           height:0.4rem;
@@ -54,11 +58,7 @@
     }
   }
 
-  .addPlanContainer{
-    input,textarea{
-      border:1px solid #dadada;
-    }
-  }
+
 
 
   .save{
@@ -67,14 +67,26 @@
     margin-left: 0.75rem;
   }
 
-
-
+  .addPlanContainer{
+    margin-top: 0.1rem;
+  }
 
 
 }
 
 
+.addPlanContainer{
+  margin-top: 0.9rem;
+  input,textarea{
+    border:1px solid #dadada;
+  }
+  button{
+    width:6rem;
+    margin-top: 0.5rem;
+    margin-left: 0.75rem;
+  }
 
+}
 
 
 

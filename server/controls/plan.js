@@ -25,17 +25,6 @@ export default class PlanControl {
         let res = null,
             doc = null;
 
-        // doc = await Entity.aggregate(Model.plan,[
-        //     {
-        //        $lookup:
-        //        {
-        //            from: "marks",
-        //            localField: "markId",
-        //            foreignField: "_id",
-        //            as: "marks"
-        //         }
-        //     }
-        // ])
 
         if (type == 2) { // 正在进行
             condition.startDatetime = {$lte: Date.now()}
@@ -47,6 +36,7 @@ export default class PlanControl {
         } else {
 
         }
+
 
         doc = await Entity.find(Model.plan, condition).catch(e => {
             res = Serrors.findError('计划查询失败')

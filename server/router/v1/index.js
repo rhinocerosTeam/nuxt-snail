@@ -6,6 +6,7 @@ import Router from 'koa-router'
 import mark from './marks'
 import plan from './plan'
 import record from './record'
+import user from './user'
 const router = new Router({prefix: '/v1'})
 
 /**
@@ -17,7 +18,7 @@ const router = new Router({prefix: '/v1'})
 router.use(mark.routes(), mark.allowedMethods())
 router.use(plan.routes(), plan.allowedMethods())
 router.use(record.routes(), record.allowedMethods())
-
+router.use(user.routes(), user.allowedMethods())
 
 function authorize (ctx, next) {
   // console.log( ctx )

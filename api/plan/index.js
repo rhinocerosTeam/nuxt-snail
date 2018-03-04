@@ -29,6 +29,9 @@ export default {
     addRecord(data){
         return axios.post('/v1/addRecord', this.PostParamFormat(data))
     },
+    updateRecord(data){
+        return axios.post('/v1/updateRecord', this.PostParamFormat(data))
+    },
     deleteRecord(id){
         return axios.post('/v1/deleteRecord', this.PostParamFormat({id}))
     },

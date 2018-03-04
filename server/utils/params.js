@@ -10,7 +10,9 @@ export default {
      */
     checkLogin(ctx) {
         let status = null;
-        if (ctx.session.userInfo && ctx.session.userInfo.userId) {
+
+        console.log(ctx.session.user)
+        if (ctx.session.user && ctx.session.user._id) {
             status = true;
         } else {
             status = false;

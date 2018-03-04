@@ -1,0 +1,61 @@
+.loginContainer{
+
+  .circle{
+    width:2.5rem;
+    height: 2.5rem;
+    border-radius: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.2rem;
+    margin: 0 auto;
+  }
+
+  .grade{
+    background-size:100% 100%;
+  }
+  .grade1{
+    background-image: url("../img/grade/grade1.png");
+  }
+  .grade2{
+    background-image: url("../img/grade/grade2.png");
+  }
+  .grade3{
+    background-image: url("../img/grade/grade3.png");
+  }
+  .grade4{
+    background-image: url("../img/grade/grade4.png");
+  }
+  .grade5{
+    background-image: url("../img/grade/grade5.png");
+  }
+  .grade6{
+    background-image: url("../img/grade/grade6.png");
+  }
+
+  .gradeDesc{
+    text-align: center;
+    color:#757575;
+  }
+
+  .text{
+    text-align: center;
+    font-size: 0.3rem;
+    color: #2b85e4;
+    margin: 0.3rem 0;
+  }
+
+
+
+
+  .dialog{
+    button{
+      width:6rem;
+      margin-top: 0.5rem;
+      margin-left: 0.75rem;
+    }
+
+  }
+
+
+}

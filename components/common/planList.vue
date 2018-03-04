@@ -1,20 +1,25 @@
 <template>
     <div>
-        <ul v-show="!editPlan._id && !recordPlan._id">
+        <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
             <li v-for="plan,index in planList" :key="index" @click="goRecord(index)">
-                [{{ plan.percent}} %]
+                [{{ plan.percent}}%]
                 {{ plan.planName }}
                 <div class="date">
-                    {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }} 工时：{{plan.manHour/1000/60}}分钟
+                    {{ formateDate(plan.startDatetime,plan.endDatetime)}}
+                    工时：{{plan.manHour/1000/60}}分钟
                     <span v-if="plan">
                         {{ getMarkName(plan.markId,plan.markKey) }}
                     </span>
                 </div>
                 <div class="eidtBox">
-                    <img src="../../assets/img/icon/update.png" class="update" v-if="plan.result == 0" @click.stop="updatePlan(index)">
-                    <img src="../../assets/img/icon/delete.png" class="delete" v-if="plan.result == 0" @click.stop="deletePlan(index,plan._id)">
-                    <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0" @click.stop="changeResult(index,1)">
-                    <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1" @click.stop="changeResult(index,0)">
+                    <img src="../../assets/img/icon/update.png" class="update" v-if="plan.result == 0"
+                         @click.stop="updatePlan(index)">
+                    <img src="../../assets/img/icon/delete.png" class="delete" v-if="plan.result == 0"
+                         @click.stop="deletePlan(index,plan._id)">
+                    <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
+                         @click.stop="changeResult(index,1)">
+                    <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
+                         @click.stop="changeResult(index,0)">
                 </div>
             </li>
         </ul>
@@ -84,7 +89,7 @@
                     this.planList = data
                 }
             },
-            async changeResult(index,result){
+            async changeResult(index, result){
                 this.planList[index].result = result
 
                 await api.updatePlan(this.planList[index]).catch(e => {
@@ -100,8 +105,21 @@
                 }
                 return Utils.formateMarkName(this.marks, id, key)
             },
-            formateDate(date){
-                return Utils.format(date, "yyyy-MM-dd")
+
+            formateDate(startDate, endDate){
+                let start = Utils.format(startDate, "yyyy-MM-dd")
+                let end = Utils.format(endDate, "yyyy-MM-dd")
+                let now = Utils.format(Date.now(), "yyyy-MM-dd")
+                if (start.substr(0, 4) == end.substr(0, 4)) {
+                    end = end.replace(start.substring(0, 5), '')
+                    if (start.substr(5, 2) == end.substr(0, 2)) {
+                        end = end.replace(end.substr(0, 3), '')
+                    }
+                }
+                if (start.substr(0, 4) == now.substr(0, 4)) {
+                    start = start.substr(5)
+                }
+                return start + ' ~ ' + end
             },
             updatePlan(index){
                 this.editPlan = this.planList[index]

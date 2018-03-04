@@ -3,18 +3,21 @@
 
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
-                <div class="planInfo" v-if="record.planId&&record.planId.planName">
-                    {{ record.planId.planName }}
-                </div>
                 {{record.content}}
                 <div class="date">
-                    {{ formateDatetime(record.start_time) }} ~ {{ formateDatetime(record.end_time) }}
-                    完成：{{record.persent}}%
+                    {{ getPostTime(record.start_time)}}
+                    <span>{{record.persent}}%</span> {{(record.end_time - record.start_time)/1000/60}}分钟
+                    <div class="eidtBox">
+                        <img src="../../assets/img/icon/update.png" class="update" @click.stop="toUpdateRecord(index)">
+                        <img src="../../assets/img/icon/delete.png" class="delete"
+                             @click="deleteRecord(index,record._id)">
+                    </div>
                 </div>
-                <div class="eidtBox">
-                    <img src="../../assets/img/icon/update.png" class="update" @click.stop="updatePlan(index)">
-                    <img src="../../assets/img/icon/delete.png" class="delete" @click="deleteRecord(index,record._id)">
+
+                <div class="planInfo" v-if="record.planId&&record.planId.planName">
+                    <span>{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span> {{record.planId.planName}}
                 </div>
+
             </li>
         </ul>
 
@@ -30,18 +33,18 @@
                         {{ plan.planName }}
                     </mt-cell>
                     <mt-cell title="计划时间">
-                        {{ formateDate(plan.startDatetime) }} ~ {{ formateDate(plan.endDatetime) }}
+                        {{ formateDate(plan.startDatetime) }} ~ {{formateDate(plan.endDatetime)}}
                     </mt-cell>
                     <mt-cell title="工时">
                         {{ plan.manHour }}
                     </mt-cell>
-                    <mt-cell title="完成情况">
-                        {{ plan.persent }}
+                    <mt-cell title="百分比">
+                        {{ plan.percent }}
                     </mt-cell>
                 </div>
 
                 <mt-cell title="完成事项">
-                    <textarea name="" v-model="record.content" id="" cols="30" rows="4"></textarea>
+                    <textarea v-model="record.content" id="" cols="30" rows="4"></textarea>
                 </mt-cell>
                 <mt-cell title="完成百分比">
                     <input type="text" v-model="record.persent">
@@ -54,7 +57,8 @@
                             @confirm="startPickerConfirm"
                     >
                     </mt-datetime-picker>
-                    {{ formateDatetime(record.start_time)}} <span class="selectTime" @click='chooseTime(0)'> 选择时间 </span>
+                    <span class="selectTime"
+                          @click='chooseTime(0)'>{{ formateDatetime(record.start_time)||'选择时间'}}   </span>
                 </mt-cell>
                 <mt-cell title="结束时间">
                     <mt-datetime-picker
@@ -63,7 +67,8 @@
                             @confirm="endPickerConfirm"
                             v-model="endTime">
                     </mt-datetime-picker>
-                    {{ formateDatetime(record.end_time) }} <span class="selectTime" @click='chooseTime(1)'> 选择时间 </span>
+                    <span class="selectTime"
+                          @click='chooseTime(1)'>{{ formateDatetime(record.end_time)||'选择时间' }}   </span>
                 </mt-cell>
                 <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time">开始计时</mt-button>
                 <div v-if="record.start_time && !record.end_time">
@@ -120,11 +125,17 @@
             }
         },
         methods: {
-            updatePlan(index){
-
+            getMarkName(id = '', key = ''){
+                if (!this.marks) {
+                    return ''
+                }
+                return Utils.formateMarkName(this.marks, id, key)
+            },
+            toUpdateRecord(index){
+                this.showRecord = true
+                this.record = this.recordList[index]
             },
             startPickerConfirm(value){
-                console.log(value)
                 this.record.start_time = new Date(value).getTime()
             },
             endPickerConfirm(value){
@@ -132,19 +143,26 @@
             },
             chooseTime(type){
                 if (type == 0) {
-                    if(!this.startTime){
+                    if (!this.startTime) {
                         this.startTime = new Date()
                     }
                     this.$refs.picker_start.open();
                 } else {
-                    if(!this.endTime){
+                    if (!this.endTime) {
                         this.endTime = new Date()
                     }
                     this.$refs.picker_end.open();
                 }
             },
             addRecord(){
-                this.showRecord = true
+                this.record = {
+                    planId: '',
+                    content: '',
+                    start_time: '',
+                    end_time: '',
+                    persent: ''
+                },
+                        this.showRecord = true
             },
             async getRecordList(){
 
@@ -160,6 +178,9 @@
                 if (data) {
                     this.recordList = data
                 }
+            },
+            getPostTime(date){
+                return Utils.getPostTime(date)
             },
             getMarkName(id, key){
                 return Utils.formateMarkName(this.marks, id, key)
@@ -183,18 +204,41 @@
                 return Utils.format(date, "mm:ss")
             },
             async save(){
+
                 let data = {...this.record}
-                data.planId = this.plan._id
-                if (!this.record.content || !this.record.persent) {
-                    Toast('请输入完成事项和百分比')
-                    return
+
+                if (this.record._id) {
+                    if (this.plan._id) {
+                        data.planId = this.plan._id
+                    } else {
+                        data.planId = this.record.planId._id
+                    }
+                    if (!this.record.content || !this.record.persent) {
+                        Toast('请输入完成事项和百分比')
+                        return
+                    }
+                    let d = await api.updateRecord(data).catch(e => {
+                        console.log(e)
+                    })
+                    Toast('修改成功')
+                } else {
+                    data.planId = this.plan._id
+                    if (!this.record.content || !this.record.persent) {
+                        Toast('请输入完成事项和百分比')
+                        return
+                    }
+                    let d = await api.addRecord(data).catch(e => {
+                        console.log(e)
+                    })
+                    Toast('增加成功')
                 }
-                let d = await api.addRecord(data).catch(e => {
-                    console.log(e)
-                })
-                Toast('增加成功')
+
+
+                console.log('--->', data)
+
+
                 this.closeRecord()
-                this.getRecordList(this.plan._id)
+                this.getRecordList(data.planId)
 
             },
             async deleteRecord(index, id){
@@ -245,6 +289,6 @@
 
 
 </script>
-<style >
+<style>
 
 </style>

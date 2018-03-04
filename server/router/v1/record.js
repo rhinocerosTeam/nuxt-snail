@@ -14,10 +14,20 @@ router.get('/recordList', async (ctx, next) => {
     let {planId} = ParamsUtils.queryValidate(ctx) || {},
         data = null;
 
+    if(!ParamsUtils.checkLogin(ctx)){
+        return
+    }
+
     if(planId && !ParamsUtils.isObjectId(planId)){
         data = Serrors.paramsError(`传参错误 planId:${ParamsUtils.isObjectId(planId)}`)
     }else{
-        let cont = null
+        let cont = {}
+
+
+        if(ctx.session.user && ctx.session.user._id){
+            cont.userid = ctx.session.user._id
+        }
+
         if(planId){
             cont = {planId}
             data = await recordCtrl.recordList(cont)
@@ -36,6 +46,38 @@ router.post('/addRecord', async (ctx, next) =>{
     let params = ParamsUtils.bodyValidate(ctx),
         res = null;
 
+    if(!ParamsUtils.checkLogin(ctx)){
+        return
+    }
+
+    if( !params.planId || !params.content ){
+        res = Serrors.paramsError('传参错误')
+    }else{
+
+        if(ctx.session.user && ctx.session.user._id){
+            params.userid = ctx.session.user._id
+        }
+
+        res = await recordCtrl.addUpdateRecord(params)
+    }
+
+
+    ctx.body = res
+})
+
+/**
+ * 添加
+ */
+router.post('/updateRecord', async (ctx, next) =>{
+    let params = ParamsUtils.bodyValidate(ctx),
+        res = null;
+
+    if(!ParamsUtils.checkLogin(ctx)){
+        return
+    }
+
+
+
     if( !params.planId || !params.content ){
         res = Serrors.paramsError('传参错误')
     }else{
@@ -47,13 +89,13 @@ router.post('/addRecord', async (ctx, next) =>{
 })
 
 
-
-
 router.post('/deleteRecord', async (ctx, next) =>{
     let {id} = ParamsUtils.bodyValidate(ctx),
         data = null;
 
-
+    if(!ParamsUtils.checkLogin(ctx)){
+        return
+    }
 
     if(ParamsUtils.isObjectId(id)){
         data = recordCtrl.deleteRecord(id)

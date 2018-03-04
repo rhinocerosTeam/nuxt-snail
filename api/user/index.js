@@ -11,7 +11,14 @@ export default {
     * @param
     */
     login(data) {
-        return axios.get('/v1/login', this.GetParamFormat(data))
+        return axios.post('/v1/login', this.PostParamFormat(data))
+    },
+    /**
+     * 登录
+     * @param
+     */
+    register(data) {
+        return axios.post('/v1/register', this.PostParamFormat(data))
     },
     /**
      * 登出

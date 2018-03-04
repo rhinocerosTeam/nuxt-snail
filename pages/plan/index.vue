@@ -3,9 +3,6 @@
         <mt-navbar v-model="selected">
             <mt-tab-item id="1">全部</mt-tab-item>
             <mt-tab-item id="2">进行中</mt-tab-item>
-            <mt-tab-item id="3">
-                <img src="../../assets/img/icon/add.png" class="addPlan">
-            </mt-tab-item>
             <mt-tab-item id="4">未开始</mt-tab-item>
             <mt-tab-item id="5">已完成</mt-tab-item>
         </mt-navbar>
@@ -18,11 +15,6 @@
             <mt-tab-container-item id="2">
                 <div class="planBox">
                     <plan :type="planType.doing"></plan>
-                </div>
-            </mt-tab-container-item>
-            <mt-tab-container-item id="3">
-                <div class="planBox">
-                    <add-plan type="1" editType="add"></add-plan>
                 </div>
             </mt-tab-container-item>
             <mt-tab-container-item id="4">

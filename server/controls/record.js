@@ -71,15 +71,14 @@ export default class RecordControl {
             _persent = 0,
             _manHour = 0
         if (data._id) {
-            let record = Entity.findById(Model.record, data._id).catch((e) => {
+            let record = await Entity.findById(Model.record, data._id).catch((e) => {
                 res = Serrors.findError('record查询失败')
             })
             doc = await Entity.update(Model.record, data._id, data).catch((e) => {
                 res = Serrors.updateError('record更新失败')
             })
-            _manHour = (data.end_time - data.start_time) - (record.end_time - record.start_time )
-            _persent = data.persent - record.persent
-
+            _manHour = (Number(data.end_time) - Number(data.start_time)) -  (Number(record.end_time) - Number(record.start_time ))
+            _persent = Number(data.persent) - Number(record.persent)
         } else {
             doc = await Entity.create(Model.record, data).catch(e => {
                 res = Serrors.createError('record增加失败')
@@ -87,7 +86,6 @@ export default class RecordControl {
             _persent = data.persent
             _manHour = data.end_time - data.start_time
         }
-
 
         // 增加工时和完成程度
         await planCtrl.EditPlanByRecord({planId: data.planId, percent: _persent, manHour: _manHour}).catch(e => {
@@ -135,7 +133,7 @@ export default class RecordControl {
             }
         })
 
-        console.log({id,record,planId: record.planId, percent: _persent, manHour: _manHour})
+        console.log({id, record, planId: record.planId, percent: _persent, manHour: _manHour})
 
         // 删除工时和完成程度
         await planCtrl.EditPlanByRecord({planId: record.planId, percent: _persent, manHour: _manHour}).catch(e => {
