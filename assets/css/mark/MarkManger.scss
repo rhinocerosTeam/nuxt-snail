@@ -1,0 +1,30 @@
+.marksEditContainer{
+  ul{
+    padding:0.2rem;
+    background-color: #fff;
+    li{
+      width:100%;
+      height:0.6rem;
+      border-bottom:1px solid #e0e0e0;
+      line-height: 0.6rem;
+      .editBox{
+        float: right;
+        .update{
+          width:0.4rem;
+          height:0.4rem;
+          margin-top: 0.1rem;
+          display: inline-block;
+          margin-right: 0.4rem;
+        }
+        .delete{
+          width:0.4rem;
+          height:0.4rem;
+          margin-top: 0.1rem;
+          display: inline-block;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+  }
+
+}
