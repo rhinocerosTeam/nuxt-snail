@@ -12,15 +12,24 @@
       min-height: 0.9rem;
       font-size:0.3rem;
       .date{
-        margin-top: 0.3rem;
+        margin-top: 0.15rem;
+        margin-bottom: 0.3rem;
         color: #868383;
         font-size:0.2rem;
+        height:0.5rem;
+        line-height: 0.5rem;
         span{
           padding:2px;
           background: #19be6b;
           color: #fff;
           border-radius: 2px;
-          float: right;
+          float: left;
+          margin-right: 0.3rem;
+        }
+        .more{
+          width:0.4rem;
+          height:0.4rem;
+          margin-right: 0.5rem;
         }
       }
       .eidtBox{

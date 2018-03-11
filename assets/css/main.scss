@@ -66,3 +66,21 @@ a:visited {
 .ivu-notice {
     z-index: 99999 !important;
 }
+
+.clearfix:after{
+    didplay:block;
+    content: '';
+    clear: both;
+}
+.infoBox{
+    width:6.3rem;
+    float: left;
+}
+.moreBox{
+    width:0.5rem;
+    height:1.6rem;
+    float: right;
+    background: url('../img/more.png') no-repeat center center;
+    background-size: 0.5rem  auto ;
+
+}

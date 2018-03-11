@@ -1,17 +1,23 @@
 <template>
     <div>
         <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
-            <li v-for="plan,index in planList" :key="index" @click="goRecord(index)">
+            <li v-for="plan,index in planList" :key="index" @click="goRecord(index)" class="clearfix">
+
                 [{{ plan.percent}}%]
-                {{ plan.planName }}
+                {{ plan.planName }}你说地方斯蒂芬数据库六点多就废了时代峰峻方斯蒂芬数据库六点多就废了时代峰峻
                 <div class="date">
-                    {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                    工时：{{plan.manHour/1000/60}}分钟
                     <span v-if="plan">
                         {{ getMarkName(plan.markId,plan.markKey) }}
                     </span>
+                    {{ formateDate(plan.startDatetime,plan.endDatetime)}}
+                    工时：{{plan.manHour/1000/60}}分钟
+                    <img src="../../assets/img/more.png" class="more" v-if="plan.result == 0"
+                         @click.stop="updatePlan(index)">
                 </div>
-                <div class="eidtBox">
+
+
+
+                <!--<div class="eidtBox">
                     <img src="../../assets/img/icon/update.png" class="update" v-if="plan.result == 0"
                          @click.stop="updatePlan(index)">
                     <img src="../../assets/img/icon/delete.png" class="delete" v-if="plan.result == 0"
@@ -20,7 +26,7 @@
                          @click.stop="changeResult(index,1)">
                     <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
                          @click.stop="changeResult(index,0)">
-                </div>
+                </div>-->
             </li>
         </ul>
         <div class="update" v-if="editPlan._id">
