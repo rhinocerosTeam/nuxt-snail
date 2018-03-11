@@ -13,6 +13,15 @@ export default {
     getMarkList(data) {
         return axios.get('/v1/markList', this.GetParamFormat({userid:data}))
     },
+    addMarks(data){
+        return axios.post('/v1/addMark', this.PostParamFormat(data))
+    },
+    updateMarks(data){
+        return axios.post('/v1/updateMark', this.PostParamFormat(data))
+    },
+    deleteMarks(id){
+        return axios.post('/v1/deleteMark', this.PostParamFormat(id))
+    }
 
 
 }

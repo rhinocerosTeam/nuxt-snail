@@ -11,7 +11,8 @@
                 <left-slider :index="index" @deleteItem="deleteItem">
                     <p slot="moveSlot"> 健身</p>
                     <div slot = 'editSlot'>
-                        <div class="deleteIcon" :delWidth="200" @click.prevent="deleteItem(index)">删除</div>
+                        <div class="eidtIcon" @click.prevent="deleteItem(index)">编辑</div>
+                        <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
                     </div>
                 </left-slider>
             </li>
@@ -29,7 +30,7 @@
 <script>
 
     import LeftSlider from '../../components/tool/leftSlider.vue';
-
+    import api from '../../api'
 
     export default {
         name: 'MyCollect',
