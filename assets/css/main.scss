@@ -14,6 +14,7 @@ body {
     font-family: "Source Sans Pro", Arial, sans-serif;
     height: 100vh;
     margin: 0;
+    font-size: 0.2rem;
 }
 
 footer {
@@ -84,3 +85,33 @@ a:visited {
     background-size: 0.5rem  auto ;
 
 }
+
+.stickIcon{
+    position: relative;
+    display: inline-block;
+    background-color: #c7c7cc;
+    width:33%;
+    height:100%;
+    color: #fff;
+    text-align: center;
+}
+.updateIcon{
+    position: relative;
+    display: inline-block;
+    background-color: #19be6b;
+    width:33%;
+    height:100%;
+    color: #fff;
+    text-align: center;
+}
+.deleteIcon{
+    position: relative;
+    display: inline-block;
+    background-color: #f63b31;
+    width:34%;
+    height:100%;
+    color: #fff;
+    text-align: center;
+}
+
+

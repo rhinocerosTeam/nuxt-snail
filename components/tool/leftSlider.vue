@@ -7,17 +7,16 @@
              :style="txtStyle">
             <slot name="moveSlot"></slot>
         </div>
-        <div class="editIcon" :style="zIndex">
+        <div class="editIcon" :style="{width:delWidth/100+'rem'}" >
             <slot name="editSlot" ></slot>
         </div>
-
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            //delWidth: Number
+            width: String
         },
         data() {
             return {
@@ -25,9 +24,8 @@
                 moveX: 0,       //滑动时的位置
                 disX: 0,       //移动距离
                 txtStyle: '',
-                delWidth: 200,
+                delWidth: parseInt(this.width),
                 top: '',
-                zIndex: 'z-index:-1',
             }
         },
         methods: {
@@ -99,7 +97,6 @@
         position: absolute;
         right: 0;
         top: 0;
-    /* background: url(./../assets/) no-repeat;*/
-        /*background-size: contain;*/
+        z-index: -1;
     }
 </style>

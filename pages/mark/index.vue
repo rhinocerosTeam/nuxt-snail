@@ -8,10 +8,11 @@
                 <!--</div>-->
             <!--</li>-->
             <li>
-                <left-slider :index="index" @deleteItem="deleteItem">
-                    <p slot="moveSlot"> 健身</p>
+                <left-slider @deleteItem="deleteItem" width="300">
+                    <p slot="moveSlot" class="content"> 健身</p>
                     <div slot = 'editSlot'>
-                        <div class="eidtIcon" @click.prevent="deleteItem(index)">编辑</div>
+                        <div class="stickIcon" @click.prevent="deleteItem(index)">置顶</div>
+                        <div class="updateIcon" @click.prevent="deleteItem(index)">编辑</div>
                         <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
                     </div>
                 </left-slider>
@@ -44,6 +45,9 @@
             }
         },
         methods: {
+            getMarks(){
+
+            },
             // 删除
             deleteItem: function (index) {
                 console.log('删除的索引为index', index)

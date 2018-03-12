@@ -3,17 +3,29 @@
         <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
             <li v-for="plan,index in planList" :key="index" @click="goRecord(index)" class="clearfix">
 
-                [{{ plan.percent}}%]
-                {{ plan.planName }}你说地方斯蒂芬数据库六点多就废了时代峰峻方斯蒂芬数据库六点多就废了时代峰峻
-                <div class="date">
+                <left-slider @deleteItem="deleteItem" width="300">
+                    <div slot="moveSlot" class="content">
+                        [{{ plan.percent}}%]
+                        {{ plan.planName }}你说地方斯蒂芬数据库六点多就废了时代峰峻方斯蒂芬数据库六点多就废了时代峰峻
+                        <div class="date">
                     <span v-if="plan">
                         {{ getMarkName(plan.markId,plan.markKey) }}
                     </span>
-                    {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                    工时：{{plan.manHour/1000/60}}分钟
-                    <img src="../../assets/img/more.png" class="more" v-if="plan.result == 0"
-                         @click.stop="updatePlan(index)">
-                </div>
+                            {{ formateDate(plan.startDatetime,plan.endDatetime)}}
+                            工时：{{plan.manHour/1000/60}}分钟
+                            <!--<img src="../../assets/img/more.png" class="more" v-if="plan.result == 0"-->
+                                 <!--@click.stop="updatePlan(index)">-->
+                        </div>
+                    </div>
+                    <div slot = 'editSlot'>
+                        <div class="stickIcon" @click.prevent="deleteItem(index)">置顶</div>
+                        <div class="updateIcon" @click.prevent="deleteItem(index)">编辑</div>
+                        <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
+                    </div>
+                </left-slider>
+
+
+
 
 
 
@@ -46,6 +58,7 @@
     import plan from '~/components/common/planList'
     import addPlan from '~/components/common/addPlan'
     import record from '~/components/common/record'
+    import LeftSlider from '~/components/tool/leftSlider.vue';
 
     export default {
         props: ['type'],
@@ -55,7 +68,8 @@
         components: {
             plan,
             addPlan,
-            record
+            record,
+            LeftSlider
         },
         computed: {
             ...mapGetters({
