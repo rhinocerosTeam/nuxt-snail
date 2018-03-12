@@ -86,32 +86,50 @@ a:visited {
 
 }
 
-.stickIcon{
-    position: relative;
-    display: inline-block;
-    background-color: #c7c7cc;
-    width:33%;
+.move-buttons{
     height:100%;
-    color: #fff;
-    text-align: center;
+    line-height: 100%;
+    >div{
+        float: left;
+    }
+
+    .stickIcon{
+        position: relative;
+        display: inline-block;
+        background-color: #c7c7cc;
+        width:33%;
+        height:100%;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .updateIcon{
+        position: relative;
+        display: inline-block;
+        background-color: #19be6b;
+        width:33%;
+        height:100%;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .deleteIcon{
+        position: relative;
+        display: inline-block;
+        background-color: #f63b31;
+        width:34%;
+        height:100%;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
-.updateIcon{
-    position: relative;
-    display: inline-block;
-    background-color: #19be6b;
-    width:33%;
-    height:100%;
-    color: #fff;
-    text-align: center;
-}
-.deleteIcon{
-    position: relative;
-    display: inline-block;
-    background-color: #f63b31;
-    width:34%;
-    height:100%;
-    color: #fff;
-    text-align: center;
-}
+
 
 

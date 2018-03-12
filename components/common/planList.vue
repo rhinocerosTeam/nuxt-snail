@@ -4,23 +4,25 @@
             <li v-for="plan,index in planList" :key="index" @click="goRecord(index)" class="clearfix">
 
                 <left-slider @deleteItem="deleteItem" width="300">
-                    <div slot="moveSlot" class="content">
+                    <div slot="moveSlot" class="move-content">
                         [{{ plan.percent}}%]
-                        {{ plan.planName }}你说地方斯蒂芬数据库六点多就废了时代峰峻方斯蒂芬数据库六点多就废了时代峰峻
-                        <div class="date">
-                    <span v-if="plan">
-                        {{ getMarkName(plan.markId,plan.markKey) }}
-                    </span>
+                        {{ plan.planName }}
+                        <div class="date eidtBox">
+                            <span v-if="plan">
+                                {{ getMarkName(plan.markId,plan.markKey) }}
+                            </span>
                             {{ formateDate(plan.startDatetime,plan.endDatetime)}}
                             工时：{{plan.manHour/1000/60}}分钟
-                            <!--<img src="../../assets/img/more.png" class="more" v-if="plan.result == 0"-->
-                                 <!--@click.stop="updatePlan(index)">-->
+                            <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
+                                 @click.stop="changeResult(index,1)">
+                            <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
+                                 @click.stop="changeResult(index,0)">
                         </div>
                     </div>
-                    <div slot = 'editSlot'>
-                        <div class="stickIcon" @click.prevent="deleteItem(index)">置顶</div>
-                        <div class="updateIcon" @click.prevent="deleteItem(index)">编辑</div>
-                        <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
+                    <div slot = 'editSlot' class="move-buttons">
+                        <div class="stickIcon">置顶</div>
+                        <div class="updateIcon" @click.prevent="updatePlan(index)">编辑</div>
+                        <div class="deleteIcon" @click.prevent="deletePlan(index,plan._id)">删除</div>
                     </div>
                 </left-slider>
 
