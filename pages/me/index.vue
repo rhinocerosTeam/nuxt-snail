@@ -22,14 +22,18 @@
             <mt-button type="primary" @click="save()">{{isLogin?'登录':'注册'}}</mt-button>
         </div>
 
-
+        <Footer></Footer>
     </section>
 </template>
 <script>
     import {Toast} from 'mint-ui'
-    import api from '~/api';
-    import {mapActions, mapGetters} from 'vuex';
+    import api from '~/api'
+    import Footer from '~/components/Footer'
+    import {mapActions, mapGetters} from 'vuex'
     export default {
+        components:{
+            Footer
+        },
         data() {
             return {
                 isLogin: true,

@@ -1,5 +1,8 @@
 <template>
     <section class="plan-container">
+        <Header>
+            <mt-button slot='leftBtn' @click="goAddPlan()">增加计划</mt-button>
+        </Header>
         <mt-navbar v-model="selected">
             <mt-tab-item id="1">全部</mt-tab-item>
             <mt-tab-item id="2">进行中</mt-tab-item>
@@ -28,6 +31,7 @@
                 </div>
             </mt-tab-container-item>
         </mt-tab-container>
+        <Footer></Footer>
     </section>
 </template>
 <script>
@@ -36,12 +40,16 @@
     import {planStatus, planType} from '~/constant/params'
     import {mapGetters, mapActions} from 'vuex'
     import plan from '~/components/common/planList'
+    import Header from '~/components/Header'
+    import Footer from '~/components/Footer'
     import addPlan from '~/components/common/addPlan'
 
     export default {
         components:{
             plan,
-            addPlan
+            addPlan,
+            Header,
+            Footer
         },
         computed: {
             ...mapGetters({
@@ -61,7 +69,9 @@
             }
         },
         methods:{
-
+            goAddPlan(){
+                this.$router.push({path:'plan/addPlan'})
+            },
         }
 
     }
