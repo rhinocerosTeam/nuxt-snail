@@ -8,128 +8,134 @@
 
 html,
 body {
-    background-color: #fff;
-    color: #000;
-    letter-spacing: 0.5px;
-    font-family: "Source Sans Pro", Arial, sans-serif;
-    height: 100vh;
-    margin: 0;
-    font-size: 0.2rem;
+  background-color: #fff;
+  color: #000;
+  letter-spacing: 0.5px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+  font-size: 0.2rem;
 }
 
 footer {
-    padding: 20px;
-    text-align: center;
-    border-top: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
 }
 
 a,
 a:hover,
 a:focus,
 a:visited {
-    color: #000;
+  color: #000;
 }
 
 .logo {
-    width: 100%;
-    height: auto;
-    max-width: 400px;
-    max-height: 289px;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  max-height: 289px;
 }
 
 .g-color {
-    color: #46a3ff;
+  color: #46a3ff;
 }
 
 .g-colorHover {
-    color: #66b3ff;
+  color: #66b3ff;
 }
 
 .g-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .g-clearfix:after {
-    content: ' ';
-    height: 0;
-    display: block;
-    line-height: 0;
-    clear: both;
-    visibility: hidden;
+  content: ' ';
+  height: 0;
+  display: block;
+  line-height: 0;
+  clear: both;
+  visibility: hidden;
 }
 
 .g-clearfix {
-    zoom: 1;
+  zoom: 1;
 }
 
 .ivu-notice {
-    z-index: 99999 !important;
+  z-index: 99999 !important;
 }
 
-.clearfix:after{
-    didplay:block;
-    content: '';
-    clear: both;
+.clearfix:after {
+  didplay: block;
+  content: '';
+  clear: both;
 }
-.infoBox{
-    width:6.3rem;
+
+.infoBox {
+  width: 6.3rem;
+  float: left;
+}
+
+.moreBox {
+  width: 0.5rem;
+  height: 1.6rem;
+  float: right;
+  background: url('../img/more.png') no-repeat center center;
+  background-size: 0.5rem auto;
+
+}
+
+.move-buttons {
+  height: 100%;
+  line-height: 100%;
+  > div {
     float: left;
-}
-.moreBox{
-    width:0.5rem;
-    height:1.6rem;
-    float: right;
-    background: url('../img/more.png') no-repeat center center;
-    background-size: 0.5rem  auto ;
+  }
+
+  .stickIcon {
+    position: relative;
+    display: inline-block;
+    background-color: #c7c7cc;
+    width: 33%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .updateIcon {
+    position: relative;
+    display: inline-block;
+    background-color: #19be6b;
+    width: 33%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .deleteIcon {
+    position: relative;
+    display: inline-block;
+    background-color: #f63b31;
+    width: 34%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .updateIcon50,.deleteIcon50{
+    width: 50%!important;
+  }
 
 }
-
-.move-buttons{
-    height:100%;
-    line-height: 100%;
-    >div{
-        float: left;
-    }
-
-    .stickIcon{
-        position: relative;
-        display: inline-block;
-        background-color: #c7c7cc;
-        width:33%;
-        height:100%;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .updateIcon{
-        position: relative;
-        display: inline-block;
-        background-color: #19be6b;
-        width:33%;
-        height:100%;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .deleteIcon{
-        position: relative;
-        display: inline-block;
-        background-color: #f63b31;
-        width:34%;
-        height:100%;
-        color: #fff;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
 
 

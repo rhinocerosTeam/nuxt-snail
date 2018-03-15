@@ -2,15 +2,15 @@
     <div class="marksEditContainer">
         <ul>
             <!--<li>-->
-                <!--健身-->
-                <!--<div class="editBox">-->
-                    <!--<img src="../../assets/img/icon/eidt.png" class="update">-->
-                <!--</div>-->
+            <!--健身-->
+            <!--<div class="editBox">-->
+            <!--<img src="../../assets/img/icon/eidt.png" class="update">-->
+            <!--</div>-->
             <!--</li>-->
             <li>
-                <left-slider @deleteItem="deleteItem" width="300">
+                <left-slider width="300">
                     <p slot="moveSlot" class="content"> 健身</p>
-                    <div slot = 'editSlot'>
+                    <div slot='editSlot'>
                         <div class="stickIcon" @click.prevent="deleteItem(index)">置顶</div>
                         <div class="updateIcon" @click.prevent="deleteItem(index)">编辑</div>
                         <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
@@ -18,10 +18,10 @@
                 </left-slider>
             </li>
             <!--<li>-->
-                <!--健身-->
+            <!--健身-->
             <!--</li>-->
             <!--<li>-->
-                <!--健身-->
+            <!--健身-->
             <!--</li>-->
 
         </ul>
@@ -49,7 +49,7 @@
 
             },
             // 删除
-            deleteItem: function (index) {
+            deleteItem(index) {
                 console.log('删除的索引为index', index)
             }
         },
@@ -60,7 +60,7 @@
 
 </script>
 <style>
-    .move{
+    .move {
         background-color: #00a0e9;
     }
 </style>

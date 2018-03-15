@@ -1,49 +1,36 @@
 <template>
     <div>
         <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
-            <li v-for="plan,index in planList" :key="index" @click="goRecord(index)" class="clearfix">
+            <li v-for="plan,index in planList" :key="index" @click="goRecord(plan,index)" class="clearfix">
 
-                <left-slider @deleteItem="deleteItem" width="300">
+                <left-slider width="300">
                     <div slot="moveSlot" class="move-content">
                         [{{ plan.percent}}%]
                         {{ plan.planName }}
-                        <div class="date eidtBox">
+                        <div class="date eidtBox flex">
                             <span v-if="plan">
                                 {{ getMarkName(plan.markId,plan.markKey) }}
                             </span>
-                            {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                            工时：{{plan.manHour/1000/60}}分钟
+                            <div>
+                                {{ formateDate(plan.startDatetime,plan.endDatetime)}}
+                                工时：{{plan.manHour/1000/60}}分钟
+                            </div>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
                                  @click.stop="changeResult(index,1)">
                             <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
                                  @click.stop="changeResult(index,0)">
                         </div>
                     </div>
-                    <div slot = 'editSlot' class="move-buttons">
+                    <div slot='editSlot' class="move-buttons ">
                         <div class="stickIcon">置顶</div>
-                        <div class="updateIcon" @click.prevent="updatePlan(index)">编辑</div>
-                        <div class="deleteIcon" @click.prevent="deletePlan(index,plan._id)">删除</div>
+                        <div class="updateIcon" @click.stop="updatePlan(index)">编辑</div>
+                        <div class="deleteIcon" @click.stop="deletePlan(index,plan._id)">删除</div>
                     </div>
                 </left-slider>
 
-
-
-
-
-
-                <!--<div class="eidtBox">
-                    <img src="../../assets/img/icon/update.png" class="update" v-if="plan.result == 0"
-                         @click.stop="updatePlan(index)">
-                    <img src="../../assets/img/icon/delete.png" class="delete" v-if="plan.result == 0"
-                         @click.stop="deletePlan(index,plan._id)">
-                    <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
-                         @click.stop="changeResult(index,1)">
-                    <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
-                         @click.stop="changeResult(index,0)">
-                </div>-->
             </li>
         </ul>
-        <div class="update" v-if="editPlan._id">
+        <div class="updateCont" v-if="editPlan._id">
             <addPlan :planData="editPlan" @goList="goList" editType="update"></addPlan>
         </div>
         <div v-if='recordPlan._id'>
@@ -118,8 +105,10 @@
                     console.log(e)
                 })
             },
-            goRecord(index){
-                this.recordPlan = this.planList[index]
+            goRecord(plan, index){
+                this.$router.push({path: '/record', query: {planId: plan._id,planName:plan.planName}})
+
+                // this.recordPlan = this.planList[index]
             },
             getMarkName(id = '', key = ''){
                 if (!this.marks) {

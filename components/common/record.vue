@@ -1,47 +1,38 @@
 <template>
     <div class="recordContainer">
-
+        <!-- 进度列表 -->
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
-                {{record.content}}
-                <div class="date">
-                    {{ getPostTime(record.start_time)}}
-                    <span>{{record.persent}}%</span> {{(record.end_time - record.start_time)/1000/60}}分钟
-                    <div class="eidtBox">
-                        <img src="../../assets/img/icon/update.png" class="update" @click.stop="toUpdateRecord(index)">
-                        <img src="../../assets/img/icon/delete.png" class="delete"
-                             @click="deleteRecord(index,record._id)">
+                <left-slider width="200">
+
+                    <div slot="moveSlot" class="move-content">
+                        {{record.content}}
+                        <div class="date">
+                            {{ getPostTime(record.start_time)}}
+                            <span>{{record.persent}}%</span> {{(record.end_time - record.start_time)/1000/60}}分钟
+                            <!--<div class="eidtBox">
+                                <img src="../../assets/img/icon/update.png" class="update"
+                                     @click.stop="toUpdateRecord(index)">
+                                <img src="../../assets/img/icon/delete.png" class="delete"
+                                     @click.stop="deleteRecord(index,record._id)">
+                            </div>-->
+                        </div>
+
+                        <div class="planInfo" v-if="record.planId&&record.planId.planName">
+                            <span>{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span>
+                            {{record.planId.planName}}
+                        </div>
                     </div>
-                </div>
-
-                <div class="planInfo" v-if="record.planId&&record.planId.planName">
-                    <span>{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span> {{record.planId.planName}}
-                </div>
-
+                    <div slot='editSlot' class="move-buttons ">
+                        <div class="updateIcon updateIcon50" @click.stop="toUpdateRecord(index)">编辑</div>
+                        <div class="deleteIcon deleteIcon50" @click.stop="deleteRecord(index,record._id)">删除</div>
+                    </div>
+                </left-slider>
             </li>
         </ul>
-
-        <div v-if="!isFromRecord">
-            <mt-button type="primary" class="save" @click="addRecord()">新增进度</mt-button>
-            <mt-button class="save" @click="returnList">返回计划列表</mt-button>
-        </div>
-
+        <!-- 增加进度 -->
         <div class="addRecordBox" v-show="showRecord">
             <div>
-                <div v-if="plan">
-                    <mt-cell title="计划">
-                        {{ plan.planName }}
-                    </mt-cell>
-                    <mt-cell title="计划时间">
-                        {{ formateDate(plan.startDatetime) }} ~ {{formateDate(plan.endDatetime)}}
-                    </mt-cell>
-                    <mt-cell title="工时">
-                        {{ plan.manHour }}
-                    </mt-cell>
-                    <mt-cell title="百分比">
-                        {{ plan.percent }}
-                    </mt-cell>
-                </div>
 
                 <mt-cell title="完成事项">
                     <textarea v-model="record.content" id="" cols="30" rows="4"></textarea>
@@ -90,14 +81,16 @@
     import Utils from '~/utils/index'
     import {planStatus, planType} from '~/constant/params'
     import {mapGetters, mapActions} from 'vuex'
-
+    import LeftSlider from '~/components/tool/leftSlider.vue'
 
     export default {
-        props: ['plan', 'from'],
+        props: ['planId', 'from'],
         async asyncData({isServer, store}){
 
         },
-        components: {},
+        components: {
+            LeftSlider
+        },
         computed: {
             ...mapGetters({
                 markMenu: 'getMarkMenu',
@@ -108,7 +101,6 @@
         },
         data() {
             return {
-                isFromRecord: this.from == 'record',
                 recordList: [],
                 record: {
                     planId: '',
@@ -167,8 +159,8 @@
             async getRecordList(){
 
                 let cond = {}
-                if (this.plan && this.plan._id) {
-                    cond = {planId: this.plan._id}
+                if (this.planId) {
+                    cond = {planId: this.planId}
                 }
 
                 let res = await api.getRecordList(cond).catch(e => {
@@ -208,8 +200,8 @@
                 let data = {...this.record}
 
                 if (this.record._id) {
-                    if (this.plan._id) {
-                        data.planId = this.plan._id
+                    if (this.planId) {
+                        data.planId = this.planId
                     } else {
                         data.planId = this.record.planId._id
                     }
@@ -234,9 +226,6 @@
                 }
 
 
-                console.log('--->', data)
-
-
                 this.closeRecord()
                 this.getRecordList(data.planId)
 
@@ -251,7 +240,7 @@
 
             },
             returnList(){
-                this.$emit('goList')
+                this.$router.back(-1)
             },
             start(){
                 this.record.start_time = Date.now()

@@ -71,9 +71,7 @@
                     //如果距离小于删除按钮的1/2，不显示删除按钮
                 }
             },
-//            deleteItem: function (index) {
-//                this.$emit('deleteItem', index);
-//            }
+
         }
     }
 </script>
@@ -84,10 +82,12 @@
         height: 100%;
         position: relative;
         z-index: 2;
+        background-color: #fff;
     }
 
     .move {
         position: relative;
+        height: 100%;
         background-color: #fff;
     }
 

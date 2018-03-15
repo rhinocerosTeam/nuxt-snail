@@ -5,11 +5,13 @@
       padding:0.1rem 0;
 
       li{
-        padding:0.2rem;
         margin-bottom: 0.2rem;
         min-height: 0.9rem;
         font-size: 0.3rem;
         background-color: #fff;
+        .move-content{
+          padding: 0.2rem;
+        }
         .eidtBox{
           float: right;
           .delete,.update{
@@ -34,6 +36,8 @@
         .planInfo{
           color: darkgrey;
           font-size: 0.2rem;
+          border-top: 1px solid #ececec;
+          padding-top: 0.2rem;
           span{
             padding:2px;
             background: #19be6b;
@@ -41,6 +45,7 @@
             border-radius: 2px;
           }
         }
+
       }
   }
   .addRecordBox{

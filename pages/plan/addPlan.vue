@@ -1,8 +1,6 @@
 <template>
     <div>
-        <Header>
-            <mt-button icon="back" slot='leftBtn' @click="returnPage()"></mt-button>
-        </Header>
+        <Header back="true"></Header>
         <add-plan editType="add"></add-plan>
     </div>
 
@@ -17,7 +15,7 @@
         },
         methods:{
             returnPage(){
-
+                this.$router.back(-1)
             }
         }
     }
