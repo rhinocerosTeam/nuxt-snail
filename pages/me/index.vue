@@ -7,13 +7,16 @@
             潜龙卧虎
         </div>
 
-        <div class="user">
+        <div class="user" v-if="getAccount">
             <div class="text">
                 {{getAccount&&getAccount.username}}
             </div>
+            <div  class="text" @click="logout()">
+                注销
+            </div>
         </div>
 
-        <div class="dialog" v-if="getAccount&&!getAccount.username">
+        <div class="dialog" v-if="!getAccount">
             <div class="text">
                 <span @click="isLogin = true">登录</span> / <span @click="isLogin = false">注册</span>
             </div>
@@ -31,7 +34,7 @@
     import Footer from '~/components/Footer'
     import {mapActions, mapGetters} from 'vuex'
     export default {
-        components:{
+        components: {
             Footer
         },
         data() {
@@ -71,7 +74,18 @@
                 this.setAccount(data)
 
 
+            },
+            async logout(){
+                await  api.logout().catch(e => {
+                    console.log(e)
+                })
+                this.setAccount(null)
+                console.log(this.getAccount)
+
             }
+        },
+        created(){
+            console.log('created', this.getAccount)
         }
     }
 </script>

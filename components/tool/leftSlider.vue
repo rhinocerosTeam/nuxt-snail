@@ -7,7 +7,7 @@
              :style="txtStyle">
             <slot name="moveSlot"></slot>
         </div>
-        <div class="editIcon" :style="{width:delWidth/100+'rem'}" >
+        <div class="editIcon" :style="{width:delWidth/100+'rem'}" @click.stop="close()">
             <slot name="editSlot" ></slot>
         </div>
     </div>
@@ -71,7 +71,9 @@
                     //如果距离小于删除按钮的1/2，不显示删除按钮
                 }
             },
-
+            close(){
+                this.txtStyle = "transform:translateX(0rem)";
+            }
         }
     }
 </script>

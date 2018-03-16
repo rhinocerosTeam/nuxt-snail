@@ -1,10 +1,10 @@
 <template>
     <div>
         <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
-            <li v-for="plan,index in planList" :key="index" @click="goRecord(plan,index)" class="clearfix">
+            <li v-for="plan,index in planList" :key="index"  class="clearfix">
 
                 <left-slider width="300">
-                    <div slot="moveSlot" class="move-content">
+                    <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
                         [{{ plan.percent}}%]
                         {{ plan.planName }}
                         <div class="date eidtBox flex">
@@ -23,8 +23,8 @@
                     </div>
                     <div slot='editSlot' class="move-buttons ">
                         <div class="stickIcon">置顶</div>
-                        <div class="updateIcon" @click.stop="updatePlan(index)">编辑</div>
-                        <div class="deleteIcon" @click.stop="deletePlan(index,plan._id)">删除</div>
+                        <div class="updateIcon" @click="updatePlan(index)">编辑</div>
+                        <div class="deleteIcon" @click="deletePlan(index,plan._id)">删除</div>
                     </div>
                 </left-slider>
 

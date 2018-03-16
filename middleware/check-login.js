@@ -1,16 +1,13 @@
 import api from '~/api';
-import { WX_HOST } from '~/api/config';
+import {WX_HOST} from '~/api/config';
 import _ from 'lodash'
-export default function(ctx) {
+export default function (ctx) {
     // console.log(process.server)
     if (process.server) {
-        if (ctx.req.session && ctx.req.session.userInfo) {
-            ctx.store.commit('SET_USER', ctx.req.session.userInfo)
-            ctx.store.commit('SET_LOGINSTATE', true)
-
+        if (ctx.req.session && ctx.req.session.user) {
+            ctx.store.commit('UPDATE_ACCOUNT', ctx.req.session.user)
         } else {
-            ctx.store.commit('SET_LOGINSTATE', false)
-            ctx.store.commit('SET_USER', null)
+            ctx.store.commit('UPDATE_ACCOUNT', null)
         }
     } else {
         console.log('client render')

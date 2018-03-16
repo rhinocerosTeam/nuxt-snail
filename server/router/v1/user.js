@@ -45,6 +45,19 @@ router.post('/register', async(ctx, next) => {
 })
 
 
+/**
+ * 注销
+ * */
+router.post('/logout', async(ctx, next) => {
+    ctx.session.user = null
+
+    ctx.body ={
+        data: '',
+        code: 200,
+        msg: '注销成功'
+    }
+})
+
 
 
 export default router;

@@ -10,10 +10,12 @@ export default {
     ], // 标签目录
     currentMark: [], // 当前的标签目录显示
     globalMark: {},
-    account: {
-        username: '',
-        id: ''
-    }
+    /*
+    * {
+     username: '',
+     id: ''
+     }*/
+    account: null
 
 
 }
