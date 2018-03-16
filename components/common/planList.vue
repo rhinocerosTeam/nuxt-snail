@@ -3,7 +3,7 @@
         <ul class="planList" v-show="!editPlan._id && !recordPlan._id">
             <li v-for="plan,index in planList" :key="index" @click="goRecord(plan,index)" class="clearfix">
 
-                <left-slider width="300">
+                <left-slider width="300" :key="index">
                     <div slot="moveSlot" class="move-content">
                         [{{ plan.percent}}%]
                         {{ plan.planName }}

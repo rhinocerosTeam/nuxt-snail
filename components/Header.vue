@@ -2,14 +2,22 @@
     <div>
         <mt-header fixed :title="globalMark.name">
             <div slot="left">
-                <template v-if="back">
+                <template v-if="left == 'back'">
                     <mt-button icon="back" @click="returnPage()"></mt-button>
                 </template>
                 <template v-else>
                     <slot name="leftBtn"></slot>
                 </template>
             </div>
-            <mt-button slot="right" @click="popupVisibleFN(true)">标签</mt-button>
+
+            <div slot="right" >
+                <template v-if="right == 'mark'">
+                    <mt-button @click="popupVisibleFN(true)">标签</mt-button>
+                </template>
+                <template v-else>
+                    <slot name="rightBtn"></slot>
+                </template>
+            </div>
         </mt-header>
         <mt-popup
                 v-model="popupVisible"
@@ -23,7 +31,7 @@
     import {mapGetters, mapActions} from 'vuex'
     import Vue from 'vue'
     export default {
-        props: ['back'],
+        props: ['left','right'],
         computed: {
             ...mapGetters({
                 markMenu: 'getMarkMenu',
@@ -51,7 +59,6 @@
         },
         watch: {},
         mounted(){
-            console.log('---->', this.back);
         },
         created(){
 

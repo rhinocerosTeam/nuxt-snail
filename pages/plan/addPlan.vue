@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header back="true"></Header>
+        <Header left="back" right="mark"></Header>
         <add-plan editType="add"></add-plan>
     </div>
 

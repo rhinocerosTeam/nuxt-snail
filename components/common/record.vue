@@ -3,7 +3,7 @@
         <!-- 进度列表 -->
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
-                <left-slider width="200">
+                <left-slider width="200" >
 
                     <div slot="moveSlot" class="move-content">
                         {{record.content}}
@@ -214,7 +214,7 @@
                     })
                     Toast('修改成功')
                 } else {
-                    data.planId = this.plan._id
+                    data.planId = this.planId
                     if (!this.record.content || !this.record.persent) {
                         Toast('请输入完成事项和百分比')
                         return

@@ -1,6 +1,6 @@
 <template>
     <section class="plan-container">
-        <Header>
+        <Header right="mark">
             <mt-button slot='leftBtn' @click="goAddPlan()">增加计划</mt-button>
         </Header>
         <mt-navbar v-model="selected">

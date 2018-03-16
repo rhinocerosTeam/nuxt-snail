@@ -1,9 +1,8 @@
 <template>
     <section class="container">
-        <Header>
-            <mt-button slot='leftBtn' @click="addRecord()">增加记录</mt-button>
-        </Header>
-        <p class="planName" v-if="planName"> {{ planName }}</p>
+        <mt-header fixed :title="planName||'点滴记录'">
+            <mt-button slot='left' @click="addRecord()" v-if="planId">增加记录</mt-button>
+        </mt-header>
         <record ref="recordList" from='record' :planId="planId" ></record>
         <Footer></Footer>
     </section>

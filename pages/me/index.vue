@@ -1,6 +1,8 @@
 <template>
     <section class="container loginContainer">
-
+        <mt-header fixed title="我的">
+            <m-button slot="right">注销</m-button>
+        </mt-header>
         <div class="circle grade grade1">
         </div>
         <div class="gradeDesc">
@@ -11,6 +13,7 @@
             <div class="text">
                 {{getAccount&&getAccount.username}}
             </div>
+
         </div>
 
         <div class="dialog" v-if="getAccount&&!getAccount.username">

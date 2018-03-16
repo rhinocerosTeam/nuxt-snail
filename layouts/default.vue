@@ -8,6 +8,7 @@
 <script>
 
     import Vue from 'vue'
+    // import '~/utils/vconsole.min.js'
     export default {
         head: {
             meta: [
@@ -22,6 +23,9 @@
         },
         mounted(){
             document.documentElement.style.fontSize = document.documentElement.clientWidth / (7.5) + "px";
+
+            //let vconsole = new VConsole()
+
         },
         created(){
 
