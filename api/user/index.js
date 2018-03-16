@@ -14,17 +14,18 @@ export default {
         return axios.post('/v1/login', this.PostParamFormat(data))
     },
     /**
+     * 注销
+     * @param
+     */
+    logout() {
+        return axios.post('/v1/logout', this.PostParamFormat())
+    },
+    /**
      * 登录
      * @param
      */
     register(data) {
         return axios.post('/v1/register', this.PostParamFormat(data))
-    },
-    /**
-     * 登出
-     */
-    logout(data) {
-        return axios.get('/v1/logout', this.GetParamFormat(data));
     },
     checkLogin(data) {
         return axios.get('/v1/checkLogin', this.GetParamFormat(data));

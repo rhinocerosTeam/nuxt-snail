@@ -14,9 +14,10 @@
       .move-content{
         height:100%;
         padding-left:0.2rem;
+        padding-top: 0.3rem;
       }
       .date{
-        margin-top: 0.15rem;
+        margin-top: 0.3rem;
         margin-bottom: 0.3rem;
         color: #868383;
         font-size:0.2rem;
@@ -24,6 +25,9 @@
         line-height: 0.5rem;
         span,div,img{
           float: left;
+        }
+        div{
+          font-size: 0.25rem;
         }
         span{
           background: #19be6b;

@@ -10,12 +10,7 @@
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
                             <span>{{record.persent}}%</span> {{(record.end_time - record.start_time)/1000/60}}分钟
-                            <!--<div class="eidtBox">
-                                <img src="../../assets/img/icon/update.png" class="update"
-                                     @click.stop="toUpdateRecord(index)">
-                                <img src="../../assets/img/icon/delete.png" class="delete"
-                                     @click.stop="deleteRecord(index,record._id)">
-                            </div>-->
+
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
@@ -24,8 +19,8 @@
                         </div>
                     </div>
                     <div slot='editSlot' class="move-buttons ">
-                        <div class="updateIcon updateIcon50" @click.stop="toUpdateRecord(index)">编辑</div>
-                        <div class="deleteIcon deleteIcon50" @click.stop="deleteRecord(index,record._id)">删除</div>
+                        <div class="updateIcon updateIcon50" @click="toUpdateRecord(index)">编辑</div>
+                        <div class="deleteIcon deleteIcon50" @click="deleteRecord(index,record._id)">删除</div>
                     </div>
                 </left-slider>
             </li>
@@ -33,9 +28,8 @@
         <!-- 增加进度 -->
         <div class="addRecordBox" v-show="showRecord">
             <div>
-
                 <mt-cell title="完成事项">
-                    <textarea v-model="record.content" id="" cols="30" rows="4"></textarea>
+                    <textarea v-model="record.content" id="" cols="30" rows="6"></textarea>
                 </mt-cell>
                 <mt-cell title="完成百分比">
                     <input type="text" v-model="record.persent">
@@ -68,9 +62,6 @@
                 </div>
                 <mt-button type="primary" class="save" @click="save()" v-if="record.end_time">保存</mt-button>
                 <mt-button class="save" @click="closeRecord()">关闭</mt-button>
-            </div>
-            <div>
-
             </div>
         </div>
     </div>

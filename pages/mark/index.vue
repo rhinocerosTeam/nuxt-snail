@@ -11,9 +11,9 @@
                 <left-slider width="300">
                     <p slot="moveSlot" class="content"> 健身</p>
                     <div slot='editSlot'>
-                        <div class="stickIcon" @click.prevent="deleteItem(index)">置顶</div>
-                        <div class="updateIcon" @click.prevent="deleteItem(index)">编辑</div>
-                        <div class="deleteIcon" @click.prevent="deleteItem(index)">删除</div>
+                        <div class="stickIcon" @click="deleteItem(index)">置顶</div>
+                        <div class="updateIcon" @click="deleteItem(index)">编辑</div>
+                        <div class="deleteIcon" @click="deleteItem(index)">删除</div>
                     </div>
                 </left-slider>
             </li>

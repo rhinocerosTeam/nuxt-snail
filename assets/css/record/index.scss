@@ -27,7 +27,7 @@
           margin-top: 0.15rem;
           margin-bottom: 0.15rem;
           color: #868383;
-          font-size: 0.2rem;
+          font-size: 0.25rem;
           span{
             padding:2px;
             color: #024886;
@@ -35,7 +35,7 @@
         }
         .planInfo{
           color: darkgrey;
-          font-size: 0.2rem;
+          font-size: 0.25rem;
           border-top: 1px solid #ececec;
           padding-top: 0.2rem;
           span{
@@ -57,9 +57,10 @@
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
     >div{
+      padding-top: 0.3rem;
       width:7rem;
-      height:13rem;
-      margin:0.2rem 0.2rem;
+      height:10rem;
+      margin:0.8rem 0.2rem 0.2rem;
       background-color: #fff;
       .start{
         width: 20vw;
