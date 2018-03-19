@@ -7,14 +7,8 @@
         </Header>
         <div>
             <ul>
-                <mark-node :mark="mark" :mindex="0" @updateMark="updateMark"></mark-node>
+                <mark-node :mark="mark" mindex='' @updateMark="updateMark"></mark-node>
             </ul>
-
-            <!--<div class="name" data-key="mark.key">|- {{mark.name }}</div>
-            <ul>
-                <mark-node v-for="obj,index in mark.child" :mark="obj" :key="mark.key+index" :mindex="index" @updateMark="updateMark"></mark-node>
-            </ul>-->
-
         </div>
         <mt-popup
                 v-model="popupVisible"
@@ -91,7 +85,9 @@
                     key: ''
                 },
                 editPopupVisible: false,
-                selectMark: {}
+                selectMark: {},
+                selectMarkIndex: 0,
+                selectParentMark: {},
             }
         },
         methods: {
@@ -122,12 +118,13 @@
                 callback(obj)
             },
             updateMark(data){
+                console.log(data)
                 this.popupVisible = true
                 this.selectMark = data.mark
-
+                this.selectMarkIndex = data.index
+                this.selectParentMark = data.parentMark
             },
             goAddM(){
-
                 this.popupVisible = false;
                 this.editPopupVisible = true;
             },
@@ -137,23 +134,22 @@
                 this.editPopupVisible = true;
             },
             goDeleteM(){
-
-
-
+                this.selectParentMark.splice(this.selectMarkIndex, 1, 0)
+                this.popupVisible = false
             },
             updateMData(){
-                if(this.editMark.key){
+                if (this.editMark.key) {
                     this.selectMark = this.editMark
-                }else{
+                } else {
                     this.editMark.key = Date.now()
-                    if(!this.selectMark.child){
+                    if (!this.selectMark.child) {
                         this.selectMark.child = []
                     }
                     this.selectMark.child.push(this.editMark)
                 }
                 this.editMark = {
-                    name:'',
-                    key:''
+                    name: '',
+                    key: ''
                 }
                 this.editPopupVisible = false
             }

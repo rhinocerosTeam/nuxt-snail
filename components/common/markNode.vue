@@ -1,17 +1,17 @@
 <template>
-    <li :key="mindex">
-        <div class="name" :data-index="mindex" @click.stop="updateMark()">
+    <li :key="'li'+mark.key" v-if="mark">
+        <div class="name"  @click.stop="updateMarkSelf()">
             |- {{ mark.name }}
         </div>
         <ul v-if="mark.child">
-            <mark-node v-for="obj,index in mark.child" :mark="obj" :mindex="mindex+'-'+index" :key="mark.key+index" @updateMark="updateMark"></mark-node>
+            <mark-node v-for="obj,index in mark.child" :mark="obj"  :mindex="index" :parentMark="mark.child" :key="mark.key+index" @updateMark="updateMark"></mark-node>
         </ul>
     </li>
 </template>
 <script>
     import markNode from "~/components/common/markNode"
     export default {
-        props:['mark','mindex'],
+        props:['mark','parentMark','mindex'],
         name: 'MarkNode',
         computed: {
         },
@@ -25,11 +25,10 @@
         },
         methods: {
             updateMark(data){
-                if(data){
-                    this.$emit('updateMark',data)
-                }else{
-                    this.$emit('updateMark',{mark:this.mark,index:this.mindex})
-                }
+                this.$emit('updateMark',data)
+            },
+            updateMarkSelf(index){
+                this.$emit('updateMark',{mark:this.mark,parentMark:this.parentMark,index:this.mindex})
             }
         },
         async mounted() {

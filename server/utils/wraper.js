@@ -44,4 +44,9 @@ export const wraper = (model, params) => {
         }, params)
     }
 
+    if(model === Model.mark){
+        return params
+    }
+
+
 }

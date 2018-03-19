@@ -22,14 +22,14 @@ router.get('/markList', async (ctx, next) => {
  * 添加评论
  */
 router.post('/addMark', async (ctx, next) =>{
-    let {name,key} = ParamsUtils.bodyValidate(ctx),
+    let {name,key,userid} = ParamsUtils.bodyValidate(ctx),
         res = null;
 
     if( !name || !key ){
         res = Serrors.paramsError('传参错误')
     }
     if(!res){
-        res = await marksCtrl.addUpdateMark({name,key,child:[]})
+        res = await marksCtrl.addUpdateMark({name,key,userid,child:[]})
     }
 
     ctx.body = res

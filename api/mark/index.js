@@ -20,7 +20,7 @@ export default {
         return axios.post('/v1/updateMark', this.PostParamFormat(data))
     },
     deleteMarks(id){
-        return axios.post('/v1/deleteMark', this.PostParamFormat(id))
+        return axios.post('/v1/deleteMark', this.PostParamFormat({id}))
     }
 
 

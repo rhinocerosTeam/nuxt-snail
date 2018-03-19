@@ -47,6 +47,9 @@ export default class MarksControl {
                 res = Serrors.update('标签mark更新失败')
             })
         }else{
+
+            console.log('data-->', data)
+
             doc = await Entity.create(Model.mark, data).catch(e => {
                 res = Serrors.findError('标签增加失败')
             })
