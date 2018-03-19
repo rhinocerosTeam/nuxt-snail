@@ -1,29 +1,18 @@
 <template>
-    <div class="marksEditContainer">
+    <div class="marksManagerContainer">
+        <Header left="back" title="编辑标签"></Header>
+
         <ul>
-            <!--<li>-->
-            <!--健身-->
-            <!--<div class="editBox">-->
-            <!--<img src="../../assets/img/icon/eidt.png" class="update">-->
-            <!--</div>-->
-            <!--</li>-->
-            <li>
-                <left-slider width="300">
-                    <p slot="moveSlot" class="content"> 健身</p>
-                    <div slot='editSlot'>
+            <li v-for="mark,index in markList" :key="index">
+                <left-slider width="300" :key="index">
+                    <div slot="moveSlot" class="content">{{ mark.name }}</div>
+                    <div slot='editSlot' class="move-buttons">
                         <div class="stickIcon" @click="deleteItem(index)">置顶</div>
-                        <div class="updateIcon" @click="deleteItem(index)">编辑</div>
+                        <div class="updateIcon" @click="goUpdate(mark._id)">编辑</div>
                         <div class="deleteIcon" @click="deleteItem(index)">删除</div>
                     </div>
                 </left-slider>
             </li>
-            <!--<li>-->
-            <!--健身-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--健身-->
-            <!--</li>-->
-
         </ul>
     </div>
 
@@ -32,21 +21,39 @@
 
     import LeftSlider from '../../components/tool/leftSlider.vue';
     import api from '../../api'
-
+    import {mapGetters, mapActions} from 'vuex'
+    import Header from '~/components/Header'
     export default {
         name: 'MyCollect',
         components: {
-            LeftSlider
+            LeftSlider,
+            Header
+        },
+        computed: {
+            ...mapGetters({
+                getAccount: 'getAccount'
+            })
         },
         data() {
             return {
-                index: 10
+                index: 10,
+                markList: [],
 
             }
         },
         methods: {
-            getMarks(){
-
+            async getMarks(){
+                if(this.getAccount){
+                    let userid = this.getAccount._id
+                    let data = await api.getMarkList(userid).catch(e=> {
+                        console.log('标签获得失败')
+                    })
+                    data = api.parse(data)
+                    this.markList = data
+                }
+            },
+            goUpdate(id){
+                this.$router.push({path:'/mark/updateMark',query:{id}})
             },
             // 删除
             deleteItem(index) {
@@ -54,13 +61,11 @@
             }
         },
         mounted() {
-
+            this.getMarks()
         }
     }
 
 </script>
 <style>
-    .move {
-        background-color: #00a0e9;
-    }
+
 </style>

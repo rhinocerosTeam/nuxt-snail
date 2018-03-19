@@ -1,8 +1,8 @@
 <template>
     <div class="marksContainer">
         <div class="header">MARKS
-        <span class="update" v-if="!isEdit" @click="update()"></span>
-        <span class="save" v-if="isEdit"></span>
+            <span class="update" v-if="!isEdit" @click="update()"></span>
+            <span class="save" v-if="isEdit"></span>
         </div>
         <div class="box">
             <div class="menu">
@@ -15,12 +15,13 @@
                 </li>
                 <li v-for="obj,pindex in currentMark||[]" :key="pindex" @click="choose(obj,pindex)">
                     <div v-if="isEdit">
-                        <mt-field  placeholder="请输入标签" v-model="obj.name"></mt-field>
+                        <mt-field placeholder="请输入标签" v-model="obj.name"></mt-field>
                     </div>
                     <div v-else>
                         {{obj.name}}
                     </div>
-                    <span class="more" v-if="obj.child&&obj.child.length>0&&!isEdit" @click.stop="gotoDetail(obj,pindex)" ></span>
+                    <span class="more" v-if="obj.child&&obj.child.length>0&&!isEdit"
+                          @click.stop="gotoDetail(obj,pindex)"></span>
                 </li>
             </ul>
             <!--<div>增加</div>-->
@@ -28,48 +29,48 @@
     </div>
 </template>
 <script>
-    import { mapGetters, mapActions } from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
     export default {
-        props:['popupVisibleFN'],
+        props: ['popupVisibleFN'],
         data(){
             return {
-                isEdit:false
+                isEdit: false
             }
         },
         computed: {
             ...mapGetters({
                 markMenu: 'getMarkMenu',
                 marks: 'getMarks',
-                currentMark:'getCurrentMark',
-                getGlobalMark:'getGlobalMark'
+                currentMark: 'getCurrentMark',
+                getGlobalMark: 'getGlobalMark'
             })
         },
-        methods:{
+        methods: {
             ...mapActions({
-                updateMarkMenu:'updateMarkMenu',
-                updateGlobalMark:'updateGlobalMark',
-                initMark:'initMark'
+                updateMarkMenu: 'updateMarkMenu',
+                updateGlobalMark: 'updateGlobalMark',
+                initMark: 'initMark'
             }),
             update(){
-                //this.isEdit = true
+                this.$router.push({path: '/mark'})
             },
-            gotoDetail(obj,index){
-                if(obj.child){
-                    this.updateMarkMenu({...obj,index})
+            gotoDetail(obj, index){
+                if (obj.child) {
+                    this.updateMarkMenu({...obj, index})
                 }
             },
             changeMenu(mindex){
                 this.updateMarkMenu({mindex})
             },
-            choose(obj,index){
+            choose(obj, index){
 
                 this.updateGlobalMark(obj)
-                this.$emit('popupVisibleFN',false)
+                this.$emit('popupVisibleFN', false)
             },
             noChoose(){
                 this.updateGlobalMark({})
-               // this.clearMarkMenu()
-                this.$emit('popupVisibleFN',false)
+                // this.clearMarkMenu()
+                this.$emit('popupVisibleFN', false)
             }
         },
         created(){

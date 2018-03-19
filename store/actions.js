@@ -59,13 +59,17 @@ export default {
 
     },
     initMark({commit, state}, data = {}){
-        if (!state.markIsUpdate) {
-            api.getMarkList('5a78d90312741b08df2b932b').then((res)=> {
-                let data = api.parse(res) || {};
-                commit('UPDATE_MARK', data);
-                commit('UPDATE_CURRENTMENU', data);
-                commit('UPDATE_MARKSTATUS', true);
-            })
+        if(state.account){
+            let userId = state.account._id
+            if (!state.markIsUpdate&& userId) {
+                api.getMarkList(userId).then((res)=> {
+                    let data = api.parse(res) || {};
+                    commit('UPDATE_MARK', data);
+                    commit('UPDATE_CURRENTMENU', data);
+                    commit('UPDATE_MARKSTATUS', true);
+                })
+            }
         }
+
     }
 }

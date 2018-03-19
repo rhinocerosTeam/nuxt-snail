@@ -1,8 +1,8 @@
 <template>
     <div class="addPlanContainer">
-        <mt-cell title="计划">
-            <textarea name="" v-model="plan.planName" id="" cols="30" rows="4"></textarea>
-        </mt-cell>
+
+        <mt-field label="计划" placeholder="自我介绍" type="textarea" rows="4" v-model="plan.planName"></mt-field>
+
         <mt-cell title="开始时间">
             <input type="date" v-model="plan.startDatetime">
         </mt-cell>

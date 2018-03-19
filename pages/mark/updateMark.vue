@@ -1,0 +1,178 @@
+<template>
+    <div class="marksEditContainer">
+        <Header left="back" title="编辑标签">
+            <div slot="rightBtn">
+                <mt-button slot="right" @click="save()">保存</mt-button>
+            </div>
+        </Header>
+        <div>
+            <ul>
+                <mark-node :mark="mark" :mindex="0" @updateMark="updateMark"></mark-node>
+            </ul>
+
+            <!--<div class="name" data-key="mark.key">|- {{mark.name }}</div>
+            <ul>
+                <mark-node v-for="obj,index in mark.child" :mark="obj" :key="mark.key+index" :mindex="index" @updateMark="updateMark"></mark-node>
+            </ul>-->
+
+        </div>
+        <mt-popup
+                v-model="popupVisible"
+                position="bottom"
+                class="editPopup"
+        >
+            <ul>
+
+                <li>
+                    <mt-button @click="goAddM()">增加</mt-button>
+                </li>
+                <li>
+                    <mt-button type="primary" @click="goUpdateM()">编辑</mt-button>
+                </li>
+                <li>
+                    <mt-button type="danger" @click="goDeleteM()">删除</mt-button>
+                </li>
+            </ul>
+        </mt-popup>
+
+        <mt-popup
+                v-model="editPopupVisible"
+                position="bottom"
+                class="editMarkPP"
+        >
+            <ul>
+
+                <li>
+                    <input placeholder="请输入标签名称" v-model="editMark.name">
+                </li>
+
+                <li>
+                    <mt-button type="primary" @click="updateMData()">保存</mt-button>
+                </li>
+            </ul>
+        </mt-popup>
+
+
+    </div>
+
+</template>
+
+
+<script>
+
+    import markNode from "~/components/common/markNode"
+    import LeftSlider from '../../components/tool/leftSlider.vue';
+    import api from '../../api'
+    import {mapGetters, mapActions} from 'vuex'
+    import Header from '~/components/Header'
+    import {Toast} from 'mint-ui'
+    export default {
+        name: 'updateMark',
+        components: {
+            LeftSlider,
+            Header,
+            markNode
+        },
+        computed: {
+            ...mapGetters({
+                getAccount: 'getAccount'
+            })
+        },
+        data() {
+            return {
+                markList: [],
+                mark: {
+                    name: ''
+                },
+                markId: '',
+                popupVisible: false,
+                editMark: {
+                    name: '',
+                    key: ''
+                },
+                editPopupVisible: false,
+                selectMark: {}
+            }
+        },
+        methods: {
+            async getMarks(){
+                if (this.getAccount) {
+                    let userid = this.getAccount._id
+                    let data = await api.getMarkList(userid).catch(e=> {
+                        console.log('标签获得失败')
+                    })
+                    data = api.parse(data)
+                    this.markList = data
+                }
+
+            },
+            async save(){
+                let data = await api.updateMarks(this.mark).catch(e=> {
+                    console.log('标签获得失败')
+                })
+                Toast('保存成功')
+            },
+            // 删除
+            deleteItem(index) {
+                console.log('删除的索引为index', index)
+            },
+            findMark(callback){
+                let obj = {}
+
+                callback(obj)
+            },
+            updateMark(data){
+                this.popupVisible = true
+                this.selectMark = data.mark
+
+            },
+            goAddM(){
+
+                this.popupVisible = false;
+                this.editPopupVisible = true;
+            },
+            goUpdateM(){
+                this.editMark = this.selectMark;
+                this.popupVisible = false;
+                this.editPopupVisible = true;
+            },
+            goDeleteM(){
+
+
+
+            },
+            updateMData(){
+                if(this.editMark.key){
+                    this.selectMark = this.editMark
+                }else{
+                    this.editMark.key = Date.now()
+                    if(!this.selectMark.child){
+                        this.selectMark.child = []
+                    }
+                    this.selectMark.child.push(this.editMark)
+                }
+                this.editMark = {
+                    name:'',
+                    key:''
+                }
+                this.editPopupVisible = false
+            }
+        },
+        async mounted() {
+
+            this.markId = this.$route.query.id
+
+            await this.getMarks()
+            if (this.markList) {
+                this.mark = this.markList.find(obj => {
+                    return obj._id == this.markId
+                })
+            }
+
+        }
+    }
+
+</script>
+<style>
+
+</style>

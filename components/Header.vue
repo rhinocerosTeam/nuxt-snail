@@ -1,6 +1,6 @@
 <template>
     <div>
-        <mt-header fixed :title="globalMark.name">
+        <mt-header fixed :title="right?globalMark.name:title">
             <div slot="left">
                 <template v-if="left == 'back'">
                     <mt-button icon="back" @click="returnPage()"></mt-button>
@@ -31,7 +31,7 @@
     import {mapGetters, mapActions} from 'vuex'
     import Vue from 'vue'
     export default {
-        props: ['left','right'],
+        props: ['left','right','title'],
         computed: {
             ...mapGetters({
                 markMenu: 'getMarkMenu',

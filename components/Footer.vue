@@ -4,7 +4,7 @@
             <mt-tab-item id="plan">
                 <img slot="icon" src="../assets/img/icon/bar_plan_active.png" v-if="selected == routerObj.plan">
                 <img slot="icon" src="../assets/img/icon/bar_plan.png" v-else>
-                待办事项
+                待办
             </mt-tab-item>
             <mt-tab-item id="record">
                 <img slot="icon" src="../assets/img/icon/bar_record_active.png" v-if="selected == routerObj.record">

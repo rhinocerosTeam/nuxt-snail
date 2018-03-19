@@ -1,7 +1,7 @@
 <template>
     <section class="container loginContainer">
         <mt-header fixed title="我的">
-            <m-button slot="right" @click="logout()">注销</m-button>
+            <mt-button slot="right" v-if="getAccount" @click="logout()">注销</mt-button>
         </mt-header>
         <div class="circle grade grade1">
         </div>
