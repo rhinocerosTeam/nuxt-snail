@@ -17,6 +17,9 @@ export default {
         return axios.post('/v1/addMark', this.PostParamFormat(data))
     },
     updateMarks(data){
+
+        console.log('data--->', this.PostParamFormat(data))
+
         return axios.post('/v1/updateMark', this.PostParamFormat(data))
     },
     deleteMarks(id){

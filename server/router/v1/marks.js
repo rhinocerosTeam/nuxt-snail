@@ -36,15 +36,16 @@ router.post('/addMark', async (ctx, next) =>{
 })
 
 router.post('/updateMark', async (ctx, next) =>{
-    let {_id,name,key,child} = ParamsUtils.bodyValidate(ctx),
+    let param = ParamsUtils.bodyValidate(ctx),
         res = null;
 
+    let {_id,name,key,child} = param
     if(!ParamsUtils.isObjectId(_id) || !name || !key || !Array.isArray(child)){
         res = Serrors.paramsError('传参错误')
     }
 
     if(!res){
-       res = await marksCtrl.addUpdateMark({_id,name,key,child})
+       res = await marksCtrl.addUpdateMark(param,_id)
     }
 
     ctx.body = res

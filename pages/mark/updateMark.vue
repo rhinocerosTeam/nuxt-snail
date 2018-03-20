@@ -82,7 +82,8 @@
                 popupVisible: false,
                 editMark: {
                     name: '',
-                    key: ''
+                    key: '',
+                    child: []
                 },
                 editPopupVisible: false,
                 selectMark: {},
@@ -103,6 +104,7 @@
 
             },
             async save(){
+                console.log('save',this.mark)
                 let data = await api.updateMarks(this.mark).catch(e=> {
                     console.log('标签获得失败')
                 })
@@ -149,7 +151,9 @@
                 }
                 this.editMark = {
                     name: '',
-                    key: ''
+                    key: '',
+                    child: []
+
                 }
                 this.editPopupVisible = false
             }
