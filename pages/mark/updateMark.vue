@@ -99,12 +99,26 @@
                         console.log('标签获得失败')
                     })
                     data = api.parse(data)
+
                     this.markList = data
                 }
 
             },
+
+            setChild(data){
+
+                if (data.child) {
+                    for (let obj of data.child) {
+                        this.setChild(obj)
+                    }
+                } else {
+                    data.child = []
+                }
+            },
+
+
             async save(){
-                console.log('save',this.mark)
+                console.log('save', this.mark)
                 let data = await api.updateMarks(this.mark).catch(e=> {
                     console.log('标签获得失败')
                 })
@@ -164,9 +178,14 @@
 
             await this.getMarks()
             if (this.markList) {
-                this.mark = this.markList.find(obj => {
+               let data = this.markList.find(obj => {
                     return obj._id == this.markId
                 })
+
+                this.setChild(data)
+                this.mark = data
+
+                console.log('-------------->', data)
             }
 
         }
