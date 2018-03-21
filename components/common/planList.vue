@@ -13,7 +13,7 @@
                             </span>
                             <div>
                                 {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                                工时：{{parseInt(plan.manHour/1000/60)}}分钟
+                                工时：{{formateDatetime(plan.manHour)}}
                             </div>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
                                  @click.stop="changeResult(index,1)">
@@ -83,13 +83,14 @@
 //                    markKey: '',
                     type: this.type
                 }
+
+                if (this.globalMark) {
+                    params.markKey = this.globalMark.key
+                    params.markId = this.globalMark._id
+                }
                 if (this.markMenu.length > 0) {
                     params.markId = this.markMenu[0]._id
                 }
-                if (this.globalMark) {
-                    params.markKey = this.globalMark.key
-                }
-
                 let res = await api.getPlanList(params).catch(e => {
                     console.log(e)
                 })
@@ -104,6 +105,15 @@
                 await api.updatePlan(this.planList[index]).catch(e => {
                     console.log(e)
                 })
+            },
+            formateDatetime(time){
+                let unit = 1000*60
+                let minu = parseInt(time/unit)
+                if(minu>60){
+                    return  minu/60 +'小时'
+                }
+                return minu+'分钟'
+
             },
             goRecord(plan, index){
                 this.$router.push({path: '/record', query: {planId: plan._id,planName:plan.planName}})

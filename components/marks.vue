@@ -6,13 +6,11 @@
         </div>
         <div class="box">
             <div class="menu">
-                <span @click="changeMenu(-1)">全部</span>
+                <span @click="changeMenu(-1)" >全部</span>
                 <span v-for="m,index in markMenu" @click="changeMenu(index)"> > {{ m.name}}  </span>
             </div>
             <ul>
-                <li @click="noChoose()">
-                    不选择
-                </li>
+                <li @click="noChoose()" v-if="markMenu.length == 0">不选择 </li>
                 <li v-for="obj,pindex in currentMark||[]" :key="pindex" @click="choose(obj,pindex)">
                     <div v-if="isEdit">
                         <mt-field placeholder="请输入标签" v-model="obj.name"></mt-field>
