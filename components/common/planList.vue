@@ -13,7 +13,7 @@
                             </span>
                             <div>
                                 {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                                工时：{{plan.manHour/1000/60}}分钟
+                                工时：{{parseInt(plan.manHour/1000/60)}}分钟
                             </div>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
                                  @click.stop="changeResult(index,1)">

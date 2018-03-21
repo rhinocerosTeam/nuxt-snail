@@ -9,7 +9,7 @@
                         {{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
-                            <span>{{record.persent}}%</span> {{(record.end_time - record.start_time)/1000/60}}分钟
+                            <span>{{record.persent}}%</span> {{parseInt((record.end_time - record.start_time)/1000/60)}}分钟
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
