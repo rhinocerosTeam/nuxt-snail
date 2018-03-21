@@ -4,30 +4,31 @@
 
 import Model from '../models/index'
 import Entity from '../service/entity'
-import { exec } from 'child_process'
+import {exec} from 'child_process'
 import mongoose from 'mongoose';
 import Serrors from '../utils/serrors'
 import _ from 'lodash'
 
 export default class MarksControl {
-    constructor() {}
+    constructor() {
+    }
 
     /**
      * 查询marks数据
      * @param  {String} userId  用户id
      * @return Promise
      * **/
-    async markList(userid){
-        let res=null,
-            doc=null;
-        doc = await Entity.find(Model.mark,{userid:userid}).catch(e => {
+    async markList(userid) {
+        let res = null,
+            doc = null;
+        doc = await Entity.find(Model.mark, {userid: userid}).catch(e => {
             res = Serrors.findError('标签mark查询失败')
         })
-        if(!res){
+        if (!res) {
             res = {
-                code:200,
-                data:doc,
-                msg:''
+                code: 200,
+                data: doc,
+                msg: ''
             }
         }
 
@@ -38,15 +39,17 @@ export default class MarksControl {
     }
 
 
-    async addUpdateMark(data,id){
+    async addUpdateMark(data, id) {
         let res = null,
             doc = null;
 
-        if(id){
-            doc = await Entity.update(Model.mark,data,id).catch((e)=>{
-                res = Serrors.update('标签mark更新失败')
+        if (id) {
+            delete data._id
+            console.log('addUpdateMark-->', data, id)
+            doc = await Entity.update(Model.mark, id, data).catch((e)=> {
+                res = Serrors.updateError('标签mark更新失败')
             })
-        }else{
+        } else {
 
             console.log('data-->', data)
 
@@ -56,11 +59,11 @@ export default class MarksControl {
         }
 
 
-        if(!res){
+        if (!res) {
             res = {
-                code:200,
-                data:doc,
-                msg:''
+                code: 200,
+                data: doc,
+                msg: ''
             }
         }
 
@@ -82,12 +85,12 @@ export default class MarksControl {
 
 
         doc = await Entity.remove(Model.mark, id).catch(e => {
-                res = {
-                    code: 500,
-                    data: null,
-                    msg: 'delete error'
-                }
-            })
+            res = {
+                code: 500,
+                data: null,
+                msg: 'delete error'
+            }
+        })
 
 
         if (!res) {
@@ -102,7 +105,6 @@ export default class MarksControl {
             resolve(res);
         })
     }
-
 
 
 }

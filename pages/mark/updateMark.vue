@@ -82,7 +82,8 @@
                 popupVisible: false,
                 editMark: {
                     name: '',
-                    key: ''
+                    key: '',
+                    child: []
                 },
                 editPopupVisible: false,
                 selectMark: {},
@@ -94,22 +95,33 @@
             async getMarks(){
                 if (this.getAccount) {
                     let userid = this.getAccount._id
-                    let data = await api.getMarkList(userid).catch(e=> {
+                    let data = await api.getMarkList(userid).catch(e => {
                         console.log('标签获得失败')
                     })
                     data = api.parse(data)
+
                     this.markList = data
                 }
             },
+
+            setChild(data){
+
+                if (data.child) {
+                    for (let obj of data.child) {
+                        this.setChild(obj)
+                    }
+                } else {
+                    data.child = []
+                }
+            },
+
+
             async save(){
                 let data = this.mark
-
                 let child = JSON.stringify(data.child)
                 data.child = child
-
-                cosnole.log(data)
-
-                await api.updateMarks(data).catch(e=> {
+                console.log('----->',data)
+                await api.updateMarks(data).catch(e => {
                     console.log('标签获得失败')
                 })
                 Toast('保存成功')
@@ -155,7 +167,9 @@
                 }
                 this.editMark = {
                     name: '',
-                    key: ''
+                    key: '',
+                    child: []
+
                 }
                 this.editPopupVisible = false
             }
@@ -166,9 +180,14 @@
 
             await this.getMarks()
             if (this.markList) {
-                this.mark = this.markList.find(obj => {
+                let data = this.markList.find(obj => {
                     return obj._id == this.markId
                 })
+
+                this.setChild(data)
+                this.mark = data
+
+                console.log('-------------->', data)
             }
 
         }
