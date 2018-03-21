@@ -7,7 +7,7 @@
         </Header>
         <div>
             <ul>
-                <mark-node :mark="mark" mindex='' @updateMark="updateMark"></mark-node>
+                <mark-node :mark="mark" mindex='' @updateMark="updateMark" :key='mark.key'></mark-node>
             </ul>
         </div>
         <mt-popup
@@ -100,10 +100,16 @@
                     data = api.parse(data)
                     this.markList = data
                 }
-
             },
             async save(){
-                let data = await api.updateMarks(this.mark).catch(e=> {
+                let data = this.mark
+
+                let child = JSON.stringify(data.child)
+                data.child = child
+
+                cosnole.log(data)
+
+                await api.updateMarks(data).catch(e=> {
                     console.log('标签获得失败')
                 })
                 Toast('保存成功')
