@@ -40,10 +40,12 @@ router.post('/updateMark', async (ctx, next) =>{
         res = null;
 
     let {_id,name,key,child} = param
-    if(!ParamsUtils.isObjectId(_id) || !name || !key || !Array.isArray(child)){
+    if(!ParamsUtils.isObjectId(_id) || !name || !key){
         res = Serrors.paramsError('传参错误')
     }
-
+    if(child){
+        param.child = JSON.parse(child)
+    }
     if(!res){
        res = await marksCtrl.addUpdateMark(param,_id)
     }
