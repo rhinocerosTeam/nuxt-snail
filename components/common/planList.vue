@@ -110,7 +110,7 @@
                 let unit = 1000*60
                 let minu = parseInt(time/unit)
                 if(minu>60){
-                    return  minu/60 +'小时'
+                    return  (minu/60).toFixed(2) +'小时'
                 }
                 return minu+'分钟'
 
