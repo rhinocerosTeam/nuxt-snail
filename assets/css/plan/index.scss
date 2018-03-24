@@ -1,103 +1,138 @@
-.plan-container{
-  .planBox{
-    height:calc(100vh - 130px);
+.plan-container {
+  .planBox {
+    height: calc(100vh - 130px);
     overflow-y: scroll;
   }
   background-color: #fff;
-  .planList{
+  .planList {
     // padding:0.2rem;
-    li{
-      padding-top:0.2rem;
+    li {
       border-bottom: 1px solid #e8e8e8;
       min-height: 0.9rem;
-      font-size:0.3rem;
-      .move-content{
-        height:100%;
-        padding-left:0.2rem;
-        padding-top: 0.3rem;
+      font-size: 0.3rem;
+      .move-content {
+        height: 100%;
+        padding:0.2rem;
+
+        p {
+          color: rgba(0, 0, 0, 0.8);
+          margin-top: 0.3rem;
+          margin-bottom: 0.3rem;
+          font-size: 0.28rem;
+          line-height: 0.5rem;
+          .delete {
+            float: left;
+            width: 0.4rem;
+            height: 0.4rem;
+            display: inline-block;
+            margin-right: 0.1rem;
+
+          }
+          span{
+            float: left;
+          }
+          &:after{
+            content: '';
+            display: block;
+            clear: both;
+          }
+
+        }
+        .progress {
+          background: transparent;
+          font-size: 0.25rem;
+          color: #868383;
+          span{
+            color: red;
+            background-color: transparent;
+            padding:0 0.2rem;
+            margin: 0;
+          }
+        }
       }
-      .date{
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
+
+      .date {
+
         color: #868383;
-        font-size:0.2rem;
-        height:0.5rem;
+        font-size: 0.2rem;
+        height: 0.5rem;
         line-height: 0.5rem;
-        span,div,img{
+        span, div, img {
           float: left;
         }
-        div{
+        div {
           font-size: 0.25rem;
         }
-        span{
-          background: #19be6b;
-          color: #fff;
+        .mark{
+          color: #39a2ff;
           border-radius: 1px;
           float: left;
           margin-right: 0.3rem;
           padding: 0 0.1rem;
-          border-radius:0.05rem;
-        }
-        .delete{
-          width:0.4rem;
+          border-radius: 0.4rem;
+          border:1px solid #39a2ff;
           height:0.4rem;
-          display: inline-block;
-          margin-left: 0.2rem;
+          line-height: 0.4rem;
           margin-top: 0.05rem;
         }
+        span {
+
+          border-radius: 1px;
+          float: left;
+          margin-right: 0.3rem;
+          padding: 0 0.1rem;
+          border-radius: 0.05rem;
+
+        }
+
       }
 
     }
   }
-  .addPlan{
-    width:0.5rem;
-    height:0.5rem;
+  .addPlan {
+    width: 0.5rem;
+    height: 0.5rem;
   }
   .mint-navbar {
-    height:50px;
-    border-bottom:1px solid #e8e8e8;
-    .mint-tab-item{
-      padding: 9px 0!important;
-      .mint-tab-item-label{
+    height: 50px;
+    border-bottom: 1px solid #e8e8e8;
+    .mint-tab-item {
+      padding: 9px 0 !important;
+      .mint-tab-item-label {
         line-height: 0.5rem;
-        &:nth-of-type(3){
+        &:nth-of-type(3) {
           line-height: 0;
         }
       }
     }
   }
 
-
-
-
-  .save{
-    width:6rem;
+  .save {
+    width: 6rem;
     margin-top: 0.5rem;
     margin-left: 0.75rem;
   }
 
-  .addPlanContainer{
+  .addPlanContainer {
     margin-top: 0.1rem;
   }
 
-
 }
 
-
-.addPlanContainer{
+.addPlanContainer {
   margin-top: 0.9rem;
-  input,textarea{
-    border:1px solid #dadada;
+  input, textarea {
+    border: 1px solid #dadada;
   }
-  button{
-    width:6rem;
+  button {
+    width: 6rem;
     margin-top: 0.5rem;
     margin-left: 0.75rem;
   }
 
 }
 
-.updateCont{
+.updateCont {
   position: fixed;
   top: 40px;
 }

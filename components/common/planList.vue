@@ -5,21 +5,28 @@
 
                 <left-slider width="300">
                     <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
-                        [{{ plan.percent}}%]
-                        {{ plan.planName }}
+
+                        <p>
+                            <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
+                                  @click.stop="changeResult(index,1)">
+                            <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
+                                 @click.stop="changeResult(index,0)">
+                            {{ plan.planName }}
+                        </p>
+
                         <div class="date eidtBox flex">
-                            <span v-if="plan">
+                            <span v-if="plan" class="mark">
                                 {{ getMarkName(plan.markId,plan.markKey) }}
                             </span>
                             <div>
                                 {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                                工时：{{formateDatetime(plan.manHour)}}
                             </div>
-                            <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
-                                 @click.stop="changeResult(index,1)">
-                            <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
-                                 @click.stop="changeResult(index,0)">
+
+                            <div class="progress">
+                                <span>已完成{{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
+                            </div>
                         </div>
+
                     </div>
                     <div slot='editSlot' class="move-buttons ">
                         <div class="stickIcon">置顶</div>
@@ -110,7 +117,7 @@
                 let unit = 1000*60
                 let minu = parseInt(time/unit)
                 if(minu>60){
-                    return  (minu/60).toFixed(2) +'小时'
+                    return  (minu/60).toFixed(1) +'小时'
                 }
                 return minu+'分钟'
 

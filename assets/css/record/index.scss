@@ -38,12 +38,18 @@
           font-size: 0.25rem;
           border-top: 1px solid #ececec;
           padding-top: 0.2rem;
-          span{
-            padding:2px;
-            background: #19be6b;
-            color: #fff;
-            border-radius: 2px;
+          .mark{
+            color: #39a2ff;
+            border-radius: 1px;
+            float: left;
+            margin-right: 0.3rem;
+            padding: 0 0.1rem;
+            border-radius: 0.4rem;
+            border:1px solid #39a2ff;
+            height:0.4rem;
+            line-height: 0.4rem;
           }
+
         }
 
       }

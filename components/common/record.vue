@@ -9,11 +9,12 @@
                         {{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
-                            <span>{{record.persent}}%</span> {{parseInt((record.end_time - record.start_time)/1000/60)}}分钟
+                            <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time - record.start_time)/1000/60)}}分钟
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
-                            <span>{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span>
+                            <span class="mark">{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span>
+                            <span>完成{{record.planId.percent}}%</span>
                             {{record.planId.planName}}
                         </div>
                     </div>
