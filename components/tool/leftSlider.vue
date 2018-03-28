@@ -46,10 +46,10 @@
                     this.disX = this.startX - this.moveX;
                     // console.log('disX==>',this.disX)
                     // 如果是向右滑动或者只是点击，不改变滑动位置
-                    if (this.disX < 0 || this.disX == 0) {
+                    if (this.disX < 50 || this.disX == 0) {
                         // console.log('没有移动');
                         this.txtStyle = "transform:translateX(0rem)";
-                    } else if (this.disX > 0) {
+                    } else if (this.disX > 50) {
                         // 如果是向左滑动，则实时给这个根元素一个向左的偏移-left，当偏移量到达固定值delWidth时，固定元素的偏移量为 delWidth
                         this.txtStyle = "transform:translateX(-" + this.disX / 100 + "rem)";
                         if (this.disX >= this.delWidth / 100) {

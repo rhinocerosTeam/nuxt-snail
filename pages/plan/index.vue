@@ -1,7 +1,7 @@
 <template>
     <section class="plan-container">
         <Header right="mark">
-            <mt-button slot='leftBtn' @click="goAddPlan()">增加计划</mt-button>
+            <mt-button slot='leftBtn' @click="goAddPlan()">增加</mt-button>
         </Header>
         <mt-navbar v-model="selected">
             <mt-tab-item id="1">全部</mt-tab-item>

@@ -58,6 +58,7 @@ export default {
     deleteMark(){
 
     },
+
     initMark({commit, state}, data = {}){
         if(state.account){
             let userId = state.account._id

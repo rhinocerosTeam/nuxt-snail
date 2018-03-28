@@ -2,6 +2,7 @@
     <div class="marksContainer">
         <div class="header">MARKS
             <span class="update" v-if="!isEdit" @click="update()"></span>
+            <span class="freshBtn" @click="fresh()">刷新</span>
             <span class="save" v-if="isEdit"></span>
         </div>
         <div class="box">
@@ -69,6 +70,9 @@
                 this.updateGlobalMark({})
                 // this.clearMarkMenu()
                 this.$emit('popupVisibleFN', false)
+            },
+            fresh(){
+                this.initMark()
             }
         },
         created(){
