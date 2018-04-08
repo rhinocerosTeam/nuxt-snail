@@ -38,8 +38,8 @@
         background-color: #eee !important;
     }
     .container{
-        margin-top: 40px;
-        padding-bottom:55px ;
+       /* margin-top: 40px;
+        padding-bottom:55px ;*/
     }
 
 </style>

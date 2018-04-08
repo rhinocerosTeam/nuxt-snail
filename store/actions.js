@@ -72,5 +72,17 @@ export default {
             }
         }
 
+    },
+    freshMark({commit, state}, data = {}){
+
+        if (state.account&& state.account._id) {
+            let userId = state.account._id
+            api.getMarkList(userId).then((res)=> {
+                let data = api.parse(res) || {};
+                commit('UPDATE_MARK', data);
+                commit('UPDATE_CURRENTMENU', data);
+                commit('UPDATE_MARKSTATUS', true);
+            })
+        }
     }
 }

@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="progress">
-                                <span>已完成{{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
+                                <span>完成 {{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
                             </div>
                         </div>
 
