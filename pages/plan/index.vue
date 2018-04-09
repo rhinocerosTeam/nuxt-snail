@@ -64,11 +64,10 @@
         },
         data() {
             return {
-                selected:'1',
+                selected:'2',
                 planList:[],
                 planStatus:planStatus,
                 planType:planType
-
             }
         },
         methods:{
