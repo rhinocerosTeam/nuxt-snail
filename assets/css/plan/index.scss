@@ -1,5 +1,5 @@
 .plan-container {
-
+  background: #eee!important;
   .planTab{
     padding-top:40px;
     height: calc(100vh - 96px);
@@ -10,7 +10,7 @@
     height: calc(100vh - 146px);
     overflow-y: scroll;
   }
-  background-color: #fff;
+
   .planList {
     // padding:0.2rem;
     margin-bottom: 1rem;
@@ -19,13 +19,14 @@
       border-bottom: 1px solid #e8e8e8;
       min-height: 0.9rem;
       font-size: 0.3rem;
+      margin-bottom: 0.1rem;
       .move-content {
         height: 100%;
         padding:0.2rem;
 
         p {
           color: rgba(0, 0, 0, 0.8);
-          margin-top: 0.3rem;
+          margin-top: 0.1rem;
           margin-bottom: 0.3rem;
           font-size: 0.28rem;
           line-height: 0.5rem;
@@ -49,8 +50,9 @@
         }
         .progress {
           background: transparent;
-          font-size: 0.25rem;
+          font-size: 0.22rem;
           color: #868383;
+          float: right;
           span{
             color: red;
             background-color: transparent;
@@ -61,11 +63,12 @@
       }
 
       .date {
-
         color: #868383;
         font-size: 0.2rem;
         height: 0.5rem;
         line-height: 0.5rem;
+        border-top: 1px solid rgba(168, 166, 166, 0.2);
+        padding-top: 0.1rem;
         span, div, img {
           float: left;
         }
@@ -82,7 +85,7 @@
           border:1px solid #39a2ff;
           height:0.4rem;
           line-height: 0.4rem;
-          margin-top: 0.05rem;
+          margin-top: 0.02rem;
         }
         span {
 
