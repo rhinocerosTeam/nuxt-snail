@@ -1,6 +1,8 @@
 .marksManagerContainer {
   width: 100%;
   overflow-x: hidden;
+  margin-top: 40px;
+  box-sizing: content-box;
   ul {
     background-color: #fff;
     li {
@@ -34,6 +36,8 @@
 }
 
 .marksEditContainer {
+  margin-top: 40px;
+  box-sizing: content-box;
   .name {
     line-height: 0.5rem;
   }
@@ -41,7 +45,6 @@
   ul {
     margin-left: 0.3rem;
   }
-
 
 }
 

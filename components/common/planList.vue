@@ -16,14 +16,14 @@
 
                         <div class="date eidtBox flex">
                             <span v-if="plan" class="mark">
-                                {{ getMarkName(plan.markId,plan.markKey) }}
+                                {{ getMarkName(plan.markId,plan.markKey)||'变得更好' }}
                             </span>
                             <div>
                                 {{ formateDate(plan.startDatetime,plan.endDatetime)}}
                             </div>
 
                             <div class="progress">
-                                <span>已完成{{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
+                                <span>完成 {{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
                             </div>
                         </div>
 
