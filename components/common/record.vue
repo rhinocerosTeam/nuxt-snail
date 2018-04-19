@@ -3,13 +3,14 @@
         <!-- 进度列表 -->
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
-                <left-slider width="200" >
+                <left-slider width="200">
 
                     <div slot="moveSlot" class="move-content">
                         {{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
-                            <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time - record.start_time)/1000/60)}}分钟
+                            <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time -
+                            record.start_time)/1000/60)}}分钟
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
@@ -76,11 +77,9 @@
 
     export default {
         props: ['planId', 'from'],
-        async asyncData({isServer, store}){
 
-        },
         components: {
-            LeftSlider
+            LeftSlider,
         },
         computed: {
             ...mapGetters({
@@ -89,6 +88,9 @@
                 currentMark: 'getCurrentMark',
                 globalMark: 'getGlobalMark'
             })
+        },
+        created(){
+            console.log(this.isClient)
         },
         data() {
             return {
@@ -104,10 +106,11 @@
                 timeout: '',
                 showRecord: false,
                 startTime: '',
-                endTime: ''
+                endTime: '',
             }
         },
         methods: {
+
             getMarkName(id = '', key = ''){
                 if (!this.marks) {
                     return ''
@@ -144,8 +147,8 @@
                     start_time: '',
                     end_time: '',
                     persent: ''
-                },
-                        this.showRecord = true
+                }
+                this.showRecord = true
             },
             async getRecordList(){
 

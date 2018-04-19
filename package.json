@@ -49,6 +49,7 @@
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.4.15",
     "ulid": "^2.2.3",
+    "vue-calendar-component": "^2.4.5",
     "vue-infinite-scroll": "^2.0.2",
     "vue-markdown": "^2.2.4",
     "vue-quill-editor": "^3.0.4",
