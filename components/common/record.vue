@@ -1,5 +1,16 @@
 <template>
     <div class="recordContainer">
+
+        <Calendar
+                v-on:choseDay="clickDay"
+                v-on:changeMonth="changeDate"
+                v-on:isToday="clickToday"
+                :markDateMore=markList
+                :agoDayHide='startDatetime'
+                :futureDayHide='endDatetime'
+                ref="calendar22"
+        ></Calendar>
+
         <!-- 进度列表 -->
         <ul class="recordList">
             <li v-for="record,index in recordList" :key="index">
@@ -74,12 +85,15 @@
     import {planStatus, planType} from '~/constant/params'
     import {mapGetters, mapActions} from 'vuex'
     import LeftSlider from '~/components/tool/leftSlider.vue'
+    import Calendar from '~/components/tool/vue-calendar-component/calendar';
+    import Monent from 'moment'
 
     export default {
-        props: ['planId', 'from'],
+        props: ['planId', 'from','startDatetime','endDatetime'],
 
         components: {
             LeftSlider,
+            Calendar
         },
         computed: {
             ...mapGetters({
@@ -90,10 +104,10 @@
             })
         },
         created(){
-            console.log(this.isClient)
         },
         data() {
             return {
+                markList:  [],
                 recordList: [],
                 record: {
                     planId: '',
@@ -107,10 +121,19 @@
                 showRecord: false,
                 startTime: '',
                 endTime: '',
+
             }
         },
         methods: {
-
+            clickDay(data) {
+                console.log(data); //选中某天
+            },
+            changeDate(data) {
+                console.log(data); //左右点击切换月份
+            },
+            clickToday(data) {
+                console.log(data); //跳到了本月
+            },
             getMarkName(id = '', key = ''){
                 if (!this.marks) {
                     return ''
@@ -163,6 +186,22 @@
                 let data = api.parse(res)
                 if (data) {
                     this.recordList = data
+
+                    for(let obj of this.recordList){
+
+                        let op = {
+                            date: Monent(parseInt(obj.start_time)).format("YYYY/M/D"),
+                            className: "mao"
+                        }
+                        if(!this.markList.find((o)=>{return o.date == op.date})){
+                            this.markList.push(op)
+                        }
+
+                        console.log(this.markList)
+
+                    }
+
+
                 }
             },
             getPostTime(date){
@@ -260,12 +299,14 @@
             }
 
         },
-        created(){
-
-        },
         mounted(){
 
             this.getRecordList()
+
+            this.$refs["calendar22"].start()
+            let date = Monent(parseInt(this.startDatetime)).format("YYYY-MM-DD")
+            this.$refs["calendar22"].ChoseMonth(date); //跳到具体日期
+
         }
 
     }

@@ -123,7 +123,7 @@
 
             },
             goRecord(plan, index){
-                this.$router.push({path: '/record', query: {planId: plan._id,planName:plan.planName}})
+                this.$router.push({path: '/record', query: {planId: plan._id,startDatetime:plan.startDatetime,endDatetime:plan.endDatetime,planName:plan.planName}})
 
                 // this.recordPlan = this.planList[index]
             },

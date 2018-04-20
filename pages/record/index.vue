@@ -1,23 +1,21 @@
+<style scoped>
+    .planName {
+        padding: 0.2rem;
+        text-align: center;
+    }
+    .CalendarBox{
+        margin-top:40px;
+    }
+
+</style>
+
 <template>
     <section class="container">
         <mt-header fixed :title="planName||'点滴记录'">
             <mt-button slot='left' @click="addRecord()" v-if="planId">增加记录</mt-button>
         </mt-header>
-        <div>
-            <Calendar
-                    v-on:choseDay="clickDay"
-                    v-on:changeMonth="changeDate"
-                    v-on:isToday="clickToday"
-                    :markArray=[20,21]
-                    :markDate=arr
-                    isHideOtherday=false
-                    :agoDayHide='1514937600000'
-                    :futureDayHide='1525104000000'
-                    :isClient="isClient"
-                    ref="calendar22"
-            ></Calendar>
-        </div>
-        <record ref="recordList" from='record' :planId="planId"></record>
+
+        <record ref="recordList" from='record' :planId="planId" :startDatetime="startDatetime" :endDatetime="endDatetime"></record>
         <Footer></Footer>
     </section>
 </template>
@@ -28,10 +26,12 @@
     import Calendar from '~/components/tool/vue-calendar-component/calendar';
 
     export default {
-        async asyncData({isClient,query}){
+        async asyncData({isClient, query}){
             return {
                 planId: query.planId,
                 planName: query.planName,
+                startDatetime: query.startDatetime,
+                endDatetime: query.endDatetime,
                 isClient
             }
         },
@@ -39,22 +39,18 @@
             return {
                 planId: 0,
                 planName: '',
-                arr: ['2018/4/1', '2018/4/3']
+                arr:  [{
+                    date: '2018/4/1',
+                    className: "mao"
+                }]
             }
         },
         mounted(){
-            this.$refs["calendar22"].start()
+
+            console.log('-->',this.startDatetime)
+
         },
         methods: {
-            clickDay(data) {
-                console.log(data); //选中某天
-            },
-            changeDate(data) {
-                console.log(data); //左右点击切换月份
-            },
-            clickToday(data) {
-                console.log(data); //跳到了本月
-            },
             addRecord(){
                 this.$refs['recordList'].addRecord()
             }
@@ -68,9 +64,3 @@
 
     }
 </script>
-<style scoped>
-    .planName {
-        padding: 0.2rem;
-        text-align: center;
-    }
-</style>

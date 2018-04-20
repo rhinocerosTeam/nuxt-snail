@@ -57,6 +57,7 @@
     "ws": "^2.2.3"
   },
   "devDependencies": {
-    "mint-ui": "^2.2.13"
+    "mint-ui": "^2.2.13",
+    "moment": "^2.22.1"
   }
 }

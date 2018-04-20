@@ -37,6 +37,10 @@ export default class Utils {
             + ":" + this.repairTime(d.getMinutes()) + ":" + this.repairTime(d.getSeconds());
     }
 
+    static formatDate2(d) {
+        return d.getFullYear() + "-" + this.getMonth1(d.getMonth()) + "-" + d.getDate();
+    }
+
     /**
      * 获取当前月份
      **/
