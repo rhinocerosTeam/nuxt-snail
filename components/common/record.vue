@@ -197,8 +197,6 @@
                             this.markList.push(op)
                         }
 
-                        console.log(this.markList)
-
                     }
 
 
