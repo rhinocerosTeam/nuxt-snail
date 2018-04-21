@@ -24,6 +24,39 @@
         height: 100%;
         padding:0.2rem;
 
+        .bar{
+          position: relative;
+          .runningmen{
+            position: absolute;
+            top:-0.15rem;
+            width:0.4rem;
+            height:0.4rem;
+            right:70%;
+            img{
+              width:100%;
+            }
+          }
+          .planProgress{
+
+            .mt-progress-progress{
+              background-color: #c9e5f9;
+            }
+
+
+          }
+          .factProgress{
+            margin-top: -30px;
+            z-index: 33;
+              .mt-progress-progress{
+                background: rgba(255, 235, 59, 0.5);
+              }
+              .mt-progress-runway{
+                background: transparent;
+              }
+          }
+        }
+
+
         p {
           color: rgba(0, 0, 0, 0.8);
           margin-top: 0.1rem;

@@ -14,6 +14,17 @@
                             {{ plan.planName }}
                         </p>
 
+                        <div class="bar">
+                            <mt-progress :value="planTimePersent(plan.startDatetime,plan.endDatetime)" class="planProgress">
+                            </mt-progress>
+                            <mt-progress :value="plan.percent" class="factProgress">
+                            </mt-progress>
+                            <div class="runningmen" :style="{right:(100-plan.percent)+'%'}">
+                                <img src="../../assets/img/bar/mty.png" >
+                            </div>
+                        </div>
+
+
                         <div class="date eidtBox flex">
                             <span v-if="plan" class="mark">
                                 {{ getMarkName(plan.markId,plan.markKey)||'变得更好' }}
@@ -55,6 +66,7 @@
     import addPlan from '~/components/common/addPlan'
     import record from '~/components/common/record'
     import LeftSlider from '~/components/tool/leftSlider.vue';
+    import Monent from 'moment'
 
     export default {
         props: ['type'],
@@ -112,6 +124,23 @@
                 await api.updatePlan(this.planList[index]).catch(e => {
                     console.log(e)
                 })
+            },
+            planTimePersent(start,end){
+                start = parseInt(start)
+                end = parseInt(end)
+                let allDays = (end - start)
+                let today = Date.now()
+                let toTodayDays = (today - start)
+                let persent =  parseInt(toTodayDays/allDays*100)
+
+                if(persent<0 || today < start){
+                    return 0
+                }else if(persent>100 || today > end){
+                    return 100
+                }else{
+                    return persent
+                }
+
             },
             formateDatetime(time){
                 let unit = 1000*60
