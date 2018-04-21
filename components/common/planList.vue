@@ -20,7 +20,8 @@
                             <mt-progress :value="plan.percent" class="factProgress">
                             </mt-progress>
                             <div class="runningmen" :style="{right:(100-plan.percent)+'%'}">
-                                <img src="../../assets/img/bar/mty.png" >
+
+                                <div :class=""></div>
                             </div>
                         </div>
 
@@ -96,6 +97,9 @@
             }
         },
         methods: {
+            getImgSrc(){
+              return   'imgICON-'+parseInt(Math.random()*20)
+            },
             async getProblemList(){
                 let params = {
 //                    markId: '',
