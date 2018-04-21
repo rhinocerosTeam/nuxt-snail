@@ -38,66 +38,76 @@
               background-size:cover ;
             }
 
-            .imgICON-1{
-              background-image:url("../img/bar/1.png") ;
+            //.imgICON-1{
+            //  background-image:url("../../assets/img/bar/1.png") ;
+            //}
+
+            $class-slug: imgICON !default;
+            @for $i from 1 through 92 {
+              .#{$class-slug}-#{$i}{
+                background-image:url("../../assets/img/bar/#{$i}.png") ;
+              }
             }
-            .imgICON-2{
-              background-image:url("../img/bar/2.png") ;
-            }
-            .imgICON-3{
-              background-image:url("../img/bar/3.png") ;
-            }
-            .imgICON-4{
-              background-image:url("../img/bar/4.png") ;
-            }
-            .imgICON-5{
-               background-image:url("../img/bar/5.png") ;
-             }
-            .imgICON-6{
-              background-image:url("../img/bar/6.png") ;
-            }
-            .imgICON-7{
-              background-image:url("../img/bar/7.png") ;
-            }
-            .imgICON-8{
-              background-image:url("../img/bar/8.png") ;
-            }
-            .imgICON-9{
-              background-image:url("../img/bar/9.png") ;
-            }
-            .imgICON-10{
-              background-image:url("../img/bar/10.png") ;
-            }
-            .imgICON-11{
-              background-image:url("../img/bar/11.png") ;
-            }
-            .imgICON-12{
-              background-image:url("../img/bar/12.png") ;
-            }
-            .imgICON-13{
-              background-image:url("../img/bar/13.png") ;
-            }
-            .imgICON-14{
-              background-image:url("../img/bar/14.png") ;
-            }
-            .imgICON-15{
-              background-image:url("../img/bar/15.png") ;
-            }
-            .imgICON-16{
-              background-image:url("../img/bar/16.png") ;
-            }
-            .imgICON-17{
-              background-image:url("../img/bar/17.png") ;
-            }
-            .imgICON-18{
-              background-image:url("../img/bar/18.png") ;
-            }
-            .imgICON-19{
-              background-image:url("../img/bar/19.png") ;
-            }
-            .imgICON-20{
-              background-image:url("../img/bar/20.png") ;
-            }
+
+
+            //
+            //.imgICON-2{
+            //  background-image:url("../img/bar/2.png") ;
+            //}
+            //.imgICON-3{
+            //  background-image:url("../img/bar/3.png") ;
+            //}
+            //.imgICON-4{
+            //  background-image:url("../img/bar/4.png") ;
+            //}
+            //.imgICON-5{
+            //   background-image:url("../img/bar/5.png") ;
+            // }
+            //.imgICON-6{
+            //  background-image:url("../img/bar/6.png") ;
+            //}
+            //.imgICON-7{
+            //  background-image:url("../img/bar/7.png") ;
+            //}
+            //.imgICON-8{
+            //  background-image:url("../img/bar/8.png") ;
+            //}
+            //.imgICON-9{
+            //  background-image:url("../img/bar/9.png") ;
+            //}
+            //.imgICON-10{
+            //  background-image:url("../img/bar/10.png") ;
+            //}
+            //.imgICON-11{
+            //  background-image:url("../img/bar/11.png") ;
+            //}
+            //.imgICON-12{
+            //  background-image:url("../img/bar/12.png") ;
+            //}
+            //.imgICON-13{
+            //  background-image:url("../img/bar/13.png") ;
+            //}
+            //.imgICON-14{
+            //  background-image:url("../img/bar/14.png") ;
+            //}
+            //.imgICON-15{
+            //  background-image:url("../img/bar/15.png") ;
+            //}
+            //.imgICON-16{
+            //  background-image:url("../img/bar/16.png") ;
+            //}
+            //.imgICON-17{
+            //  background-image:url("../img/bar/17.png") ;
+            //}
+            //.imgICON-18{
+            //  background-image:url("../img/bar/18.png") ;
+            //}
+            //.imgICON-19{
+            //  background-image:url("../img/bar/19.png") ;
+            //}
+            //.imgICON-20{
+            //  background-image:url("../img/bar/20.png") ;
+            //}
 
 
           }
