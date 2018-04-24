@@ -7,11 +7,11 @@
                     <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
 
                         <p>
-                            <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0"
+                            <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0 && plan.percent >=100"
                                   @click.stop="changeResult(index,1)">
                             <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
                                  @click.stop="changeResult(index,0)">
-                            <span v-html="formatPlanName(plan.planName)"></span>
+                            <span class="planName" v-html="formatPlanName(plan.planName)"></span>
                         </p>
 
                         <div class="bar">
