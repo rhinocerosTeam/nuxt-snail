@@ -11,7 +11,7 @@
                                   @click.stop="changeResult(index,1)">
                             <img src="../../assets/img/icon/select.png" class="delete" v-if="plan.result == 1"
                                  @click.stop="changeResult(index,0)">
-                            {{ plan.planName }}
+                            <span v-html="formatPlanName(plan.planName)"></span>
                         </p>
 
                         <div class="bar">
@@ -96,6 +96,9 @@
             }
         },
         methods: {
+            formatPlanName(name){
+                return name.replace(/\n/g,'<br/>')
+            },
             getImgSrc(){
               return  'imgICON-'+parseInt(Math.random()*92)
             },
