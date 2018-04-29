@@ -9,6 +9,12 @@ export default {
             .sort({ [sortType] : 'desc' })
             .exec(cb);
     },
+    fetchBase: function(cb, sort , conditions = {}) {
+        return this
+            .find(conditions)
+            .sort(sort)
+            .exec(cb);
+    },
     fetchPage: function(skip, limit, cb, sortType = 'update_time', conditions = {}) {
         return this
             .find(conditions)

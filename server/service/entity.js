@@ -19,6 +19,21 @@ export default {
         })
     },
     /**
+     * 抓取数据
+     * @param {*} model
+     */
+    fetchBase(model, sort, conditions = {}) {
+        return new Promise((resolve, reject) => {
+            model.fetchBase((err, doc) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(doc)
+                }
+            }, sort, conditions)
+        })
+    },
+    /**
      * 分页获取数据
      */
     fetchPage(model, skip, limit, sortType, conditions) {
@@ -32,6 +47,23 @@ export default {
             }, sortType, conditions)
         })
     },
+
+
+    /**
+     * 分页获取数据 关联查询
+     */
+    fetchBasePage(model, skip, limit, sort, conditions) {
+        return new Promise((resolve, reject) => {
+            model.fetchBasePage(parseInt(skip), parseInt(limit), (err, doc) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(doc)
+                }
+            }, sort, conditions)
+        })
+    },
+
 
     /**
      * 分页获取数据 关联查询
@@ -47,6 +79,22 @@ export default {
             }, sortType, conditions)
         })
     },
+
+    /**
+     * 分页获取数据 关联查询
+     */
+    refFetchBasePage(model, skip, limit, sort, conditions) {
+        return new Promise((resolve, reject) => {
+            model.refFetchBasePage(parseInt(skip), parseInt(limit), (err, doc) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(doc)
+                }
+            }, sort, conditions)
+        })
+    },
+
 
     /**
      * 查找多个

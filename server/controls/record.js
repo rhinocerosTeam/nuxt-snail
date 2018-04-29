@@ -25,7 +25,7 @@ export default class RecordControl {
         let res = null,
             doc = null;
 
-        doc = await Entity.fetch(Model.record, 'create_time', condition).catch(e => {
+        doc = await Entity.fetchBase(Model.record, {'type': 'desc', 'create_time': 'desc'}, condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -48,7 +48,7 @@ export default class RecordControl {
             doc = null;
 
 
-        doc = await Entity.refFetchPage(Model.record, 0, 20, 'create_time', condition).catch(e => {
+        doc = await Entity.refFetchBasePage(Model.record, 0, 20, {'type': 'desc', 'create_time': 'desc'}, condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -77,7 +77,7 @@ export default class RecordControl {
             doc = await Entity.update(Model.record, data._id, data).catch((e) => {
                 res = Serrors.updateError('record更新失败')
             })
-            _manHour = (Number(data.end_time) - Number(data.start_time)) -  (Number(record.end_time) - Number(record.start_time ))
+            _manHour = (Number(data.end_time) - Number(data.start_time)) - (Number(record.end_time) - Number(record.start_time))
             _persent = Number(data.persent) - Number(record.persent)
         } else {
             doc = await Entity.create(Model.record, data).catch(e => {

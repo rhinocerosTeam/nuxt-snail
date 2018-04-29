@@ -13,7 +13,8 @@ const recordSchema = new Schema({
     end_time: String,
     create_time: String,
     userid: String, // userid
-    persent: Number
+    persent: Number,
+    type: Boolean
 }, {versionKey: false});
 
 
@@ -25,6 +26,15 @@ recordSchema.statics = _.merge(baseModel, {
             .skip(skip)
             .limit(limit)
             .sort({[sortType]: 'desc'})
+            .exec(cb);
+    },
+    refFetchBasePage: function (skip, limit, cb, sort, conditions = {}) {
+        return this
+            .find(conditions)
+            .populate('planId')
+            .skip(skip)
+            .limit(limit)
+            .sort(sort)
             .exec(cb);
     }
 });

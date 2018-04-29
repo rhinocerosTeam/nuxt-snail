@@ -24,10 +24,11 @@ export const wraper = (model, params) => {
         }, params)
     }
     if(model === Model.record){
-        params = _.pick(params, ['planId', 'content', 'start_time', 'end_time', 'persent', 'userid']);
+        params = _.pick(params, ['planId', 'content', 'type','start_time', 'end_time', 'persent', 'userid']);
         return Object.assign({}, {
             planId: "",
             content: "",
+            type:false,
             start_time: "",
             end_time: "",
             percent: 0,

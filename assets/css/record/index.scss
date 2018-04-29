@@ -1,77 +1,87 @@
-.recordContainer{
+.recordContainer {
   background-color: #eee;
   min-height: 79vh;
   margin-top: 40px;
   box-sizing: content-box;
 
-  .recordList{
-      padding:0.1rem 0;
+  .recordList {
+    padding: 0.1rem 0 1rem;
 
-      li{
-        margin-bottom: 0.2rem;
-        min-height: 0.9rem;
-        font-size: 0.3rem;
-        background-color: #fff;
-        .move-content{
-          padding: 0.2rem;
+    li {
+      margin-bottom: 0.2rem;
+      min-height: 0.9rem;
+      font-size: 0.3rem;
+      background-color: #fff;
+      .move-content {
+        padding: 0.2rem;
+        .type{
+          color: red;
+          border-radius: 0.5rem;
+          padding:0 0.2rem;
+          border:1px solid red;
+          margin-right: 0.2rem;
         }
-        .eidtBox{
-          float: right;
-          .delete,.update{
-            width: 0.4rem;
-            height: 0.4rem;
-            display: inline-block;
-          }
-          .update{
-            margin-right: 0.3rem;
-          }
+      }
+      .eidtBox {
+        float: right;
+        .delete, .update {
+          width: 0.4rem;
+          height: 0.4rem;
+          display: inline-block;
         }
-        .date{
-          margin-top: 0.15rem;
-          margin-bottom: 0.15rem;
-          color: #868383;
-          font-size: 0.25rem;
-          span{
-            padding:2px;
-            color: #024886;
-          }
+        .update {
+          margin-right: 0.3rem;
         }
-        .planInfo{
-          color: darkgrey;
-          font-size: 0.25rem;
-          border-top: 1px solid #ececec;
-          padding-top: 0.2rem;
-          .mark{
-            color: #39a2ff;
-            border-radius: 1px;
-            float: left;
-            margin-right: 0.3rem;
-            padding: 0 0.1rem;
-            border-radius: 0.4rem;
-            border:1px solid #39a2ff;
-            height:0.4rem;
-            line-height: 0.4rem;
-          }
-
+      }
+      .date {
+        margin-top: 0.15rem;
+        margin-bottom: 0.15rem;
+        color: #868383;
+        font-size: 0.25rem;
+        span {
+          padding: 2px;
+          color: #024886;
+        }
+      }
+      .planInfo {
+        color: darkgrey;
+        font-size: 0.25rem;
+        border-top: 1px solid #ececec;
+        padding-top: 0.2rem;
+        span{
+          margin-right: 0.1rem;
+          color: #191717;
+        }
+        .mark {
+          color: #39a2ff;
+          border-radius: 1px;
+          margin-right: 0.3rem;
+          padding: 0 0.1rem;
+          border-radius: 0.4rem;
+          border: 1px solid #39a2ff;
+          height: 0.4rem;
+          line-height: 0.4rem;
         }
 
       }
+
+    }
   }
-  .addRecordBox{
+  .addRecordBox {
     position: fixed;
-    top:0;
-    left:0;
-    width:100vw;
-    height:100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 100;
-    >div{
+    > div {
       padding-top: 0.3rem;
-      width:7rem;
-      height:10rem;
-      margin:0.8rem 0.2rem 0.2rem;
+      width: 7rem;
+      height: 10rem;
+      margin: 0.8rem 0.2rem 0.2rem;
       background-color: #fff;
-      .start{
+      .start {
         width: 20vw;
         height: 20vw;
         background-color: #00a0e9;
@@ -82,25 +92,26 @@
       }
     }
 
-    .time{
+    .time {
       font-size: 0.9rem;
       text-align: center;
-      margin:20px 0;
+      margin: 20px 0;
       color: red;
     }
-    .mint-cell-value{
-      width:5rem;
-      textarea,input{
-        width:100%;
+    .mint-cell-value {
+      width: 5rem;
+      textarea, input {
+        width: 100%;
       }
     }
   }
-  button{
+  button {
     width: 6rem;
     margin-top: 0.5rem;
     margin-left: 0.75rem;
   }
 }
-.mint-header,.mint-tabbar{
-  z-index: 20!important;
+
+.mint-header, .mint-tabbar {
+  z-index: 20 !important;
 }

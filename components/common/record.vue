@@ -17,7 +17,7 @@
                 <left-slider width="200">
 
                     <div slot="moveSlot" class="move-content">
-                        {{record.content}}
+                        <span class="type" v-if="record.type">待办</span>{{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
                             <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time -
@@ -25,9 +25,7 @@
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
-                            <span class="mark">{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span>
-                            <span>完成{{record.planId.percent}}%</span>
-                            {{record.planId.planName}}
+                            <span class="mark">{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span><span>完成{{record.planId.percent}}%</span>{{record.planId.planName.length>50?record.planId.planName.substr(0,40)+'...':record.planId.planName}}
                         </div>
                     </div>
                     <div slot='editSlot' class="move-buttons ">
@@ -45,6 +43,9 @@
                 </mt-cell>
                 <mt-cell title="完成百分比">
                     <input type="text" v-model="record.persent">
+                </mt-cell>
+                <mt-cell title="类型">
+                    <mt-switch v-model="record.type">{{record.type?'待办':'记录'}}</mt-switch>
                 </mt-cell>
                 <mt-cell title="开始时间">
                     <mt-datetime-picker
@@ -112,6 +113,7 @@
                 record: {
                     planId: '',
                     content: '',
+                    type:true,
                     start_time: '',
                     end_time: '',
                     persent: ''
@@ -142,7 +144,12 @@
             },
             toUpdateRecord(index){
                 this.showRecord = true
-                this.record = this.recordList[index]
+                let record = this.recordList[index]
+                if(!'type' in record){
+                    record.type = false
+                }
+                this.record = record
+                console.log('--------->',this.record)
             },
             startPickerConfirm(value){
                 this.record.start_time = new Date(value).getTime()
@@ -169,7 +176,8 @@
                     content: '',
                     start_time: '',
                     end_time: '',
-                    persent: ''
+                    persent: '',
+                    type:false
                 }
                 this.showRecord = true
             },
@@ -302,7 +310,8 @@
             this.getRecordList()
 
             this.$refs["calendar22"].start()
-            let date = Monent(parseInt(this.startDatetime)).format("YYYY-MM-DD")
+
+            let date = Monent(parseInt(this.startDatetime||Date.now())).format("YYYY-MM-DD")
             this.$refs["calendar22"].ChoseMonth(date); //跳到具体日期
 
         }
