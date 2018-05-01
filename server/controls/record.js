@@ -25,7 +25,7 @@ export default class RecordControl {
         let res = null,
             doc = null;
 
-        doc = await Entity.fetchBase(Model.record, {'recordType': 'desc', 'create_time': 'desc'}, condition).catch(e => {
+        doc = await Entity.fetchBase(Model.record, {'recordType': 'desc', 'start_time': 'desc'}, condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
@@ -48,7 +48,7 @@ export default class RecordControl {
             doc = null;
 
 
-        doc = await Entity.refFetchBasePage(Model.record, 0, 20, {'recordType': 'desc', 'create_time': 'desc'}, condition).catch(e => {
+        doc = await Entity.refFetchBasePage(Model.record, 0, 20, {'recordType': 'desc', 'start_time': 'desc'}, condition).catch(e => {
             res = Serrors.findError('查询失败')
         })
         if (!res) {
