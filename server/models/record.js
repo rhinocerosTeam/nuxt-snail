@@ -14,7 +14,7 @@ const recordSchema = new Schema({
     create_time: String,
     userid: String, // userid
     persent: Number,
-    type: String
+    recordType:String
 }, {versionKey: false});
 
 

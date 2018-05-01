@@ -17,7 +17,7 @@
                 <left-slider width="200">
 
                     <div slot="moveSlot" class="move-content">
-                        <span class="type" v-if="record.type == 1">待办</span>{{record.content}}
+                        <span class="type" v-if="record.recordType == 1">待办</span>{{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
                             <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time -
@@ -46,7 +46,7 @@
                 </mt-cell>
                 <mt-cell title="类型">
 
-                    <select  v-model="record.type" >
+                    <select  v-model="record.recordType" >
 
                         <option v-for="obj of typeSort" :value="obj.value">{{obj.text}}</option>
 
@@ -75,12 +75,12 @@
                           @click='chooseTime(1)'>{{ formateDatetime(record.end_time)||'选择时间' }}   </span>
                 </mt-cell>
 
-                <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time && record.type == 0">开始计时</mt-button>
+                <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time && record.recordType == 0">开始计时</mt-button>
                 <div v-if="record.start_time && !record.end_time">
                     <div class="time">{{ formateTime(recordTime) }}</div>
                     <mt-button type="primary" class="save" @click="end()">结束计时</mt-button>
                 </div>
-                <mt-button type="primary" class="save" @click="save()" v-if="record.end_time || record.type == 1">保存</mt-button>
+                <mt-button type="primary" class="save" @click="save()" v-if="record.end_time || record.recordType == 1 ">保存</mt-button>
                 <mt-button class="save" @click="closeRecord()">关闭</mt-button>
             </div>
         </div>
@@ -120,7 +120,7 @@
                 record: {
                     planId: '',
                     content: '',
-                    type: '0',
+                    recordType: '0',
                     start_time: '',
                     end_time: '',
                     persent: ''
@@ -153,8 +153,8 @@
             toUpdateRecord(index){
                 this.showRecord = true
                 let record = this.recordList[index]
-                if (!'type' in record) {
-                    record.type = '0'
+                if (!'recordType' in record) {
+                    record.recordType = '0'
                 }
                 this.record = record
             },
@@ -184,7 +184,7 @@
                     start_time: '',
                     end_time: '',
                     persent: '0',
-                    type: '0'
+                    recordType: '0'
                 }
                 this.showRecord = true
             },
@@ -257,12 +257,15 @@
                         Toast('请输入完成事项和百分比')
                         return
                     }
+
+
                     let d = await api.updateRecord(data).catch(e => {
                         console.log(e)
                     })
                     Toast('修改成功')
                 } else {
                     data.planId = this.planId
+
                     if (!this.record.content || !this.record.persent) {
                         Toast('请输入完成事项和百分比')
                         return
@@ -306,8 +309,9 @@
                     content: '',
                     start_time: '',
                     end_time: '',
-                    persent: ''
-                };
+                    persent: '0',
+                    recordType: '0'
+                }
                 this.recordTime = 0;
                 this.timeout = '';
                 this.showRecord = false;
