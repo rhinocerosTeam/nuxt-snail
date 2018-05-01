@@ -100,7 +100,7 @@
                 return name.replace(/\n/g,'<br/>')
             },
             getImgSrc(){
-              return  'imgICON-'+parseInt(Math.random()*92)
+              return  'imgICON-'+parseInt(Math.random()*10)
             },
             async getProblemList(){
                 let params = {
