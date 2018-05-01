@@ -68,9 +68,9 @@ module.exports = {
     loading: '~/components/common/Loading.vue',
     watchers: {
         webpack: {
-            aggregateTimeout: 500,
+            aggregateTimeout: 5000,
             ignored: /node_modules/,
-            poll: 1000
+            poll: 10000
         }
     }
 }
