@@ -69,7 +69,10 @@ export default class RecordControl {
         let res = null,
             doc = null,
             _persent = 0,
-            _manHour = 0
+            _manHour = 0;
+
+        console.log('data-->',data)
+
         if (data._id) {
             let record = await Entity.findById(Model.record, data._id).catch((e) => {
                 res = Serrors.findError('record查询失败')

@@ -28,7 +28,7 @@ export const wraper = (model, params) => {
         return Object.assign({}, {
             planId: "",
             content: "",
-            type:false,
+            type:'0',
             start_time: "",
             end_time: "",
             percent: 0,

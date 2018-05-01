@@ -17,7 +17,7 @@
                 <left-slider width="200">
 
                     <div slot="moveSlot" class="move-content">
-                        <span class="type" v-if="record.type">待办</span>{{record.content}}
+                        <span class="type" v-if="record.type == 1">待办</span>{{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
                             <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time -
@@ -45,7 +45,13 @@
                     <input type="text" v-model="record.persent">
                 </mt-cell>
                 <mt-cell title="类型">
-                    <mt-switch v-model="record.type">{{record.type?'待办':'记录'}}</mt-switch>
+
+                    <select  v-model="record.type" >
+
+                        <option v-for="obj of typeSort" :value="obj.value">{{obj.text}}</option>
+
+                    </select>
+
                 </mt-cell>
                 <mt-cell title="开始时间">
                     <mt-datetime-picker
@@ -68,12 +74,13 @@
                     <span class="selectTime"
                           @click='chooseTime(1)'>{{ formateDatetime(record.end_time)||'选择时间' }}   </span>
                 </mt-cell>
-                <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time">开始计时</mt-button>
+
+                <mt-button type="primary" class="save" @click="start()" v-if="!record.start_time && record.type == 0">开始计时</mt-button>
                 <div v-if="record.start_time && !record.end_time">
                     <div class="time">{{ formateTime(recordTime) }}</div>
                     <mt-button type="primary" class="save" @click="end()">结束计时</mt-button>
                 </div>
-                <mt-button type="primary" class="save" @click="save()" v-if="record.end_time">保存</mt-button>
+                <mt-button type="primary" class="save" @click="save()" v-if="record.end_time || record.type == 1">保存</mt-button>
                 <mt-button class="save" @click="closeRecord()">关闭</mt-button>
             </div>
         </div>
@@ -90,7 +97,7 @@
     import Monent from 'moment'
 
     export default {
-        props: ['planId', 'from','startDatetime','endDatetime'],
+        props: ['planId', 'from', 'startDatetime', 'endDatetime'],
 
         components: {
             LeftSlider,
@@ -108,12 +115,12 @@
         },
         data() {
             return {
-                markList:  [],
+                markList: [],
                 recordList: [],
                 record: {
                     planId: '',
                     content: '',
-                    type:true,
+                    type: '0',
                     start_time: '',
                     end_time: '',
                     persent: ''
@@ -123,6 +130,7 @@
                 showRecord: false,
                 startTime: '',
                 endTime: '',
+                typeSort:[{value:'0',text:'记录'},{value:'1',text:'待办'}]
 
             }
         },
@@ -145,11 +153,10 @@
             toUpdateRecord(index){
                 this.showRecord = true
                 let record = this.recordList[index]
-                if(!'type' in record){
-                    record.type = false
+                if (!'type' in record) {
+                    record.type = '0'
                 }
                 this.record = record
-                console.log('--------->',this.record)
             },
             startPickerConfirm(value){
                 this.record.start_time = new Date(value).getTime()
@@ -176,8 +183,8 @@
                     content: '',
                     start_time: '',
                     end_time: '',
-                    persent: '',
-                    type:false
+                    persent: '0',
+                    type: '0'
                 }
                 this.showRecord = true
             },
@@ -195,13 +202,15 @@
                 if (data) {
                     this.recordList = data
 
-                    for(let obj of this.recordList){
+                    for (let obj of this.recordList) {
 
                         let op = {
                             date: Monent(parseInt(obj.start_time)).format("YYYY/M/D"),
                             className: "mao"
                         }
-                        if(!this.markList.find((o)=>{return o.date == op.date})){
+                        if (!this.markList.find((o)=> {
+                                    return o.date == op.date
+                                })) {
                             this.markList.push(op)
                         }
 
@@ -311,7 +320,7 @@
 
             this.$refs["calendar22"].start()
 
-            let date = Monent(parseInt(this.startDatetime||Date.now())).format("YYYY-MM-DD")
+            let date = Monent(parseInt(this.startDatetime || Date.now())).format("YYYY-MM-DD")
             this.$refs["calendar22"].ChoseMonth(date); //跳到具体日期
 
         }
