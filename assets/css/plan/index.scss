@@ -39,7 +39,7 @@
             }
 
             $class-slug: imgICON !default;
-            @for $i from 1 through 92 {
+            @for $i from 1 through 10 {
               .#{$class-slug}-#{$i}{
                 background-image:url("../../assets/img/bar/#{$i}.png") ;
               }
