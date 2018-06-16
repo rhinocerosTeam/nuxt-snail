@@ -108,7 +108,8 @@
                 markMenu: 'getMarkMenu',
                 marks: 'getMarks',
                 currentMark: 'getCurrentMark',
-                globalMark: 'getGlobalMark'
+                globalMark: 'getGlobalMark',
+                plainMark:"getPlainMark"
             })
         },
         created(){
@@ -144,12 +145,25 @@
             clickToday(data) {
                 console.log(data); //跳到了本月
             },
+
             getMarkName(id = '', key = ''){
-                if (!this.marks) {
+                if (!this.plainMark) {
                     return ''
                 }
-                return Utils.formateMarkName(this.marks, id, key)
+
+                let mark = this.plainMark.find((obj)=>{
+                            return obj.key == key
+                        })||{}
+
+                return mark.name
             },
+
+//            getMarkName(id = '', key = ''){
+//                if (!this.marks) {
+//                    return ''
+//                }
+//                return Utils.formateMarkName(this.marks, id, key)
+//            },
             toUpdateRecord(index){
                 this.showRecord = true
                 let record = this.recordList[index]

@@ -5,6 +5,9 @@
 
                 <left-slider width="300">
                     <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
+                        <div class="">
+                            你今天的日积月累,早晚会成为别人的望尘莫及--c罗
+                        </div>
 
                         <p>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0 && plan.percent >=100"
@@ -221,7 +224,7 @@
         },
         mounted(){
             this.getProblemList()
-           
+
         },
         watch: {
             globalMark(){
