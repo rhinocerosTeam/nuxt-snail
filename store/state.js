@@ -17,7 +17,9 @@ export default {
      username:"xiaolan44"
      _id:"5a9ab65a2463c58c00f4a62a"
      }*/
-    account: null
+    account: null,
+    /*扁平化的标签 就是把 标签放到一个数组里 */
+    markPlain:[]
 
 
 }

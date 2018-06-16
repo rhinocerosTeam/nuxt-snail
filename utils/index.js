@@ -115,6 +115,8 @@ export default class Utils {
 
     static formateMarkName(marks = [], markId, markKey) {
 
+
+
         if (marks.length == 0) {
             return ''
         }
@@ -126,11 +128,16 @@ export default class Utils {
         if (mark) {
             if (mark.key == markKey) {
                 keyName = mark.name
-                return keyName
             } else {
                 keyName = this.findMarkKey(mark.child, markKey, keyName)
-                return keyName
+
             }
+
+          //  console.log({marks,markId,markKey,keyName})
+
+
+            return keyName
+
 
         }
 

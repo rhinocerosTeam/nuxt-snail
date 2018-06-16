@@ -13,5 +13,8 @@ export default {
     },
     getAccount: state => {
         return state.account
+    },
+    getPlainMark: state => {
+        return state.markPlain
     }
 }

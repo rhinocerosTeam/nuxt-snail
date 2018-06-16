@@ -68,11 +68,19 @@ export default {
                     commit('UPDATE_MARK', data);
                     commit('UPDATE_CURRENTMENU', data);
                     commit('UPDATE_MARKSTATUS', true);
+
+                    let plainMark = []
+                    setPlainMark_fun(data,plainMark)
+                    commit('UPDATE_PLAINMARK', plainMark);
+
                 })
             }
         }
 
     },
+
+
+
     freshMark({commit, state}, data = {}){
 
         if (state.account&& state.account._id) {
@@ -83,6 +91,15 @@ export default {
                 commit('UPDATE_CURRENTMENU', data);
                 commit('UPDATE_MARKSTATUS', true);
             })
+        }
+    }
+}
+
+function setPlainMark_fun(oldMark,newMark){
+    for(let mObj of oldMark){
+        newMark.push({key:mObj.key,name:mObj.name})
+        if(mObj.child && mObj.child.length){
+            setPlainMark_fun(mObj.child,newMark)
         }
     }
 }

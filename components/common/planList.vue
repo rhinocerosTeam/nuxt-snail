@@ -27,7 +27,7 @@
 
                         <div class="date eidtBox flex">
                             <span v-if="plan" class="mark">
-                                {{ getMarkName(plan.markId,plan.markKey)||'变得更好' }}
+                                {{ getMarkName(plan.markId,plan.markKey)||'不要看起来的努力' }}
                             </span>
                             <div>
                                 {{ formateDate(plan.startDatetime,plan.endDatetime)}}
@@ -84,7 +84,8 @@
                 markMenu: 'getMarkMenu',
                 marks: 'getMarks',
                 currentMark: 'getCurrentMark',
-                globalMark: 'getGlobalMark'
+                globalMark: 'getGlobalMark',
+                plainMark:"getPlainMark"
             })
         },
         data() {
@@ -162,11 +163,22 @@
 
                 // this.recordPlan = this.planList[index]
             },
+//            getMarkName(id = '', key = ''){
+//                if (!this.marks) {
+//                    return ''
+//                }
+//                return Utils.formateMarkName(this.marks, id, key)
+//            },
             getMarkName(id = '', key = ''){
-                if (!this.marks) {
+                if (!this.plainMark) {
                     return ''
                 }
-                return Utils.formateMarkName(this.marks, id, key)
+
+                let mark = this.plainMark.find((obj)=>{
+                    return obj.key == key
+                })||{}
+
+                return mark.name
             },
 
             formateDate(startDate, endDate){
@@ -209,6 +221,7 @@
         },
         mounted(){
             this.getProblemList()
+           
         },
         watch: {
             globalMark(){

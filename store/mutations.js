@@ -35,6 +35,9 @@ export default {
     },
     UPDATE_ACCOUNT(state, data){
         state.account = data
+    },
+    UPDATE_PLAINMARK(state, data){
+        state.markPlain = data
     }
 
 
