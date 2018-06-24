@@ -12,6 +12,7 @@
       min-height: 0.9rem;
       font-size: 0.3rem;
       background-color: #fff;
+
       .move-content {
         padding: 0.2rem;
         .type{
@@ -34,7 +35,7 @@
         }
       }
       .date {
-        margin-top: 0.15rem;
+        margin-top: 0.55rem;
         margin-bottom: 0.15rem;
         color: #868383;
         font-size: 0.25rem;
@@ -53,12 +54,13 @@
           color: #191717;
         }
         .mark {
-          color: #39a2ff;
+          color: #fff;
           border-radius: 1px;
           margin-right: 0.3rem;
           padding: 0 0.1rem;
           border-radius: 0.4rem;
           border: 1px solid #39a2ff;
+          background: #39a2ff;
           height: 0.4rem;
           line-height: 0.4rem;
         }

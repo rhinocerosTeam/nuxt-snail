@@ -17,15 +17,15 @@
                 <left-slider width="200">
 
                     <div slot="moveSlot" class="move-content">
-                        <span class="type" v-if="record.recordType == 1">待办</span>{{record.content}}
+                        <span class="type" v-if="record.recordType == 1">待办</span>
+                        {{record.content}}
                         <div class="date">
                             {{ getPostTime(record.start_time)}}
-                            <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time -
-                            record.start_time)/1000/60)}}分钟
+                            <span>完成{{record.persent}}%</span> 奋斗{{parseInt((record.end_time - record.start_time)/1000/60)}}分钟
                         </div>
 
                         <div class="planInfo" v-if="record.planId&&record.planId.planName">
-                            <span class="mark">{{ getMarkName(record.planId.markId,record.planId.markKey)}}</span><span>完成{{record.planId.percent}}%</span>{{record.planId.planName.length>50?record.planId.planName.substr(0,40)+'...':record.planId.planName}}
+                            <span class="mark">{{getMarkName(record.planId.markId,record.planId.markKey)}}</span><span>{{record.planId.percent}}%</span>| {{record.planId.planName.length>50?record.planId.planName.substr(0,40)+'...':record.planId.planName}}
                         </div>
                     </div>
                     <div slot='editSlot' class="move-buttons ">
@@ -147,9 +147,14 @@
             },
 
             getMarkName(id = '', key = ''){
+                console.log('我进来了')
                 if (!this.plainMark) {
                     return ''
                 }
+
+console.log('his.plainMark',this.plainMark)
+                console.log('id',id)
+                console.log('key',key)
 
                 let mark = this.plainMark.find((obj)=>{
                             return obj.key == key

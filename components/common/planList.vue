@@ -5,7 +5,7 @@
 
                 <left-slider width="300">
                     <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
-                        
+
                         <p>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0 && plan.percent >=100"
                                   @click.stop="changeResult(index,1)">
