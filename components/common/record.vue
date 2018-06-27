@@ -38,10 +38,10 @@
         <!-- 增加进度 -->
         <div class="addRecordBox" v-show="showRecord">
             <div>
-                <mt-cell title="完成事项">
+                <mt-cell :title="record.recordType != 2?'完成事项':'随感'">
                     <textarea v-model="record.content" id="" cols="30" rows="6"></textarea>
                 </mt-cell>
-                <mt-cell title="完成百分比">
+                <mt-cell title="完成百分比" v-if="record.recordType != 2">
                     <input type="text" v-model="record.persent">
                 </mt-cell>
                 <mt-cell title="类型">
@@ -53,7 +53,8 @@
                     </select>
 
                 </mt-cell>
-                <mt-cell title="开始时间">
+
+                <mt-cell title="开始时间" v-if="record.recordType != 2">
                     <mt-datetime-picker
                             ref="picker_start"
                             type="datetime"
@@ -64,7 +65,7 @@
                     <span class="selectTime"
                           @click='chooseTime(0)'>{{ formateDatetime(record.start_time)||'选择时间'}}   </span>
                 </mt-cell>
-                <mt-cell title="结束时间">
+                <mt-cell title="结束时间" v-if="record.recordType != 2">
                     <mt-datetime-picker
                             ref="picker_end"
                             type="datetime"
@@ -81,6 +82,9 @@
                     <mt-button type="primary" class="save" @click="end()">结束计时</mt-button>
                 </div>
                 <mt-button type="primary" class="save" @click="save()" v-if="record.end_time || record.recordType == 1 ">保存</mt-button>
+
+                <mt-button type="primary" class="save" @click="save()" v-if="record.recordType == 2 ">发表</mt-button>
+
                 <mt-button class="save" @click="closeRecord()">关闭</mt-button>
             </div>
         </div>
@@ -131,7 +135,7 @@
                 showRecord: false,
                 startTime: '',
                 endTime: '',
-                typeSort:[{value:'0',text:'记录'},{value:'1',text:'待办'}]
+                typeSort:[{value:'0',text:'记录'},{value:'1',text:'待办'},{value:'2',text:'心情'}]
 
             }
         },
@@ -147,14 +151,10 @@
             },
 
             getMarkName(id = '', key = ''){
-                console.log('我进来了')
                 if (!this.plainMark) {
                     return ''
                 }
 
-console.log('his.plainMark',this.plainMark)
-                console.log('id',id)
-                console.log('key',key)
 
                 let mark = this.plainMark.find((obj)=>{
                             return obj.key == key
@@ -261,6 +261,10 @@ console.log('his.plainMark',this.plainMark)
                     return ''
                 }
                 return Utils.format(date, "mm:ss")
+            },
+            /*保存*/
+            send(){
+
             },
             async save(){
 

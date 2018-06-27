@@ -5,7 +5,14 @@
 
                 <left-slider width="300">
                     <div slot="moveSlot" class="move-content" @click="goRecord(plan,index)">
-
+                        <div class="date eidtBox flex">
+                            <span v-if="plan" class="mark">
+                                {{ getMarkName(plan.markId,plan.markKey)||'不要看起来的努力' }}
+                            </span>
+                            <div class="progress">
+                                奋斗{{formateDatetime(plan.manHour)}} {{getDays(plan.startDatetime,plan.endDatetime)}}
+                            </div>
+                        </div>
                         <p>
                             <img src="../../assets/img/icon/noselect.png" class="delete" v-if="plan.result == 0 && plan.percent >=100"
                                   @click.stop="changeResult(index,1)">
@@ -19,24 +26,12 @@
                             </mt-progress>
                             <mt-progress :value="plan.percent" class="factProgress">
                             </mt-progress>
-                            <div class="runningmen" :style="{right:(100-plan.percent)+'%'}">
+                            <div class="runningmen" :style="{right:(100-plan.percent>94?94:(100-plan.percent))+'%'}">
                                 <div :class="getImgSrc()"></div>
+                                <span class="percent_runningmen">{{plan.percent}}%</span>
                             </div>
                         </div>
-
-
-                        <div class="date eidtBox flex">
-                            <span v-if="plan" class="mark">
-                                {{ getMarkName(plan.markId,plan.markKey)||'不要看起来的努力' }}
-                            </span>
-                            <div>
-                                {{ formateDate(plan.startDatetime,plan.endDatetime)}}
-                            </div>
-
-                            <div class="progress">
-                                <span>完成 {{ plan.percent}}% </span>奋斗{{formateDatetime(plan.manHour)}}
-                            </div>
-                        </div>
+                        <div class="barDesc"><span class="left">{{formateDay(plan.startDatetime)}}</span><span class="right">{{formateDay(plan.endDatetime)}}</span></div>
 
                     </div>
                     <div slot='editSlot' class="move-buttons ">
@@ -180,6 +175,22 @@
 
                 return mark.name
             },
+
+            formateDay(startDate){
+                let start = Utils.format(startDate, "yyyy-MM-dd")
+                let now = Utils.format(Date.now(), "yyyy-MM-dd")
+                if (start.substr(0, 4) == now.substr(0, 4)) {
+                    start = start.substr(5)
+                }
+                return start
+            },
+
+            getDays(startDate, endDate){
+
+                return '(1/6)'
+
+            },
+
 
             formateDate(startDate, endDate){
                 let start = Utils.format(startDate, "yyyy-MM-dd")
